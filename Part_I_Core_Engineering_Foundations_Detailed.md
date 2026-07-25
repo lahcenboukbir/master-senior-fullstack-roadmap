@@ -12,47 +12,51 @@
 ## Table of Contents
 
 **Phase 1 — Computer Science Fundamentals**
-- [1.1 — How a CPU Works](#11--how-a-cpu-works)
-- [1.2 — Memory Hierarchy](#12--memory-hierarchy)
-- [1.3 — Operating Systems Fundamentals](#13--operating-systems-fundamentals)
-- [1.4 — Networking Deep Dive](#14--networking-deep-dive)
-- [1.5 — How the Browser Works](#15--how-the-browser-works)
-- [1.6 — Compilers, Interpreters & the JVM](#16--compilers-interpreters--the-jvm)
+- 👀 [1.1 — How a CPU Works](#11--how-a-cpu-works)
+- 🎯 [1.2 — Memory Hierarchy](#12--memory-hierarchy)
+- 🎯 [1.3 — Operating Systems Fundamentals](#13--operating-systems-fundamentals)
+- 👀 [1.4 — Networking Deep Dive](#14--networking-deep-dive)
+- 🎯 [1.5 — How the Browser Works](#15--how-the-browser-works)
+- 👀 [1.6 — Compilers, Interpreters & the JVM](#16--compilers-interpreters--the-jvm)
 - [Phase 1 Capstone](#phase-1-capstone)
 
 **Phase 2 — Data Structures & Algorithms**
-- [2.1 — Complexity Analysis](#21--complexity-analysis)
-- [2.2 — Arrays & Strings](#22--arrays--strings)
-- [2.3 — Linked Lists](#23--linked-lists)
-- [2.4 — Stacks & Queues](#24--stacks--queues)
-- [2.5 — Hash Maps & Hash Sets](#25--hash-maps--hash-sets)
-- [2.6 — Trees](#26--trees)
-- [2.7 — Heaps](#27--heaps)
-- [2.8 — Graphs](#28--graphs)
-- [2.9 — Tries](#29--tries)
-- [2.10 — Union-Find (Disjoint Set Union)](#210--union-find-disjoint-set-union)
-- [2.11 — Sorting Algorithms](#211--sorting-algorithms)
-- [2.12 — Searching & Shortest Paths](#212--searching--shortest-paths)
-- [2.13 — Dynamic Programming](#213--dynamic-programming)
-- [2.14 — Advanced & Niche DS&A](#214--advanced--niche-dsa)
-- [2.15 — Problem-Solving Patterns Reference](#215--problem-solving-patterns-reference)
+- 🎯 [2.1 — Complexity Analysis](#21--complexity-analysis)
+- 🎯 [2.2 — Arrays & Strings](#22--arrays--strings)
+- 🎯 [2.3 — Linked Lists](#23--linked-lists)
+- 🎯 [2.4 — Stacks & Queues](#24--stacks--queues)
+- 🎯 [2.5 — Hash Maps & Hash Sets](#25--hash-maps--hash-sets)
+- 🎯 [2.6 — Trees](#26--trees)
+- 👀 [2.7 — Heaps](#27--heaps)
+- 👀 [2.8 — Graphs](#28--graphs)
+- ⏸️ [2.9 — Tries](#29--tries)
+- ⏸️ [2.10 — Union-Find (Disjoint Set Union)](#210--union-find-disjoint-set-union)
+- 🎯 [2.11 — Sorting Algorithms](#211--sorting-algorithms)
+- 🎯 [2.12 — Searching & Shortest Paths](#212--searching--shortest-paths)
+- 👀 [2.13 — Dynamic Programming](#213--dynamic-programming)
+- ⏸️ [2.14 — Advanced & Niche DS&A](#214--advanced--niche-dsa)
+- 🎯 [2.15 — Problem-Solving Patterns Reference](#215--problem-solving-patterns-reference)
 - [Phase 2 Capstone](#phase-2-capstone)
 
 **Phase 3 — Software Design & Clean Code**
-- [3.1 — Clean Code Principles](#31--clean-code-principles)
-- [3.2 — SOLID Principles](#32--solid-principles)
-- [3.3 — Design Patterns](#33--design-patterns)
-- [3.4 — Architecture Patterns](#34--architecture-patterns)
-- [3.5 — Refactoring](#35--refactoring)
+- 🎯 [3.1 — Clean Code Principles](#31--clean-code-principles)
+- 🎯 [3.2 — SOLID Principles](#32--solid-principles)
+- 🎯 [3.3 — Design Patterns](#33--design-patterns)
+- 🎯 [3.4 — Architecture Patterns](#34--architecture-patterns)
+- 🎯 [3.5 — Refactoring](#35--refactoring)
 - [Phase 3 Capstone](#phase-3-capstone)
 
 ---
 
 # Phase 1 — Computer Science Fundamentals
 
+**Phase tier: 🎯👀 Mixed — half Master (memory, OS, browser), half Know Only (CPU internals, deep networking, compilers)**
+
 > Most coders use computers without understanding them. This is the mental model layer.
 
 ## 1.1 — How a CPU Works
+
+**Tier: 👀 Know Only**
 
 ### What to Learn
 - **Fetch-decode-execute cycle** — the CPU fetches an instruction from memory, decodes what it means, executes it, and repeats — billions of times per second. Everything your code does eventually reduces to this loop.
@@ -78,6 +82,8 @@
 
 ## 1.2 — Memory Hierarchy
 
+**Tier: 🎯 Master**
+
 ### What to Learn
 - **The hierarchy and real latency numbers** — Registers (~1 cycle) → L1 cache (~4 cycles) → L2 cache (~12 cycles) → L3 cache (~40 cycles) → RAM (~100-300 cycles) → SSD (~100,000 cycles) → HDD (~10,000,000 cycles). Each step down is roughly an order of magnitude slower — internalize this ratio, not the exact numbers.
 - **Cache lines** — memory is fetched from RAM into cache in fixed-size chunks (typically 64 bytes), not one byte at a time; this is *why* sequential access patterns are dramatically faster than random ones.
@@ -97,6 +103,8 @@
 ---
 
 ## 1.3 — Operating Systems Fundamentals
+
+**Tier: 🎯 Master**
 
 ### What to Learn
 
@@ -165,6 +173,8 @@
 
 ## 1.4 — Networking Deep Dive
 
+**Tier: 👀 Know Only**
+
 ### What to Learn
 - **OSI layers 3–7** — Network (IP — addressing/routing), Transport (TCP/UDP — end-to-end delivery), Session/Presentation (mostly folded into practice today), Application (HTTP, DNS, etc.) — you don't need to recite all 7 layers, but you need the mental model of "each layer only cares about its own job and hands off to the next."
 - **IP addressing** — IPv4 vs IPv6, subnets, CIDR notation (`/24` etc.) at a working level.
@@ -194,6 +204,8 @@
 
 ## 1.5 — How the Browser Works
 
+**Tier: 🎯 Master**
+
 ### What to Learn
 - **URL to rendered page, step by step** — DNS lookup → TCP connection → TLS handshake → HTTP request sent → response received → parsing begins.
 - **The rendering pipeline** — HTML parsing produces the **DOM**; CSS parsing produces the **CSSOM**; DOM + CSSOM combine into the **render tree** (only visible, styled nodes); **layout** (aka reflow) computes exact size/position of every render-tree node; **paint** fills in pixels; **composite** lets the GPU assemble separately-painted layers into the final frame.
@@ -215,6 +227,8 @@
 ---
 
 ## 1.6 — Compilers, Interpreters & the JVM
+
+**Tier: 👀 Know Only**
 
 ### What to Learn
 - **Lexing/tokenization** — breaking source text into meaningful tokens (keywords, identifiers, literals, operators) before anything about structure is understood.
@@ -242,9 +256,13 @@
 
 # Phase 2 — Data Structures & Algorithms
 
+**Phase tier: 🎯 Mostly Master — core structures/patterns Master; heaps/graphs/DP Know Only; tries/union-find/advanced topics Skip**
+
 > Implement everything in Java, from scratch, no built-in collections for the "build" exercises. Understanding comes from building, not from reading someone else's implementation.
 
 ## 2.1 — Complexity Analysis
+
+**Tier: 🎯 Master**
 
 ### What to Learn
 - **Big O** measures growth rate as input size grows — not actual wall-clock speed. An O(n²) algorithm can beat an O(n log n) one for small n; Big O only tells you what happens as n → ∞.
@@ -268,6 +286,8 @@
 
 ## 2.2 — Arrays & Strings
 
+**Tier: 🎯 Master**
+
 ### What to Learn
 - Static arrays — contiguous memory, O(1) index access, fixed size.
 - Dynamic arrays — resize by doubling when full, which is *why* `add()` is amortized O(1) (see 2.1).
@@ -290,6 +310,8 @@ A dynamic array with `get`, `set`, `add` (auto-resize by doubling), and `remove`
 
 ## 2.3 — Linked Lists
 
+**Tier: 🎯 Master**
+
 ### What to Learn
 - Singly (`next` only) vs doubly (`next` + `prev`) linked lists.
 - When linked lists genuinely beat arrays: frequent insertion/deletion in the middle when you already hold a reference to the node — O(1) instead of array's O(n) shift.
@@ -308,6 +330,8 @@ A singly linked list with `addFirst`, `addLast`, `removeFirst`, `get`, `contains
 
 ## 2.4 — Stacks & Queues
 
+**Tier: 🎯 Master**
+
 ### What to Learn
 - Stack (LIFO): `push`/`pop`/`peek`. Queue (FIFO): `enqueue`/`dequeue`.
 - In Java, use **`ArrayDeque`** for both — it's backed by a resizable array and outperforms the legacy `Stack` class (which is needlessly synchronized) and `LinkedList` (worse cache locality) for this purpose.
@@ -324,6 +348,8 @@ A stack backed by a dynamic array; a queue implemented using two stacks (a class
 ---
 
 ## 2.5 — Hash Maps & Hash Sets
+
+**Tier: 🎯 Master**
 
 ### What to Learn
 - `hashCode()` compresses a key into an index, mapped into a bucket.
@@ -345,6 +371,8 @@ A HashMap using separate chaining: `put`, `get`, `remove`, and automatic `resize
 
 ## 2.6 — Trees
 
+**Tier: 🎯 Master**
+
 ### What to Learn
 - Binary tree — each node has at most two children. BST property — left subtree < node < right subtree, which is what enables O(log n) search *when the tree is balanced*.
 - Traversals — **inorder** (left, node, right — produces sorted output for a BST), **preorder** (node, left, right — useful for copying/serializing a tree), **postorder** (left, right, node — useful for safely deleting a tree bottom-up), **BFS/level-order** (queue-based, level by level).
@@ -361,6 +389,8 @@ A BST with `insert`, `search`, `delete`, all four traversals (both recursively a
 ---
 
 ## 2.7 — Heaps
+
+**Tier: 👀 Know Only**
 
 ### What to Learn
 - A binary heap is a complete binary tree stored as a flat array (child/parent indices computed arithmetically, no pointers needed).
@@ -380,6 +410,8 @@ A min-heap with `insert`, `extractMin`, `peek`, and a `heapify` (build-from-arra
 ---
 
 ## 2.8 — Graphs
+
+**Tier: 👀 Know Only**
 
 ### What to Learn
 - Directed vs undirected; weighted vs unweighted.
@@ -402,6 +434,8 @@ A graph via adjacency list supporting `addEdge`, BFS, DFS, cycle detection, and 
 
 ## 2.9 — Tries
 
+**Tier: ⏸️ Skip For Now**
+
 ### What to Learn
 - A prefix tree — each edge represents one character, and a path from the root spells out a prefix (or full word, marked with an `isEndOfWord` flag).
 - Insert, search, and prefix-search are all O(m), where m is the length of the word/prefix — independent of how many words are stored, which is the key advantage over scanning a list of strings.
@@ -418,6 +452,8 @@ A trie with `insert`, `search`, `startsWith`, and `getAllWordsWithPrefix`.
 
 ## 2.10 — Union-Find (Disjoint Set Union)
 
+**Tier: ⏸️ Skip For Now**
+
 ### What to Learn
 - Tracks a partition of elements into disjoint sets, supporting `union` (merge two sets) and `find` (which set does this element belong to) efficiently.
 - **Path compression** — during `find`, flatten the tree so future lookups are near-instant.
@@ -431,6 +467,8 @@ A trie with `insert`, `search`, `startsWith`, and `getAllWordsWithPrefix`.
 ---
 
 ## 2.11 — Sorting Algorithms
+
+**Tier: 🎯 Master**
 
 ### What to Learn
 - Bubble, Selection, Insertion — all O(n²); understand *why* they're slow (each does redundant comparisons/swaps), not just that they are. Insertion sort is genuinely good for small or nearly-sorted inputs.
@@ -451,6 +489,8 @@ Merge sort and quicksort, from memory, with no reference material.
 ---
 
 ## 2.12 — Searching & Shortest Paths
+
+**Tier: 🎯 Master**
 
 ### What to Learn
 - **Binary search** — O(log n) on sorted (or otherwise monotonic) data; the standard template uses `mid = left + (right - left) / 2` specifically to avoid integer overflow that `(left + right) / 2` risks on large inputs; off-by-one errors between `left <= right` and `left < right` are the most common bug source here.
@@ -473,6 +513,8 @@ Merge sort and quicksort, from memory, with no reference material.
 
 ## 2.13 — Dynamic Programming
 
+**Tier: 👀 Know Only**
+
 ### What to Learn
 - Recognize **optimal substructure** (the optimal solution to the whole problem is built from optimal solutions to subproblems) and **overlapping subproblems** (the same subproblem gets solved repeatedly in a naive recursive approach) — these two properties together are the actual signal that DP applies.
 - **Memoization (top-down)** — write the natural recursive solution, then cache results so each unique subproblem is computed once.
@@ -493,6 +535,8 @@ Fibonacci with and without memoization (measure and compare the performance gap 
 
 ## 2.14 — Advanced & Niche DS&A
 
+**Tier: ⏸️ Skip For Now**
+
 > Awareness-to-working level. You won't use these daily, but you should recognize the problem shape that calls for them.
 
 - **Segment Tree / Fenwick Tree (Binary Indexed Tree)** — support range queries (sum/min/max over a range) and point updates in O(log n), where a naive approach would be O(n) per query. Used in competitive programming and some real analytics/metrics systems.
@@ -506,6 +550,8 @@ Fibonacci with and without memoization (measure and compare the performance gap 
 ---
 
 ## 2.15 — Problem-Solving Patterns Reference
+
+**Tier: 🎯 Master**
 
 | Pattern | Recognize It When | Classic Example |
 |---|---|---|
@@ -532,9 +578,13 @@ Fibonacci with and without memoization (measure and compare the performance gap 
 
 # Phase 3 — Software Design & Clean Code
 
+**Phase tier: 🎯 Master — all of it, this is core craft, not over-engineering**
+
 > The true cost of software isn't writing it — it's maintaining it. This phase is about controlling that cost.
 
 ## 3.1 — Clean Code Principles
+
+**Tier: 🎯 Master**
 
 ### What to Learn
 - **Meaningful naming** — a name should make a comment unnecessary; `validateAndEnrichUserOrder()` tells you what happens, `processData()` tells you nothing.
@@ -560,6 +610,8 @@ Fibonacci with and without memoization (measure and compare the performance gap 
 ---
 
 ## 3.2 — SOLID Principles
+
+**Tier: 🎯 Master**
 
 ### What to Learn (with concrete bad/good pairs — don't memorize the acronym, learn to spot violations)
 
@@ -598,6 +650,8 @@ Fibonacci with and without memoization (measure and compare the performance gap 
 ---
 
 ## 3.3 — Design Patterns
+
+**Tier: 🎯 Master**
 
 ### Creational Patterns
 - **Singleton** — exactly one instance for the application's lifetime; implemented via a private constructor + static instance + `getInstance()`; thread-safe versions use `synchronized`, double-checked locking, or (the cleanest in Java) an `enum` singleton. **Why it's often abused:** it's frequently just global mutable state wearing a design-pattern costume, which reintroduces every problem OOP encapsulation was meant to solve.
@@ -643,6 +697,8 @@ God object (one class that knows/does everything), Singleton abuse (global mutab
 
 ## 3.4 — Architecture Patterns
 
+**Tier: 🎯 Master**
+
 ### What to Learn
 - **Layered Architecture** — Presentation → Business Logic → Data Access, each layer only talking to the one below; the common failure mode is business logic leaking into controllers or repositories because there's no structural enforcement preventing it.
 - **Clean Architecture** — dependencies always point inward; core business rules know nothing about frameworks, databases, or HTTP — they're defined purely in terms of your domain, with outer layers (infrastructure, presentation) implementing interfaces the core defines.
@@ -671,6 +727,8 @@ src/main/java/com/company/app/
 ---
 
 ## 3.5 — Refactoring
+
+**Tier: 🎯 Master**
 
 ### What to Learn
 - **What refactoring is** — changing internal structure without changing external behavior; if behavior changes, it's not a refactor, it's a feature change or a bug fix wearing a refactor's clothes.

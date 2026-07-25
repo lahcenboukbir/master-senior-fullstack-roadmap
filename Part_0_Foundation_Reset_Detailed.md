@@ -11,20 +11,22 @@
 
 ## Table of Contents
 
-- [0.1 — Your Operating Environment (Linux as Daily Driver)](#01--your-operating-environment-linux-as-daily-driver)
-- [0.2 — Terminal Mastery](#02--terminal-mastery)
-- [0.3 — IDE Mastery](#03--ide-mastery)
-- [0.4 — Chrome DevTools Mastery](#04--chrome-devtools-mastery)
-- [0.5 — Git Internals & Discipline](#05--git-internals--discipline)
-- [0.6 — HTML Semantics](#06--html-semantics)
-- [0.7 — CSS Fundamentals (Before Any Framework)](#07--css-fundamentals-before-any-framework)
-- [0.8 — How HTTP Really Works](#08--how-http-really-works)
-- [0.9 — Environment & Habits Checklist](#09--environment--habits-checklist)
+- 🎯 [0.1 — Your Operating Environment (Linux as Daily Driver)](#01--your-operating-environment-linux-as-daily-driver)
+- 🎯 [0.2 — Terminal Mastery](#02--terminal-mastery)
+- 🎯 [0.3 — IDE Mastery](#03--ide-mastery)
+- 🎯 [0.4 — Chrome DevTools Mastery](#04--chrome-devtools-mastery)
+- 🎯 [0.5 — Git Internals & Discipline](#05--git-internals--discipline)
+- 🎯 [0.6 — HTML Semantics](#06--html-semantics)
+- 🎯 [0.7 — CSS Fundamentals (Before Any Framework)](#07--css-fundamentals-before-any-framework)
+- 🎯 [0.8 — How HTTP Really Works](#08--how-http-really-works)
+- 🎯 [0.9 — Environment & Habits Checklist](#09--environment--habits-checklist)
 - [Phase 0 Capstone](#phase-0-capstone)
 
 ---
 
 ## 0.1 — Your Operating Environment (Linux as Daily Driver)
+
+**Tier: 🎯 Master**
 
 > You don't need Linux to write good code, but you need to stop treating your OS as a black box. Most engineers who are weak here are weak because they've never had to be strong — the GUI always saved them. Remove the GUI safety net deliberately.
 
@@ -60,6 +62,8 @@ Whichever you pick, the rule is the same: **do your daily development work, git,
 
 ## 0.2 — Terminal Mastery
 
+**Tier: 🎯 Master**
+
 > The terminal is the one interface that hasn't meaningfully changed in 40 years — and won't. Every hour invested here compounds for the rest of your career.
 
 ### Core Tools to Learn Deeply
@@ -93,6 +97,8 @@ Whichever you pick, the rule is the same: **do your daily development work, git,
 
 ## 0.3 — IDE Mastery
 
+**Tier: 🎯 Master**
+
 > Your editor is where you'll spend 80% of your working hours. Mouse-dependency here is a permanent tax on your speed — pay it down once.
 
 ### What to Learn (IntelliJ IDEA — primary, for Java/Spring work)
@@ -122,6 +128,8 @@ The same categories apply — Command Palette (`Ctrl+Shift+P`) mastery, multi-cu
 ---
 
 ## 0.4 — Chrome DevTools Mastery
+
+**Tier: 🎯 Master**
 
 > Every frontend bug, every "why is this slow," and every "why is this request failing" question gets answered here first — before you touch code.
 
@@ -174,6 +182,8 @@ The same categories apply — Command Palette (`Ctrl+Shift+P`) mastery, multi-cu
 
 ## 0.5 — Git Internals & Discipline
 
+**Tier: 🎯 Master**
+
 > Most developers use Git as a magic "save" button. Understanding what it actually stores turns every scary situation (bad rebase, lost commit, conflict hell) into a solvable puzzle instead of a panic.
 
 ### What to Learn
@@ -206,6 +216,8 @@ The same categories apply — Command Palette (`Ctrl+Shift+P`) mastery, multi-cu
 
 ## 0.6 — HTML Semantics
 
+**Tier: 🎯 Master**
+
 > If you've been reaching for `<div>` for everything, this is the single highest-leverage half-day you can spend on frontend fundamentals.
 
 ### What to Learn
@@ -232,6 +244,8 @@ The same categories apply — Command Palette (`Ctrl+Shift+P`) mastery, multi-cu
 ---
 
 ## 0.7 — CSS Fundamentals (Before Any Framework)
+
+**Tier: 🎯 Master**
 
 > Tailwind, and every other CSS framework, is a shorthand for real CSS. If you don't know what the shorthand expands to, you will eventually hit a bug you cannot fix — only work around.
 
@@ -264,6 +278,8 @@ The same categories apply — Command Palette (`Ctrl+Shift+P`) mastery, multi-cu
 
 ## 0.8 — How HTTP Really Works
 
+**Tier: 🎯 Master**
+
 > Every API you'll ever build or consume sits on top of this. If HTTP itself is fuzzy, every layer above it (REST design, caching, auth headers, CORS errors) will feel like memorized trivia instead of understood mechanics.
 
 ### What to Learn
@@ -293,6 +309,8 @@ The same categories apply — Command Palette (`Ctrl+Shift+P`) mastery, multi-cu
 ---
 
 ## 0.9 — Environment & Habits Checklist
+
+**Tier: 🎯 Master**
 
 > These aren't topics to study — they're behaviors to install. Revisit this list monthly for the first year; it should become automatic, not something you have to remember to do.
 

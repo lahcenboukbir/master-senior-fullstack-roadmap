@@ -12,31 +12,35 @@
 ## Table of Contents
 
 **Phase 8 — Databases**
-- [8.1 — How Databases Actually Work](#81--how-databases-actually-work)
-- [8.2 — Indexing (The Most Important Topic)](#82--indexing-the-most-important-topic)
-- [8.3 — ACID & Transactions](#83--acid--transactions)
-- [8.4 — Query Optimization](#84--query-optimization)
-- [8.5 — PostgreSQL in Depth](#85--postgresql-in-depth)
-- [8.6 — Redis Beyond Caching](#86--redis-beyond-caching)
-- [8.7 — Scaling Databases](#87--scaling-databases)
-- [8.8 — The Broader Database Landscape](#88--the-broader-database-landscape)
+- 🎯 [8.1 — How Databases Actually Work](#81--how-databases-actually-work)
+- 🎯 [8.2 — Indexing (The Most Important Topic)](#82--indexing-the-most-important-topic)
+- 🎯 [8.3 — ACID & Transactions](#83--acid--transactions)
+- 🎯 [8.4 — Query Optimization](#84--query-optimization)
+- 🎯 [8.5 — PostgreSQL in Depth](#85--postgresql-in-depth)
+- 🎯 [8.6 — Redis Beyond Caching](#86--redis-beyond-caching)
+- 👀 [8.7 — Scaling Databases](#87--scaling-databases)
+- 👀 [8.8 — The Broader Database Landscape](#88--the-broader-database-landscape)
 - [Phase 8 Capstone](#phase-8-capstone)
 
 **Phase 9 — Data Engineering (Awareness)**
-- [9.1 — ETL vs ELT](#91--etl-vs-elt)
-- [9.2 — Batch & Stream Processing](#92--batch--stream-processing)
-- [9.3 — Orchestration & Data Quality](#93--orchestration--data-quality)
-- [9.4 — Data Lakes, Warehouses & Modeling](#94--data-lakes-warehouses--modeling)
-- [9.5 — Product Analytics & Data Contracts](#95--product-analytics--data-contracts)
+- 👀 [9.1 — ETL vs ELT](#91--etl-vs-elt)
+- 👀 [9.2 — Batch & Stream Processing](#92--batch--stream-processing)
+- 👀 [9.3 — Orchestration & Data Quality](#93--orchestration--data-quality)
+- 👀 [9.4 — Data Lakes, Warehouses & Modeling](#94--data-lakes-warehouses--modeling)
+- 👀 [9.5 — Product Analytics & Data Contracts](#95--product-analytics--data-contracts)
 - [Phase 9 Capstone](#phase-9-capstone)
 
 ---
 
 # Phase 8 — Databases
 
+**Phase tier: 🎯 Mostly Master — core PostgreSQL/Redis Master; scaling and the broader NoSQL landscape Know Only**
+
 > Most production bugs and outages trace back to the database. Understanding internals is what separates an engineer who debugs a slow endpoint in ten minutes from one who spends a full day guessing.
 
 ## 8.1 — How Databases Actually Work
+
+**Tier: 🎯 Master**
 
 ### What to Learn
 - **Storage on disk** — data lives in fixed-size **pages** (commonly 8KB in PostgreSQL), each holding multiple rows; this directly connects to Phase 1.2's memory hierarchy — a page is the unit the database moves between disk and its in-memory buffer pool, chosen specifically to amortize the enormous cost gap between disk and RAM access.
@@ -64,6 +68,8 @@
 
 ## 8.2 — Indexing (The Most Important Topic)
 
+**Tier: 🎯 Master**
+
 ### What to Learn
 - **What an index actually is** — a separate, additional data structure (not a copy of your table) that trades write cost and storage space for dramatically faster reads on the columns it covers.
 - **B-Tree indexes (the default)** — a direct, practical application of the balanced-tree concept from Phase 2.6; supports both equality (`WHERE id = ?`) and range queries (`WHERE created_at > ?`) in O(log n).
@@ -90,6 +96,8 @@
 ---
 
 ## 8.3 — ACID & Transactions
+
+**Tier: 🎯 Master**
 
 ### What to Learn
 - **Atomicity** — a transaction's operations all succeed or all roll back together; there is no partial-completion state ever visible to the rest of the system.
@@ -133,6 +141,8 @@
 
 ## 8.4 — Query Optimization
 
+**Tier: 🎯 Master**
+
 ### What to Learn
 - **Why `SELECT *` is harmful** — it transfers more data than needed over the network, can prevent an index-only scan (8.2) from being possible at all, and silently breaks when the schema changes underneath it (a new column appears in results the calling code never asked for or expected).
 - **The N+1 problem** — one query to fetch N parent records, then N additional queries to fetch each one's related data in a loop, instead of one batched query — this is the single most common real-world performance bug in web applications, and directly connects to Phase 5.3's Spring Data JPA `JOIN FETCH`/`@EntityGraph` fix.
@@ -159,6 +169,8 @@
 
 ## 8.5 — PostgreSQL in Depth
 
+**Tier: 🎯 Master**
+
 ### What to Learn
 - **Full-text search** — `tsvector` (a preprocessed, searchable representation of a document — normalized, stemmed, stripped of stop words) and `tsquery` (the parsed search expression), matched against each other and backed by a **GIN** index (8.2) for real performance at scale; `ts_rank` orders results by textual relevance instead of just returning an unordered matching set.
 - **`pgvector`** — adds a `vector` column type and nearest-neighbor search operators (`<->` for distance) directly inside Postgres, with `ivfflat`/`hnsw` index types for approximate-nearest-neighbor search at scale — the practical, low-friction starting point for AI-adjacent similarity search (embeddings) without standing up a separate specialized vector database.
@@ -181,6 +193,8 @@
 ---
 
 ## 8.6 — Redis Beyond Caching
+
+**Tier: 🎯 Master**
 
 ### What to Learn
 - **Data types and their real use cases** — string (simple values, atomic counters via `INCR`), list (queues, recent-activity feeds), set (unique membership collections, tagging), **sorted set** (leaderboards, and rate limiting — using the score as a timestamp and counting entries within a sliding time window, from Phase 2.7's priority-queue concept applied practically), hash (compact object/session storage), stream (an append-only log, closer in spirit to a lightweight Kafka).
@@ -205,6 +219,8 @@
 
 ## 8.7 — Scaling Databases
 
+**Tier: 👀 Know Only**
+
 ### What to Learn
 - **Read replicas** — a primary handles writes, one or more replicas handle reads, replicating data asynchronously (usually) from the primary; **replication lag** is real and means a read from a replica can be milliseconds-to-seconds stale — directly relevant to "why did I just write something and then immediately not see it when I read it back" bugs (a classic "read-your-own-writes" consistency problem).
 - **Sharding** — partitioning data across multiple independent database instances, by user ID (hash-based — spreads load evenly but makes cross-shard queries hard), by time (range-based — good for time-series-heavy workloads, but can create "hot" shards for recent data), or by geography (good for data-residency and latency requirements, but uneven load if usage isn't evenly distributed geographically) — every sharding strategy is a real tradeoff, not a free scaling lever.
@@ -223,6 +239,8 @@
 ---
 
 ## 8.8 — The Broader Database Landscape
+
+**Tier: 👀 Know Only**
 
 > Ecosystem awareness — you don't need production mastery of all of these, but you should recognize the shape of a problem that calls for one of them instead of forcing everything into PostgreSQL.
 
@@ -270,9 +288,13 @@
 
 # Phase 9 — Data Engineering (Awareness)
 
+**Phase tier: 👀 Know Only — entirely, this phase was already designed as awareness-level**
+
 > You do not need to become a data engineer. You need to understand this landscape well enough to design systems that feed data pipelines correctly, collaborate effectively with a data team, and recognize whether a given problem is a data-engineering problem or an application-engineering problem. This phase is intentionally lighter than Phase 8 — awareness, not mastery.
 
 ## 9.1 — ETL vs ELT
+
+**Tier: 👀 Know Only**
 
 ### What to Learn
 - **ETL (Extract, Transform, Load)** — transform data *before* loading it into the destination warehouse; the traditional approach, and still the right choice when transformation must happen before data leaves a sensitive source system (e.g., masking PII before it's ever copied anywhere else).
@@ -286,6 +308,8 @@
 
 ## 9.2 — Batch & Stream Processing
 
+**Tier: 👀 Know Only**
+
 ### What to Learn
 - **Batch processing** — Apache Spark (DataFrames, distributed processing across a cluster), Hadoop MapReduce (older, largely superseded by Spark but still found in legacy systems), Databricks (a managed Spark platform); partitioning strategy has a dramatic effect on job performance, since poorly partitioned data forces expensive data shuffling across the cluster; batch wins for large historical datasets, scheduled reports, and ML training runs where near-real-time isn't required.
 - **Stream processing** — **Apache Kafka** is the backbone of most real data pipelines (topics, partitions for parallelism, consumer groups for scaling out consumption, configurable retention); Apache Flink (stateful stream processing with exactly-once semantics and explicit handling of event-time vs processing-time); Spark Streaming (a micro-batch approach to streaming, reusing existing Spark infrastructure). **Windowing** — tumbling (fixed, non-overlapping time buckets), sliding (overlapping buckets), session (gap-based — a window closes after a period of inactivity) — the choice of windowing strategy changes what question you're actually answering about the stream. Streaming wins for real-time dashboards, fraud detection, and live recommendations, where the value of the data decays quickly with delay.
@@ -297,6 +321,8 @@
 ---
 
 ## 9.3 — Orchestration & Data Quality
+
+**Tier: 👀 Know Only**
 
 ### What to Learn
 - **Apache Airflow** — DAG-based workflow orchestration defined in Python — effectively "cron on steroids," with dependency management, retries, and backfills (re-running historical pipeline periods when the transformation logic changes) built in; **sensors** wait for an external condition (a file arriving, an API becoming available) before triggering the next step. Prefect/Dagster are more modern alternatives focused on developer experience.
@@ -311,6 +337,8 @@
 
 ## 9.4 — Data Lakes, Warehouses & Modeling
 
+**Tier: 👀 Know Only**
+
 ### What to Learn
 - **Data lakes** — raw data stored cheaply in object storage (S3) using columnar formats like Parquet/ORC; **Delta Lake/Apache Iceberg/Apache Hudi** add ACID transactions, schema evolution (adding columns without rewriting all existing data), and "time travel" (querying data as it looked at a past point in time) on top of otherwise-simple object storage.
 - **Data warehouses** — Snowflake, BigQuery, Redshift, DuckDB — built on **columnar storage**, which is why analytical "aggregate this one column across billions of rows" queries can be 10-100x faster than the same query against a row-oriented database like Postgres (directly connects to the row-vs-column storage tradeoff from 8.1).
@@ -324,6 +352,8 @@
 ---
 
 ## 9.5 — Product Analytics & Data Contracts
+
+**Tier: 👀 Know Only**
 
 ### What to Learn
 - **Product analytics tools** — Mixpanel/Amplitude (event tracking, funnel analysis, cohort retention), Segment (routes a single instrumented event to multiple downstream analytics tools without your application needing to know about each one individually).

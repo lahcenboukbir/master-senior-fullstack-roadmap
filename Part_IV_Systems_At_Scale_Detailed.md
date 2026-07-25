@@ -12,69 +12,73 @@
 ## Table of Contents
 
 **Phase 10 — System Design & Architecture**
-- [10.1 — The Foundation Questions](#101--the-foundation-questions)
-- [10.2 — Scalability & Availability](#102--scalability--availability)
-- [10.3 — Consistency Models](#103--consistency-models)
-- [10.4 — Load Balancing](#104--load-balancing)
-- [10.5 — Caching Architecture](#105--caching-architecture)
-- [10.6 — Asynchronous Communication](#106--asynchronous-communication)
-- [10.7 — Microservices vs Monolith](#107--microservices-vs-monolith)
-- [10.8 — Distributed Systems Fundamentals](#108--distributed-systems-fundamentals)
-- [10.9 — Common Systems to Design](#109--common-systems-to-design)
+- 🎯 [10.1 — The Foundation Questions](#101--the-foundation-questions)
+- 🎯 [10.2 — Scalability & Availability](#102--scalability--availability)
+- 🎯 [10.3 — Consistency Models](#103--consistency-models)
+- 👀 [10.4 — Load Balancing](#104--load-balancing)
+- 🎯 [10.5 — Caching Architecture](#105--caching-architecture)
+- 👀 [10.6 — Asynchronous Communication](#106--asynchronous-communication)
+- 🎯 [10.7 — Microservices vs Monolith](#107--microservices-vs-monolith)
+- ⏸️ [10.8 — Distributed Systems Fundamentals](#108--distributed-systems-fundamentals)
+- 👀 [10.9 — Common Systems to Design](#109--common-systems-to-design)
 - [Phase 10 Capstone](#phase-10-capstone)
 
 **Phase 11 — Testing & Quality Engineering**
-- [11.1 — The Testing Pyramid](#111--the-testing-pyramid)
-- [11.2 — Test-Driven Development](#112--test-driven-development)
-- [11.3 — Unit Testing (Deep)](#113--unit-testing-deep)
-- [11.4 — Integration & E2E Testing](#114--integration--e2e-testing)
-- [11.5 — Performance/Load Testing](#115--performanceload-testing)
-- [11.6 — Beyond the Basics](#116--beyond-the-basics)
-- [11.7 — CI/CD Testing Pipeline](#117--cicd-testing-pipeline)
+- 🎯 [11.1 — The Testing Pyramid](#111--the-testing-pyramid)
+- 🎯 [11.2 — Test-Driven Development](#112--test-driven-development)
+- 🎯 [11.3 — Unit Testing (Deep)](#113--unit-testing-deep)
+- 🎯 [11.4 — Integration & E2E Testing](#114--integration--e2e-testing)
+- 👀 [11.5 — Performance/Load Testing](#115--performanceload-testing)
+- ⏸️ [11.6 — Beyond the Basics](#116--beyond-the-basics)
+- 🎯 [11.7 — CI/CD Testing Pipeline](#117--cicd-testing-pipeline)
 - [Phase 11 Capstone](#phase-11-capstone)
 
 **Phase 12 — Performance Engineering**
-- [12.0 — The Golden Rule](#120--the-golden-rule)
-- [12.1 — Database Performance](#121--database-performance)
-- [12.2 — Java / Spring Boot Performance](#122--java--spring-boot-performance)
-- [12.3 — Frontend Performance](#123--frontend-performance)
-- [12.4 — Caching & Infrastructure Performance](#124--caching--infrastructure-performance)
-- [12.5 — Load Testing](#125--load-testing)
+- 🎯 [12.0 — The Golden Rule](#120--the-golden-rule)
+- 🎯 [12.1 — Database Performance](#121--database-performance)
+- 👀 [12.2 — Java / Spring Boot Performance](#122--java--spring-boot-performance)
+- 🎯 [12.3 — Frontend Performance](#123--frontend-performance)
+- 👀 [12.4 — Caching & Infrastructure Performance](#124--caching--infrastructure-performance)
+- 👀 [12.5 — Load Testing](#125--load-testing)
 - [Phase 12 Capstone](#phase-12-capstone)
 
 **Phase 13 — DevOps & Infrastructure**
-- [13.1 — Git Mastery (Team Context)](#131--git-mastery-team-context)
-- [13.2 — Linux & Bash for Operations](#132--linux--bash-for-operations)
-- [13.3 — Containerization: Docker](#133--containerization-docker)
-- [13.4 — CI/CD: GitHub Actions](#134--cicd-github-actions)
-- [13.5 — Container Orchestration: Kubernetes](#135--container-orchestration-kubernetes)
-- [13.6 — Infrastructure as Code: Terraform](#136--infrastructure-as-code-terraform)
-- [13.7 — AWS Core Services](#137--aws-core-services)
-- [13.8 — Web Servers & Proxies](#138--web-servers--proxies)
-- [13.9 — Monitoring & Observability](#139--monitoring--observability)
-- [13.10 — Deployment Strategies](#1310--deployment-strategies)
-- [13.11 — Backups & Cron](#1311--backups--cron)
+- 🎯 [13.1 — Git Mastery (Team Context)](#131--git-mastery-team-context)
+- 👀 [13.2 — Linux & Bash for Operations](#132--linux--bash-for-operations)
+- 🎯 [13.3 — Containerization: Docker](#133--containerization-docker)
+- 🎯 [13.4 — CI/CD: GitHub Actions](#134--cicd-github-actions)
+- ⏸️ [13.5 — Container Orchestration: Kubernetes](#135--container-orchestration-kubernetes)
+- ⏸️ [13.6 — Infrastructure as Code: Terraform](#136--infrastructure-as-code-terraform)
+- 👀 [13.7 — AWS Core Services](#137--aws-core-services)
+- 👀 [13.8 — Web Servers & Proxies](#138--web-servers--proxies)
+- 👀 [13.9 — Monitoring & Observability](#139--monitoring--observability)
+- 👀 [13.10 — Deployment Strategies](#1310--deployment-strategies)
+- ⏸️ [13.11 — Backups & Cron](#1311--backups--cron)
 - [Phase 13 Capstone](#phase-13-capstone)
 
 **Phase 14 — Security Fundamentals**
-- [14.1 — Security Mindset](#141--security-mindset)
-- [14.2 — OWASP Top 10](#142--owasp-top-10)
-- [14.3 — Authentication Deep Dive](#143--authentication-deep-dive)
-- [14.4 — Authorization](#144--authorization)
-- [14.5 — Common Attack Vectors](#145--common-attack-vectors)
-- [14.6 — Security Headers](#146--security-headers)
-- [14.7 — Cryptography Fundamentals](#147--cryptography-fundamentals)
-- [14.8 — Secrets Management](#148--secrets-management)
-- [14.9 — API Security](#149--api-security)
+- 🎯 [14.1 — Security Mindset](#141--security-mindset)
+- 🎯 [14.2 — OWASP Top 10](#142--owasp-top-10)
+- 🎯 [14.3 — Authentication Deep Dive](#143--authentication-deep-dive)
+- 🎯 [14.4 — Authorization](#144--authorization)
+- 🎯 [14.5 — Common Attack Vectors](#145--common-attack-vectors)
+- 🎯 [14.6 — Security Headers](#146--security-headers)
+- 👀 [14.7 — Cryptography Fundamentals](#147--cryptography-fundamentals)
+- 🎯 [14.8 — Secrets Management](#148--secrets-management)
+- 🎯 [14.9 — API Security](#149--api-security)
 - [Phase 14 Capstone](#phase-14-capstone)
 
 ---
 
 # Phase 10 — System Design & Architecture
 
+**Phase tier: 🎯👀 Mixed — foundational concepts Master; distributed-systems depth (10.8) Skip**
+
 > Real systems don't fail because of bad code. They fail because of bad design decisions made under pressure, without understanding the tradeoffs.
 
 ## 10.1 — The Foundation Questions
+
+**Tier: 🎯 Master**
 
 ### What to Learn
 - Before designing anything: **what problem are we actually solving?** — a surprising number of system-design failures are really "we designed an excellent solution to the wrong problem."
@@ -95,6 +99,8 @@
 ---
 
 ## 10.2 — Scalability & Availability
+
+**Tier: 🎯 Master**
 
 ### What to Learn
 - **Vertical scaling** (a bigger machine — simpler, but has a real ceiling and gets disproportionately expensive) vs **horizontal scaling** (more machines — more complex, but effectively unlimited) — horizontal scaling requires **stateless services** (Phase 7.1's REST statelessness principle, generalized): if a server holds session state in its own memory, you can't freely route a request to any instance.
@@ -117,6 +123,8 @@
 
 ## 10.3 — Consistency Models
 
+**Tier: 🎯 Master**
+
 ### What to Learn
 - **Strong consistency** — every read reflects the most recent write, immediately, everywhere — the intuitive default most people assume, but genuinely expensive to guarantee at scale and across geographic distance.
 - **Eventual consistency** — reads may be stale for a period, but the system guarantees convergence eventually — cheaper and more available, at the cost of that staleness window being a real, visible behavior a user or another system might notice.
@@ -133,6 +141,8 @@
 
 ## 10.4 — Load Balancing
 
+**Tier: 👀 Know Only**
+
 ### What to Learn
 - **Algorithms** — round robin (simplest, ignores current load per server), least connections (routes to the currently-least-busy server), IP hash (the same client consistently reaches the same server — useful when session affinity is needed), **consistent hashing** (the specific technique that matters most for distributed caches/databases: when a node is added or removed, only roughly 1/N of keys need to be remapped, instead of nearly all of them as with naive modulo-based hashing).
 - **Layer 4 vs Layer 7** — Layer 4 (transport layer — routes based on IP/port, faster, less intelligent) vs Layer 7 (application layer — can route based on the actual HTTP request content, e.g., path-based routing, but with more overhead).
@@ -148,6 +158,8 @@
 ---
 
 ## 10.5 — Caching Architecture
+
+**Tier: 🎯 Master**
 
 ### What to Learn
 - **What to cache** — expensive computations, read-heavy/rarely-changing data, external API responses; **what NOT to cache** — user-specific real-time data, and anything security-sensitive where staleness could mean a stale permission check.
@@ -167,6 +179,8 @@
 
 ## 10.6 — Asynchronous Communication
 
+**Tier: 👀 Know Only**
+
 ### What to Learn
 - **Message queues vs direct HTTP calls** — a queue decouples the producer from the consumer's availability; the consumer can be down entirely and the message simply waits, whereas a direct HTTP call fails immediately if the callee is unreachable.
 - **At-least-once vs exactly-once delivery** — at-least-once (a message may be delivered more than once — consumers must be idempotent, Phase 5.6) is the realistic, commonly-implemented guarantee; true exactly-once delivery across a real distributed system is extraordinarily hard to guarantee end-to-end, and most systems that claim it are really doing at-least-once delivery plus idempotent processing, which produces an *effectively* exactly-once outcome without the underlying delivery guarantee actually being exactly-once.
@@ -185,6 +199,8 @@
 ---
 
 ## 10.7 — Microservices vs Monolith
+
+**Tier: 🎯 Master**
 
 ### What to Learn
 
@@ -213,6 +229,8 @@
 
 ## 10.8 — Distributed Systems Fundamentals
 
+**Tier: ⏸️ Skip For Now**
+
 ### What to Learn
 - **The Fallacies of Distributed Computing** — the network is not reliable, not zero-latency, and not infinite-bandwidth; every distributed design that implicitly assumes otherwise will eventually break in production.
 - **CAP theorem** — during an actual network partition, a system must choose Consistency or Availability (it cannot have both); **PACELC** extends this: even *without* a partition, there's still a latency-vs-consistency tradeoff in normal operation.
@@ -240,6 +258,8 @@
 ---
 
 ## 10.9 — Common Systems to Design
+
+**Tier: 👀 Know Only**
 
 ### What to Learn
 For each system below, practice working through: functional requirements, a rough scale estimate, the key components, the database choice(s), and the real tradeoffs involved.
@@ -274,9 +294,13 @@ For each system below, practice working through: functional requirements, a roug
 
 # Phase 11 — Testing & Quality Engineering
 
+**Phase tier: 🎯 Mostly Master — core testing practice Master; advanced techniques (mutation/chaos/property-based) Skip**
+
 > If you're afraid to change your code, your tests are failing you — even if they all currently pass.
 
 ## 11.1 — The Testing Pyramid
+
+**Tier: 🎯 Master**
 
 ### What to Learn
 ```
@@ -300,6 +324,8 @@ For each system below, practice working through: functional requirements, a roug
 
 ## 11.2 — Test-Driven Development
 
+**Tier: 🎯 Master**
+
 ### What to Learn
 - **RED** — write a failing test first, for behavior that doesn't exist yet.
 - **GREEN** — write the *minimum* code needed to make it pass — deliberately resisting the urge to also build in extra functionality not yet demanded by a test.
@@ -317,6 +343,8 @@ For each system below, practice working through: functional requirements, a roug
 ---
 
 ## 11.3 — Unit Testing (Deep)
+
+**Tier: 🎯 Master**
 
 ### What to Learn
 - **Arrange-Act-Assert** — structure every test the same way: set up state, perform the action, assert the outcome — consistent structure makes tests fast to read and review.
@@ -344,6 +372,8 @@ For each system below, practice working through: functional requirements, a roug
 
 ## 11.4 — Integration & E2E Testing
 
+**Tier: 🎯 Master**
+
 ### What to Learn
 - **Integration tests** verify that real components work together correctly — the database layer actually talking to a real database, not a mock of one.
 - **Testcontainers** (Phase 5.7) — spin up real PostgreSQL/Redis/RabbitMQ in Docker specifically for the test run, then tear down — avoiding both the "mocked away entirely" gap and the "shared, stateful test database" maintenance burden.
@@ -363,6 +393,8 @@ For each system below, practice working through: functional requirements, a roug
 ---
 
 ## 11.5 — Performance/Load Testing
+
+**Tier: 👀 Know Only**
 
 ### What to Learn
 - **Load testing** — simulate expected real-world traffic and confirm the system handles it within acceptable latency/error thresholds.
@@ -385,6 +417,8 @@ For each system below, practice working through: functional requirements, a roug
 
 ## 11.6 — Beyond the Basics
 
+**Tier: ⏸️ Skip For Now**
+
 ### What to Learn
 - **Contract testing (Pact)** — consumer-driven contracts let a frontend/consumer team define exactly what they expect from an API; that contract is verified automatically against the real backend in CI, catching a breaking API change before it ever reaches a shared environment (directly connects to Phase 7.6).
 - **Property-based testing** — instead of hand-picking specific example inputs, define a *property* that must hold for all valid inputs (e.g., "sorting a list then reversing it should equal reversing then sorting"), and let the framework (fast-check for JS, jqwik for Java) generate hundreds of random inputs, including edge cases you'd never have thought to write by hand.
@@ -406,6 +440,8 @@ For each system below, practice working through: functional requirements, a roug
 ---
 
 ## 11.7 — CI/CD Testing Pipeline
+
+**Tier: 🎯 Master**
 
 ### What to Learn
 ```
@@ -437,9 +473,13 @@ Every push triggers automatically:
 
 # Phase 12 — Performance Engineering
 
+**Phase tier: 🎯👀 Mixed — Golden Rule + DB/frontend performance Master; JVM tuning and infra performance Know Only**
+
 > Performance is a design property, not an afterthought. Measure first — never optimize what you haven't measured.
 
 ## 12.0 — The Golden Rule
+
+**Tier: 🎯 Master**
 ```
 Measure → Identify bottleneck → Fix → Measure again
 Never optimize without data. Never guess.
@@ -455,6 +495,8 @@ Never optimize without data. Never guess.
 ---
 
 ## 12.1 — Database Performance
+
+**Tier: 🎯 Master**
 
 ### What to Learn
 - `EXPLAIN ANALYZE` (Phase 8.2) — read every node's `cost`, `actual rows`, and `actual time`, and make this a reflex on every non-trivial query, not a last resort.
@@ -476,6 +518,8 @@ Never optimize without data. Never guess.
 
 ## 12.2 — Java / Spring Boot Performance
 
+**Tier: 👀 Know Only**
+
 ### What to Learn
 - **JVM tuning** — `-Xmx`/`-Xms` heap sizing, and choosing **G1GC vs ZGC** (Phase 1.3) as a genuine throughput-vs-latency tradeoff, not a "pick the newest one" decision.
 - **Avoiding object allocation in hot paths** — every allocation is eventually GC work; a tight, frequently-executed loop that allocates unnecessarily creates real, measurable GC pressure.
@@ -496,6 +540,8 @@ Never optimize without data. Never guess.
 
 ## 12.3 — Frontend Performance
 
+**Tier: 🎯 Master**
+
 ### What to Learn
 - Reiterating and applying Phase 4.9's Core Web Vitals, code splitting, image optimization, and bundle analysis specifically as a *measured, iterative* performance-engineering discipline: baseline, change one thing, re-measure, keep or revert based on the actual number.
 - `React.memo`/`useMemo`/`useCallback` only after the Profiler has identified a real, specific re-render cost (Phase 4.5) — not as a default habit.
@@ -511,6 +557,8 @@ Never optimize without data. Never guess.
 
 ## 12.4 — Caching & Infrastructure Performance
 
+**Tier: 👀 Know Only**
+
 ### What to Learn
 - Redis cache-aside with real hit/miss monitoring (know your actual hit rate, don't assume it) — cache warming, and cache stampede protection (Phase 8.6/10.5) applied specifically as a performance-engineering lever.
 - CDN cache policies and invalidation strategies as a genuine performance decision, not just a deployment detail.
@@ -522,6 +570,8 @@ Never optimize without data. Never guess.
 ---
 
 ## 12.5 — Load Testing
+
+**Tier: 👀 Know Only**
 
 ### What to Learn
 - Reiterating Phase 11.5's k6-based load testing specifically through a performance-engineering lens: use load testing not just to validate "does it work under load" (a QA question) but to actively find and characterize the system's specific bottleneck (a performance-engineering question) — p50/p95/p99 latency, error rate, and throughput, correlated against what's actually saturating (CPU, DB connections, thread pool, memory) at the breaking point.
@@ -542,9 +592,13 @@ Never optimize without data. Never guess.
 
 # Phase 13 — DevOps & Infrastructure
 
+**Phase tier: 👀 Mostly Know Only — Git/Docker/basic CI Master; Kubernetes/Terraform/deep AWS Skip — the biggest cut for a fullstack (not DevOps) focus**
+
 > Infrastructure is not someone else's problem. Engineers who understand the full path from code to production build systems that actually work reliably, and can fix them at 2am without paging someone else.
 
 ## 13.1 — Git Mastery (Team Context)
+
+**Tier: 🎯 Master**
 
 ### What to Learn
 - **Branching strategies** — Git Flow (feature/develop/release/hotfix branches — heavier process, less common for fast-moving teams now), Trunk-Based Development (everyone commits to `main` frequently, short-lived branches — the strategy most modern CI/CD practices assume), GitHub Flow (simple, PR-based — the practical default for most teams).
@@ -560,6 +614,8 @@ Never optimize without data. Never guess.
 ---
 
 ## 13.2 — Linux & Bash for Operations
+
+**Tier: 👀 Know Only**
 
 ### What to Learn
 - File permissions (`chmod`/`chown`/`umask`, Phase 0.1) applied to real production file/log/secret handling.
@@ -580,6 +636,8 @@ Never optimize without data. Never guess.
 ---
 
 ## 13.3 — Containerization: Docker
+
+**Tier: 🎯 Master**
 
 ### What to Learn
 - **Images vs containers** — an image is an immutable blueprint; a container is a running instance of one — the same distinction as a class and an object.
@@ -605,6 +663,8 @@ Never optimize without data. Never guess.
 
 ## 13.4 — CI/CD: GitHub Actions
 
+**Tier: 🎯 Master**
+
 ### What to Learn
 - **Workflows, jobs, steps** — the structural hierarchy; jobs run in parallel by default, `needs` creates explicit ordering dependencies between them.
 - **Secrets** (`${{ secrets.X }}`) — never hardcoded in workflow files, which are plain text and typically version-controlled and visible to anyone with repo read access.
@@ -627,6 +687,8 @@ Never optimize without data. Never guess.
 
 ## 13.5 — Container Orchestration: Kubernetes
 
+**Tier: ⏸️ Skip For Now**
+
 ### What to Learn (working awareness level, not deep operator/CRD mastery)
 - **Pod, Deployment, Service, Ingress** — the core objects: a Pod is the smallest deployable unit (one or more tightly-coupled containers); a Deployment manages a desired number of Pod replicas and handles rolling updates; a Service gives a stable network identity/address to a dynamic set of Pods; Ingress handles external HTTP routing into the cluster.
 - **ConfigMap & Secret** — externalized configuration and sensitive values, injected into Pods rather than baked into images (directly connects to 13.3's "never bake secrets into an image" principle).
@@ -647,6 +709,8 @@ Never optimize without data. Never guess.
 
 ## 13.6 — Infrastructure as Code: Terraform
 
+**Tier: ⏸️ Skip For Now**
+
 ### What to Learn
 - **Declarative infrastructure** — describe the desired end state; Terraform figures out the sequence of API calls needed to get there, rather than you scripting each step imperatively.
 - **Core workflow** — `terraform init` (set up providers/modules) → `terraform plan` (show exactly what would change, without changing anything yet) → `terraform apply` (actually make the change) → `terraform destroy`.
@@ -666,6 +730,8 @@ Never optimize without data. Never guess.
 ---
 
 ## 13.7 — AWS Core Services
+
+**Tier: 👀 Know Only**
 
 ### What to Learn
 
@@ -697,6 +763,8 @@ Never optimize without data. Never guess.
 
 ## 13.8 — Web Servers & Proxies
 
+**Tier: 👀 Know Only**
+
 ### What to Learn
 - **Nginx** — reverse proxy, load balancing, SSL/TLS termination, rate limiting, and static file serving — one tool covering several of the concerns from Phase 10.4/10.5 in a real, concrete configuration file.
 - **Let's Encrypt + Certbot** — free, automatically-renewing TLS certificates, removing "we forgot to renew the cert" as an entirely avoidable class of outage.
@@ -710,6 +778,8 @@ Never optimize without data. Never guess.
 ---
 
 ## 13.9 — Monitoring & Observability
+
+**Tier: 👀 Know Only**
 
 ### What to Learn
 - **The three pillars** — logs (structured JSON, correlation IDs, Phase 5.5), metrics (the **RED method** — Rate, Errors, Duration — a solid default framework for what to measure on any service), distributed tracing (following one request's full path across multiple services).
@@ -728,6 +798,8 @@ Never optimize without data. Never guess.
 ---
 
 ## 13.10 — Deployment Strategies
+
+**Tier: 👀 Know Only**
 
 ### What to Learn
 
@@ -753,6 +825,8 @@ Never optimize without data. Never guess.
 
 ## 13.11 — Backups & Cron
 
+**Tier: ⏸️ Skip For Now**
+
 ### What to Learn
 - **The 3-2-1 backup rule** — 3 copies of data, on 2 different media types, with 1 copy offsite — a simple, durable heuristic against many different failure modes at once (hardware failure, site-level disaster, accidental deletion).
 - **Automated restore testing** — a backup you've never actually restored from is an unverified assumption, not a real safety net; point-in-time recovery capability specifically matters when the failure is a bad deploy or bad data change, not just total data loss.
@@ -774,9 +848,13 @@ Never optimize without data. Never guess.
 
 # Phase 14 — Security Fundamentals
 
+**Phase tier: 🎯 Mostly Master — OWASP/auth/attack vectors Master (non-negotiable); deep crypto Know Only, Zero Trust/WAF/SIEM/compliance Skip**
+
 > Security is a property of every feature, not a feature itself. The question is never "will we be attacked?" — it's "when, and will we be ready?"
 
 ## 14.1 — Security Mindset
+
+**Tier: 🎯 Master**
 
 ### What to Learn
 - **Think like an attacker** — for every endpoint/feature, ask "how would someone abuse this specifically?" as a deliberate design step, not an afterthought.
@@ -793,6 +871,8 @@ Never optimize without data. Never guess.
 ---
 
 ## 14.2 — OWASP Top 10
+
+**Tier: 🎯 Master**
 
 ### What to Learn
 
@@ -822,6 +902,8 @@ Never optimize without data. Never guess.
 
 ## 14.3 — Authentication Deep Dive
 
+**Tier: 🎯 Master**
+
 ### What to Learn
 - **Password storage** — never plaintext, never MD5/SHA-1 (fast hashes, exactly the wrong property for passwords); **Argon2id** (or bcrypt) is deliberately slow and tunable, making brute-forcing computationally expensive even if the hash database is stolen.
 - **JWT structure** — `header.payload.signature`, all Base64URL-encoded (not encrypted by default — anyone can *read* a JWT's payload, they just can't forge a valid signature without the key); signing — HS256 (symmetric, one shared secret both signs and verifies — if that secret leaks anywhere, forgery becomes possible from that single point) vs RS256 (asymmetric — a private key signs, a public key verifies, so the verifying party never needs the secret that could forge a token).
@@ -844,6 +926,8 @@ Never optimize without data. Never guess.
 
 ## 14.4 — Authorization
 
+**Tier: 🎯 Master**
+
 ### What to Learn
 - **RBAC** (Role-Based Access Control — permissions attached to roles, users assigned roles) vs **ABAC** (Attribute-Based Access Control — permissions computed from attributes of the user, resource, and context, enabling finer-grained rules than a fixed role set can express).
 - **IDOR (Insecure Direct Object Reference)** — an endpoint that trusts a client-supplied ID (`GET /orders/456`) without verifying the *current* authenticated user actually owns/may access order 456 — one of the most common, easy-to-introduce, and easy-to-miss real vulnerabilities.
@@ -859,6 +943,8 @@ Never optimize without data. Never guess.
 ---
 
 ## 14.5 — Common Attack Vectors
+
+**Tier: 🎯 Master**
 
 > Learn these by doing, on PortSwigger's Web Security Academy — reading about them is a poor substitute for actually exploiting and then fixing one yourself.
 
@@ -882,6 +968,8 @@ Never optimize without data. Never guess.
 
 ## 14.6 — Security Headers
 
+**Tier: 🎯 Master**
+
 ### What to Learn
 ```
 Content-Security-Policy
@@ -904,6 +992,8 @@ Permissions-Policy
 
 ## 14.7 — Cryptography Fundamentals
 
+**Tier: 👀 Know Only**
+
 ### What to Learn
 - **Symmetric encryption** (AES-256 — the same key both encrypts and decrypts, fast, but requires securely sharing that one key with every party that needs it) vs **asymmetric encryption** (RSA/ECC — a public key encrypts, only the corresponding private key decrypts, solving the key-distribution problem at the cost of being much slower — which is why real systems like TLS use asymmetric crypto briefly to establish a shared symmetric key, then switch to symmetric encryption for the actual bulk data).
 - **Hashing** — SHA-256 for integrity verification (fast, deterministic, one-way) vs Argon2/bcrypt for passwords specifically (deliberately slow, salted, tunable) — using a fast general-purpose hash like SHA-256 for passwords is itself a real, common mistake, not just "using an old algorithm."
@@ -921,6 +1011,8 @@ Permissions-Policy
 
 ## 14.8 — Secrets Management
 
+**Tier: 🎯 Master**
+
 ### What to Learn
 - Never commit secrets to Git — ever, including in a "private" repo, since history persists and access can change over time.
 - Environment variables are acceptable for local development; production should use a real secrets manager — **AWS Secrets Manager**/Parameter Store or **HashiCorp Vault** — rather than environment variables baked into a deployment config, since a real secrets manager provides access auditing, rotation support, and fine-grained access control that plain env vars don't.
@@ -936,6 +1028,8 @@ Permissions-Policy
 ---
 
 ## 14.9 — API Security
+
+**Tier: 🎯 Master**
 
 ### What to Learn
 - Reiterating and applying Phase 7.4 specifically as a security-fundamentals discipline: authentication on every non-public endpoint with no silent exceptions; distributed rate limiting (per-user and per-IP, separately, Phase 8.6); input validation at the API boundary regardless of what the frontend already checks (14.4's client-side-is-not-a-boundary principle); output filtering to avoid ever returning fields the caller isn't authorized to see; API key hygiene (sufficient entropy, rotation, scope restriction, never embedded in client-side code where it's trivially extractable); SPF/DKIM/DMARC for email deliverability and anti-spoofing, specifically relevant to any API that sends transactional email.
@@ -955,6 +1049,8 @@ Permissions-Policy
 ---
 
 ## Ecosystem Awareness (All of Phase 14, Beyond the Core)
+
+**Tier: ⏸️ Skip For Now**
 
 > Awareness level — recognize these when they come up, know roughly what they solve, don't expect production mastery yet.
 

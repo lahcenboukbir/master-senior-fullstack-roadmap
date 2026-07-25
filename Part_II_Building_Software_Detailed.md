@@ -12,56 +12,60 @@
 ## Table of Contents
 
 **Phase 4 — Frontend Engineering**
-- [4.1 — JavaScript: The Core Language](#41--javascript-the-core-language)
-- [4.2 — Async JavaScript](#42--async-javascript)
-- [4.3 — TypeScript, Strict Mode From Day One](#43--typescript-strict-mode-from-day-one)
-- [4.4 — Browser & DOM APIs](#44--browser--dom-apis)
-- [4.5 — React: How It Actually Works](#45--react-how-it-actually-works)
-- [4.6 — Next.js](#46--nextjs)
-- [4.7 — Styling](#47--styling)
-- [4.8 — Build Tools & Dev Tooling](#48--build-tools--dev-tooling)
-- [4.9 — Frontend Performance](#49--frontend-performance)
+- 🎯 [4.1 — JavaScript: The Core Language](#41--javascript-the-core-language)
+- 🎯 [4.2 — Async JavaScript](#42--async-javascript)
+- 🎯 [4.3 — TypeScript, Strict Mode From Day One](#43--typescript-strict-mode-from-day-one)
+- 🎯 [4.4 — Browser & DOM APIs](#44--browser--dom-apis)
+- 🎯 [4.5 — React: How It Actually Works](#45--react-how-it-actually-works)
+- 🎯 [4.6 — Next.js](#46--nextjs)
+- 🎯 [4.7 — Styling](#47--styling)
+- 🎯 [4.8 — Build Tools & Dev Tooling](#48--build-tools--dev-tooling)
+- 🎯 [4.9 — Frontend Performance](#49--frontend-performance)
 - [Phase 4 Capstone](#phase-4-capstone)
 
 **Phase 5 — Backend Engineering (Java + Spring Boot)**
-- [5.1 — Java Fundamentals (Deep)](#51--java-fundamentals-deep)
-- [5.2 — Spring Boot Core Concepts](#52--spring-boot-core-concepts)
-- [5.3 — Spring Data JPA](#53--spring-data-jpa)
-- [5.4 — Spring Security](#54--spring-security)
-- [5.5 — Spring Boot Production Features](#55--spring-boot-production-features)
-- [5.6 — Async & Background Jobs](#56--async--background-jobs)
-- [5.7 — Testing Spring Boot](#57--testing-spring-boot)
-- [5.8 — Backend Production Concerns](#58--backend-production-concerns)
+- 🎯 [5.1 — Java Fundamentals (Deep)](#51--java-fundamentals-deep)
+- 🎯 [5.2 — Spring Boot Core Concepts](#52--spring-boot-core-concepts)
+- 🎯 [5.3 — Spring Data JPA](#53--spring-data-jpa)
+- 🎯 [5.4 — Spring Security](#54--spring-security)
+- 🎯 [5.5 — Spring Boot Production Features](#55--spring-boot-production-features)
+- 🎯 [5.6 — Async & Background Jobs](#56--async--background-jobs)
+- 🎯 [5.7 — Testing Spring Boot](#57--testing-spring-boot)
+- 👀 [5.8 — Backend Production Concerns](#58--backend-production-concerns)
 - [Phase 5 Capstone](#phase-5-capstone)
 
 **Phase 6 — Mobile Engineering (React Native)**
-- [6.1 — Why React Native After React Web](#61--why-react-native-after-react-web)
-- [6.2 — React Native Fundamentals](#62--react-native-fundamentals)
-- [6.3 — Expo](#63--expo)
-- [6.4 — Navigation](#64--navigation)
-- [6.5 — Styling for Mobile](#65--styling-for-mobile)
-- [6.6 — Mobile Performance](#66--mobile-performance)
-- [6.7 — Device APIs & Storage](#67--device-apis--storage)
-- [6.8 — Networking & Offline](#68--networking--offline)
-- [6.9 — App Store Deployment](#69--app-store-deployment)
+- ⏸️ [6.1 — Why React Native After React Web](#61--why-react-native-after-react-web)
+- ⏸️ [6.2 — React Native Fundamentals](#62--react-native-fundamentals)
+- ⏸️ [6.3 — Expo](#63--expo)
+- ⏸️ [6.4 — Navigation](#64--navigation)
+- ⏸️ [6.5 — Styling for Mobile](#65--styling-for-mobile)
+- ⏸️ [6.6 — Mobile Performance](#66--mobile-performance)
+- ⏸️ [6.7 — Device APIs & Storage](#67--device-apis--storage)
+- ⏸️ [6.8 — Networking & Offline](#68--networking--offline)
+- ⏸️ [6.9 — App Store Deployment](#69--app-store-deployment)
 - [Phase 6 Capstone](#phase-6-capstone)
 
 **Phase 7 — API Design**
-- [7.1 — REST Principles (Deep)](#71--rest-principles-deep)
-- [7.2 — REST Best Practices](#72--rest-best-practices)
-- [7.3 — WebSockets](#73--websockets)
-- [7.4 — API Security](#74--api-security)
-- [7.5 — API Documentation](#75--api-documentation)
-- [7.6 — Beyond REST](#76--beyond-rest)
+- 🎯 [7.1 — REST Principles (Deep)](#71--rest-principles-deep)
+- 🎯 [7.2 — REST Best Practices](#72--rest-best-practices)
+- 🎯 [7.3 — WebSockets](#73--websockets)
+- 🎯 [7.4 — API Security](#74--api-security)
+- 🎯 [7.5 — API Documentation](#75--api-documentation)
+- 👀 [7.6 — Beyond REST](#76--beyond-rest)
 - [Phase 7 Capstone](#phase-7-capstone)
 
 ---
 
 # Phase 4 — Frontend Engineering
 
+**Phase tier: 🎯 Master — all of it, this is half of 'fullstack'**
+
 > HTML/CSS are the foundation (Phase 0). JavaScript is the language. TypeScript is the discipline. React is the framework. This order is deliberate — skipping ahead to React without JavaScript fluency just means you'll be debugging JavaScript through a React-shaped fog.
 
 ## 4.1 — JavaScript: The Core Language
+
+**Tier: 🎯 Master**
 
 ### What to Learn
 - **Single-threaded execution** — one call stack, one thing happening at a time; this is the foundational fact that makes everything about async JavaScript (4.2) make sense — there is no "background thread" quietly running your `.then()` callback, it's all still one thread, just cleverly scheduled.
@@ -99,6 +103,8 @@
 
 ## 4.2 — Async JavaScript
 
+**Tier: 🎯 Master**
+
 ### What to Learn
 - **The event loop** — call stack (synchronous code) + task queue (macrotasks) + microtask queue; the loop only pulls the next macrotask from the queue once the call stack is completely empty, and it drains the *entire* microtask queue between every macrotask.
 - **Macrotasks vs microtasks** — `setTimeout`/`setInterval`/I/O callbacks are macrotasks; `Promise.then`/`queueMicrotask`/`MutationObserver` callbacks are microtasks. Microtasks always run before the next macrotask, which is why a `Promise.resolve().then(...)` fires before a `setTimeout(fn, 0)` even though both are "async."
@@ -121,6 +127,8 @@
 ---
 
 ## 4.3 — TypeScript, Strict Mode From Day One
+
+**Tier: 🎯 Master**
 
 ### What to Learn
 - **Type inference** — TypeScript infers types from context far more often than beginners expect; over-annotating everything is a sign of not trusting inference, not a sign of rigor.
@@ -145,6 +153,8 @@
 ---
 
 ## 4.4 — Browser & DOM APIs
+
+**Tier: 🎯 Master**
 
 ### What to Learn
 - **DOM tree structure** — how the browser represents parsed HTML in memory (ties directly back to Phase 1.5); manipulation via `querySelector`/`querySelectorAll`, `createElement`, `appendChild`, `removeChild`.
@@ -172,6 +182,8 @@
 ---
 
 ## 4.5 — React: How It Actually Works
+
+**Tier: 🎯 Master**
 
 ### What to Learn
 
@@ -230,6 +242,8 @@
 
 ## 4.6 — Next.js
 
+**Tier: 🎯 Master**
+
 ### What to Learn
 - **App Router vs Pages Router** — App Router (built on React Server Components) is the current direction; Pages Router is the older, still-widely-deployed model — know both exist, since you'll encounter Pages Router in real codebases.
 - **SSR vs SSG vs ISR** — Server-Side Rendering (render per request, always fresh, slower per request), Static Site Generation (render at build time, fastest, can go stale until rebuilt), Incremental Static Regeneration (statically generated, but can be re-generated on a schedule or on-demand without a full rebuild) — choosing between them is a real tradeoff decision per page/route, not a framework default to accept blindly.
@@ -250,6 +264,8 @@
 
 ## 4.7 — Styling
 
+**Tier: 🎯 Master**
+
 ### What to Learn
 - **Tailwind CSS** — utility-first composition directly in JSX; the **JIT compiler** only ships classes you actually use in your source, keeping production CSS small regardless of how many utilities exist in the framework; responsive prefixes (`sm:`, `md:`, `lg:`) are mobile-first (a bare class applies to all sizes, a prefixed class applies from that breakpoint up); `dark:` for dark mode; state variants (`hover:`, `focus:`, `disabled:`); extending `tailwind.config` for a real design system (custom colors, spacing scale) instead of fighting the defaults; `@apply` for extracting a genuinely repeated utility group into a named class — use sparingly, since it partially defeats the "everything visible inline" benefit of the utility-first approach.
 - **CSS Grid, deeper** — `grid-template-areas` for naming layout regions directly, `minmax()` for a track that can grow but not shrink below a floor, `auto-fit` vs `auto-fill` (the frequent point of confusion: `auto-fit` collapses/removes empty tracks so existing items stretch to fill the space, `auto-fill` keeps the empty tracks present, leaving gaps), subgrid for nested grids that align with their parent's tracks.
@@ -268,6 +284,8 @@
 ---
 
 ## 4.8 — Build Tools & Dev Tooling
+
+**Tier: 🎯 Master**
 
 ### What to Learn
 - **Vite** — ES modules served directly (unbundled) in development for near-instant startup and HMR (Hot Module Replacement); a real bundling step (via Rollup) only happens for the production build.
@@ -292,6 +310,8 @@
 ---
 
 ## 4.9 — Frontend Performance
+
+**Tier: 🎯 Master**
 
 ### What to Learn
 - **Core Web Vitals** — LCP (Largest Contentful Paint, target < 2.5s — how fast the main content appears), INP (Interaction to Next Paint, target < 200ms — how responsive the page feels to input), CLS (Cumulative Layout Shift, target < 0.1 — how much visible content jumps around unexpectedly).
@@ -324,9 +344,13 @@
 
 # Phase 5 — Backend Engineering (Java + Spring Boot)
 
+**Phase tier: 🎯 Mostly Master — core Spring Boot Master; niche production concerns (payments/multi-tenancy/search) Know Only**
+
 > Java forces you to understand OOP, types, and memory more deeply than most languages let you get away with skipping. Spring Boot is the enterprise/fintech industry default — this combination opens doors that a more "trendy" stack alone often doesn't.
 
 ## 5.1 — Java Fundamentals (Deep)
+
+**Tier: 🎯 Master**
 
 ### What to Learn
 
@@ -388,6 +412,8 @@
 
 ## 5.2 — Spring Boot Core Concepts
 
+**Tier: 🎯 Master**
+
 ### What to Learn
 - **Dependency Injection & IoC** — Inversion of Control means the framework (not your code) creates and wires object graphs; the Spring IoC container holds every managed bean and its lifecycle.
 - **Bean scopes** — singleton (one shared instance per application context — the default, and correct for stateless services), prototype (a new instance every time it's requested), request/session (web-specific scopes tied to an HTTP request or session).
@@ -421,6 +447,8 @@
 
 ## 5.3 — Spring Data JPA
 
+**Tier: 🎯 Master**
+
 ### What to Learn
 - `JpaRepository<T, ID>` — gives you `save`, `findById`, `findAll`, `delete`, and more, for free, plus **derived query methods** (`findByEmailAndStatus(String email, Status status)` — Spring parses the method name itself and generates the query, no SQL/JPQL written by you).
 - `@Query` — write JPQL (object-model-aware query language) or native SQL directly when derived methods can't express what you need.
@@ -443,6 +471,8 @@
 ---
 
 ## 5.4 — Spring Security
+
+**Tier: 🎯 Master**
 
 ### What to Learn
 - **Authentication vs authorization** — authentication answers "who are you" (proving identity); authorization answers "what are you allowed to do" (given a proven identity) — conflating these is a common source of real security bugs (e.g., checking only that a user is logged in, not that *this* user owns *this* resource).
@@ -467,6 +497,8 @@
 
 ## 5.5 — Spring Boot Production Features
 
+**Tier: 🎯 Master**
+
 ### What to Learn
 - **Profiles** — `application-dev.yml`/`application-prod.yml`, activated via `SPRING_PROFILES_ACTIVE`, for environment-specific configuration without code branching.
 - **Actuator** — exposes operational endpoints (`/actuator/health`, `/actuator/metrics`, `/actuator/info`) for monitoring and orchestration systems (like Kubernetes health checks) to query — know which endpoints are safe to expose publicly and which need to be locked down.
@@ -488,6 +520,8 @@
 
 ## 5.6 — Async & Background Jobs
 
+**Tier: 🎯 Master**
+
 ### What to Learn
 - `@Async` (with `@EnableAsync`) — runs a method on a separate thread pool instead of the calling thread; the caller gets a `Future`/`CompletableFuture` (or fires-and-forgets, for `void` methods) instead of blocking.
 - `@Scheduled` — cron-like recurring jobs defined directly in application code (`@Scheduled(cron = "0 0 * * * *")`).
@@ -508,6 +542,8 @@
 ---
 
 ## 5.7 — Testing Spring Boot
+
+**Tier: 🎯 Master**
 
 ### What to Learn
 - `@SpringBootTest` — loads the full application context; the most realistic but also the slowest and heaviest test type — use it sparingly, for genuine end-to-end integration checks.
@@ -531,6 +567,8 @@
 ---
 
 ## 5.8 — Backend Production Concerns
+
+**Tier: 👀 Know Only**
 
 ### What to Learn
 - **Webhooks** — verify every incoming webhook's signature (commonly HMAC-SHA256) before trusting its payload at all; respond `200` quickly and process the actual work asynchronously (many webhook senders will retry aggressively if your endpoint is slow or doesn't respond fast); design every handler idempotently, since retries are the normal case, not the exception; maintain a dead-letter path for payloads your app ultimately fails to process. Real examples: Stripe payment events, GitHub push events, Twilio delivery status.
@@ -560,9 +598,13 @@
 
 # Phase 6 — Mobile Engineering (React Native)
 
+**Phase tier: ⏸️ Skip For Now — entirely, unless your goal shifts from fullstack *web* to include mobile**
+
 > You already know React (Phase 4). React Native is React targeting a different rendering surface — the transition is deliberately smooth, but mobile has its own real constraints (slower CPUs, different navigation model, app store review) that don't exist on the web.
 
 ## 6.1 — Why React Native After React Web
+
+**Tier: ⏸️ Skip For Now**
 
 ### What to Learn
 - The mental model transfers almost entirely: components, hooks, props, state.
@@ -576,6 +618,8 @@
 ---
 
 ## 6.2 — React Native Fundamentals
+
+**Tier: ⏸️ Skip For Now**
 
 ### What to Learn
 - **How RN actually works** — your JS runs on a JS thread; native UI/platform APIs run on the native side; the **bridge** (older architecture) serialized messages asynchronously between the two, while **JSI** (the new architecture) allows more direct, synchronous communication — you don't need to implement either, but understanding that this boundary exists explains real RN performance characteristics that don't have a web equivalent.
@@ -600,6 +644,8 @@
 
 ## 6.3 — Expo
 
+**Tier: ⏸️ Skip For Now**
+
 ### What to Learn
 - **Expo (managed workflow) vs bare React Native** — start with Expo; eject (or use a bare/dev-client workflow) only once you need a native module genuinely unsupported by the Expo SDK.
 - **Expo Router** — file-based routing, directly analogous to Next.js's App Router (`app/index.tsx`, `app/(tabs)/home.tsx`) — if you know Next.js routing conventions, this will feel immediately familiar.
@@ -621,6 +667,8 @@
 
 ## 6.4 — Navigation
 
+**Tier: ⏸️ Skip For Now**
+
 ### What to Learn
 - Expo Router's file-based routing model — directory structure directly determines the navigation structure (stacks, tabs, nested layouts).
 - Deep linking — universal links (iOS) and app links (Android) let an external URL open directly to a specific in-app screen.
@@ -637,6 +685,8 @@
 
 ## 6.5 — Styling for Mobile
 
+**Tier: ⏸️ Skip For Now**
+
 ### What to Learn
 - **NativeWind** — brings Tailwind's utility-class syntax to React Native, so the mental model and even the class names carry over directly from web Tailwind work.
 - **`StyleSheet.create`** — still relevant for performance-sensitive style objects even alongside NativeWind.
@@ -652,6 +702,8 @@
 ---
 
 ## 6.6 — Mobile Performance
+
+**Tier: ⏸️ Skip For Now**
 
 ### What to Learn
 - **`FlatList` vs `ScrollView`** — `FlatList` virtualizes (only renders items currently near the visible viewport), while `ScrollView` renders every child immediately regardless of visibility — for any list that could grow large, `FlatList` is the only correct default.
@@ -672,6 +724,8 @@
 
 ## 6.7 — Device APIs & Storage
 
+**Tier: ⏸️ Skip For Now**
+
 ### What to Learn
 - Camera (`expo-camera`), location (`expo-location` — and the real distinction between foreground and background location permissions, which have very different privacy implications and review scrutiny), push notifications (Expo Notifications routed through FCM for Android and APNs for iOS), biometrics (`expo-local-authentication` for Face ID/Touch ID).
 - **MMKV vs AsyncStorage** — MMKV is dramatically faster for local key-value storage; AsyncStorage is the older, slower, still-common default.
@@ -688,6 +742,8 @@
 ---
 
 ## 6.8 — Networking & Offline
+
+**Tier: ⏸️ Skip For Now**
 
 ### What to Learn
 - The same TanStack Query patterns from Phase 4 apply directly on mobile, including `persistQueryClient` paired with AsyncStorage to persist the cache across app restarts for offline access.
@@ -706,6 +762,8 @@
 ---
 
 ## 6.9 — App Store Deployment
+
+**Tier: ⏸️ Skip For Now**
 
 ### What to Learn
 - **App signing** — iOS certificates and provisioning profiles, Android keystores — EAS Build can manage these for you, but you should understand what they actually represent (proof that a build genuinely came from you, the registered developer).
@@ -732,9 +790,13 @@
 
 # Phase 7 — API Design
 
+**Phase tier: 🎯 Mostly Master — REST fully Master; GraphQL/gRPC/etc. Know Only**
+
 > An API is a product with real users (other developers, including future-you), versions, and documentation. Design it like someone else is depending on it — because they are, or soon will be.
 
 ## 7.1 — REST Principles (Deep)
+
+**Tier: 🎯 Master**
 
 ### What to Learn
 - **Resources, not actions** — `GET /orders/123`, never `POST /getOrder` — the URL names a *thing*, the HTTP method describes the *action* on it.
@@ -756,6 +818,8 @@
 ---
 
 ## 7.2 — REST Best Practices
+
+**Tier: 🎯 Master**
 
 ### What to Learn
 - **Versioning** — URL versioning (`/api/v1/...`) is explicit, human-readable, and trivially cacheable per-version; it's the more common practical default over header-based versioning.
@@ -783,6 +847,8 @@
 
 ## 7.3 — WebSockets
 
+**Tier: 🎯 Master**
+
 ### What to Learn
 - **When to use WebSockets** — genuine bidirectional, low-latency communication (chat, live notifications, collaborative editing) — not just "anything that updates in real time" (Server-Sent Events, 7.6, is often a simpler correct choice for one-directional server-push cases).
 - **Handshake** — starts as a normal HTTP request that upgrades via the `Upgrade: websocket` header — it's not a separate protocol from scratch, it piggybacks on HTTP just for the initial negotiation.
@@ -804,6 +870,8 @@
 
 ## 7.4 — API Security
 
+**Tier: 🎯 Master**
+
 ### What to Learn
 - Authentication required on every non-public endpoint, with no silent exceptions.
 - Rate limiting — per-user and per-IP, with different limits for each (an authenticated user's legitimate traffic shouldn't be capped by an anonymous-abuse-focused IP limit, and vice versa) — implemented in Redis for distributed enforcement across multiple server instances.
@@ -824,6 +892,8 @@
 
 ## 7.5 — API Documentation
 
+**Tier: 🎯 Master**
+
 ### What to Learn
 - **OpenAPI 3.0** — the industry-standard way to describe every endpoint, parameter, request/response schema, and auth requirement in a machine-readable spec.
 - **API-first design** — write the spec *before* the implementation; the spec becomes the actual contract that both frontend and backend teams build against independently and in parallel, rather than the frontend waiting on a finished backend (or reverse-engineering behavior from whatever the backend happens to currently do).
@@ -841,6 +911,8 @@
 ---
 
 ## 7.6 — Beyond REST
+
+**Tier: 👀 Know Only**
 
 > Ecosystem awareness — know when each of these is the better tool, even if REST remains your default.
 

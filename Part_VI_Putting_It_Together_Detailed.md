@@ -30,6 +30,7 @@
 > The master roadmap lists the stack flatly. Here, each entry includes *why it's the default choice for this roadmap*, and what you'd reach for instead if the context changed — because a senior engineer's value isn't knowing one stack, it's knowing why a stack was chosen at all.
 
 ### Languages
+**Tier: 🎯 Mostly Master — Java/TypeScript/JS/SQL/Bash Master; HCL (Terraform) is Skip-adjacent, see Priority_Map.md**
 
 | Tool | Why It's the Default Here | When You'd Choose Differently |
 |---|---|---|
@@ -42,26 +43,33 @@
 | **HCL** | Terraform's native configuration language (Part IV, 13.6) | Pulumi's HCL alternative (real TypeScript/Python for IaC) if your team strongly prefers a general-purpose language over a DSL |
 
 ### Frontend
+**Tier: 🎯 Master**
 HTML5 (semantic, Part 0) → plain CSS (Part 0) → Tailwind CSS (Part II, 4.7) → JavaScript ES6+ deeply (Part II, 4.1–4.2) → TypeScript strict mode (Part II, 4.3) → React 18+ (Part II, 4.5) → Next.js (Part II, 4.6) → TanStack Query, Zustand, React Router, Vite (Part II) → Playwright (E2E, Part IV, 11.4), Vitest (unit).
 
 *Why this specific order matters, restated:* each layer is genuinely built on the one below it. Skipping straight to React without JavaScript fluency means every React bug looks like a React problem when it's actually a closures or `this`-binding problem wearing a React costume.
 
 ### Mobile
+**Tier: ⏸️ Skip For Now — per Priority_Map.md, deprioritized for a fullstack *web* focus**
 React Native, Expo, Expo Router, NativeWind, React Navigation, EAS Build + Submit, Fastlane (Part II, Phase 6). Chosen specifically because it reuses your React investment almost entirely — the alternative (separate native Swift/Kotlin codebases) is a real, valid choice for teams that need platform-specific performance or APIs badly enough to justify maintaining two codebases, but it's a different bet than this roadmap makes.
 
 ### Backend
+**Tier: 🎯 Master**
 Java 21, Spring Boot 3, Spring Security, Spring Data JPA, Hibernate, MapStruct, Flyway, JUnit 5, Mockito, Testcontainers, Maven, resilience4j (Part II, Phase 5). This is the deep-dive stack. The Part II ecosystem-awareness notes cover Node/Python/Go/Rust as real alternatives with their own genuine tradeoffs (faster iteration, simpler deployment, different concurrency models) — know they exist and roughly when each wins, without needing production depth in all of them.
 
 ### Databases
+**Tier: 🎯 Master**
 PostgreSQL (primary, Part III, Phase 8), pgvector (AI/embedding search, Part III, 8.5/8.8), Redis (cache/pub-sub/queues, Part III, 8.6), PgBouncer (connection pooling, Part III, 8.5), Flyway (migrations, Part II, 5.3). The broader NoSQL/vector-DB landscape (Part III, 8.8) is awareness-level — you reach for MongoDB, Cassandra, Elasticsearch, or Neo4j only once a real, specific problem shape actually calls for it, not by default.
 
 ### Infrastructure & DevOps
+**Tier: 👀 Mostly Know Only — Docker + basic CI stay Master; Kubernetes/Terraform/deep AWS drop to Skip, see Priority_Map.md**
 Linux (Ubuntu, Part 0), Git (Part 0/Part IV), GitHub Actions (Part IV, 13.4), Docker + Docker Compose (Part IV, 13.3), Kubernetes at working awareness (Part IV, 13.5), AWS — EC2, RDS, S3, ElastiCache, CloudFront, IAM, CloudWatch, Route 53, SQS, ECS (Part IV, 13.7), Terraform (Part IV, 13.6), Nginx, Let's Encrypt (Part IV, 13.8).
 
 ### Observability
+**Tier: 👀 Know Only — Actuator itself is Master (Part II), the full Prometheus/Grafana stack is Know Only**
 Prometheus, Grafana, Sentry, Spring Boot Actuator + Micrometer (Part IV, 13.9) — implementing the RED method and a real SLI/SLO/error-budget model, not just "having dashboards."
 
 ### API & Communication
+**Tier: 🎯 Master**
 REST (Part II, Phase 7), WebSockets (Part II, 7.3), RabbitMQ (Part II, 5.6), OpenAPI/Swagger (Part II, 7.5) — with GraphQL/gRPC/SSE/tRPC/AsyncAPI as ecosystem awareness (Part II, 7.6).
 
 ### Learning Resources (Reference)
@@ -133,43 +141,43 @@ devtools-saas/
 
 > Building in this order isn't arbitrary — each phase produces something that the *next* phase genuinely depends on, mirroring how a real product actually gets built (auth before anything user-scoped makes sense; tests from the start rather than bolted on; infra before scale-sensitive features).
 
-**Phase 1 — Core API**
+**Phase 1 — Core API** **Tier: 🎯 Master**
 Build: user registration/login, JWT + refresh tokens, basic CRUD on one core resource, PostgreSQL + Flyway migrations.
 *Acceptance criteria:* a user can register, log in, receive a valid JWT, and perform CRUD on their own resources only (server-side ownership check present, Part IV 14.4) — and cannot access another user's resources by ID manipulation (a deliberate IDOR check).
 
-**Phase 2 — Frontend**
+**Phase 2 — Frontend** **Tier: 🎯 Master**
 Build: React + TypeScript app consuming the API, real forms with validation, protected routes.
 *Acceptance criteria:* a fresh clone of the repo, following the README, gets a new developer to a working local full-stack environment in under 15 minutes (this is itself a test of Part 0/Part V documentation discipline).
 
-**Phase 3 — Testing From the Start**
+**Phase 3 — Testing From the Start** **Tier: 🎯 Master**
 Build: unit tests (Mockito), integration tests (Testcontainers against real Postgres), a first Playwright E2E test for the critical login path.
 *Acceptance criteria:* the test suite genuinely follows the pyramid shape (Part IV, 11.1) — many fast unit tests, some integration, one or two E2E — not inverted.
 
-**Phase 4 — Infrastructure**
+**Phase 4 — Infrastructure** **Tier: 🎯 Master**
 Build: Docker Compose for local dev (Postgres + Redis + RabbitMQ), then a real GitHub Actions CI pipeline (lint → unit → integration → coverage gate → build).
 *Acceptance criteria:* a deliberately broken PR (failing test, or coverage below threshold) is *actually* blocked from merging — verify this by opening one on purpose.
 
-**Phase 5 — Advanced Backend**
+**Phase 5 — Advanced Backend** **Tier: 🎯 Master**
 Build: RabbitMQ background jobs with a dead letter queue, WebSocket-based real-time notifications, Redis-based distributed rate limiting.
 *Acceptance criteria:* deliver the same message to a job handler twice and confirm idempotency (Part II, 5.6); kill a WebSocket connection mid-session and confirm the heartbeat detects it (Part II, 7.3); confirm rate limiting is correctly per-user *and* per-IP with separate limits (Part IV, 14.9).
 
-**Phase 6 — Deploy to AWS with Terraform**
+**Phase 6 — Deploy to AWS with Terraform** **Tier: 👀 Simplify — skip Terraform/full AWS, a single EC2/PaaS deploy is enough, see Priority_Map.md**
 Build: the full stack provisioned via Terraform (VPC, EC2/ECS, RDS, S3, CloudFront), remote state with locking, GitHub Actions deploying automatically on merge to `main` with a required approval gate before production.
 *Acceptance criteria:* `terraform destroy` followed by a fresh `terraform apply` fully reconstructs the environment from code alone — no manual console clicks required anywhere in the stack.
 
-**Phase 7 — Monitoring**
+**Phase 7 — Monitoring** **Tier: 👀 Know Only — a basic Grafana dashboard is enough, don't over-invest in the full observability stack**
 Build: Prometheus scraping Actuator metrics, Grafana dashboards using the RED method, Sentry error tracking, at least one alert tied to an explicit SLO you've written down.
 *Acceptance criteria:* deliberately trigger the alert condition (e.g., force an elevated error rate) and confirm the alert actually fires — an untested alert is not a real safety net (directly echoing Part IV, 13.11's backup-testing principle).
 
-**Phase 8 — AI Feature**
+**Phase 8 — AI Feature** **Tier: 🎯 Master**
 Build: RAG-powered document search using pgvector — embed uploaded documents, retrieve relevant chunks at query time, stream an AI-generated answer grounded in the user's own data.
 *Acceptance criteria:* ask a question with an answer *not* present in the uploaded documents and confirm the system doesn't confidently hallucinate an answer — it should indicate it doesn't know, or ground its answer visibly in retrieved context.
 
-**Phase 9 — Billing**
+**Phase 9 — Billing** **Tier: 🎯 Master**
 Build: Stripe integration with PaymentIntents, idempotency keys, and signature-verified webhook handling.
 *Acceptance criteria:* replay the exact same webhook payload twice and confirm no duplicate charge or duplicate state change occurs (Part II, 5.8's idempotency exercise, now against a real payment provider).
 
-**Phase 10 — Mobile App**
+**Phase 10 — Mobile App** **Tier: ⏸️ Skip For Now — drop from the required build path per Priority_Map.md**
 Build: React Native + Expo companion app — auth with `expo-secure-store`, offline support via TanStack Query's persisted cache, push notifications.
 *Acceptance criteria:* force-quit the app while offline and relaunch it, confirming previously-fetched data still renders from cache rather than an error state (Part II, 6.8).
 

@@ -12,39 +12,43 @@
 ## Table of Contents
 
 **Phase 15 — The Senior Mindset & Problem Solving**
-- [15.1 — Developer vs Engineer](#151--developer-vs-engineer)
-- [15.2 — First Principles Thinking](#152--first-principles-thinking)
-- [15.3 — Debugging: The Scientific Method](#153--debugging-the-scientific-method)
-- [15.4 — Thinking in Tradeoffs](#154--thinking-in-tradeoffs)
-- [15.5 — Estimation](#155--estimation)
-- [15.6 — Core Daily Habits](#156--core-daily-habits)
+- 🎯 [15.1 — Developer vs Engineer](#151--developer-vs-engineer)
+- 🎯 [15.2 — First Principles Thinking](#152--first-principles-thinking)
+- 🎯 [15.3 — Debugging: The Scientific Method](#153--debugging-the-scientific-method)
+- 🎯 [15.4 — Thinking in Tradeoffs](#154--thinking-in-tradeoffs)
+- 🎯 [15.5 — Estimation](#155--estimation)
+- 🎯 [15.6 — Core Daily Habits](#156--core-daily-habits)
 - [Phase 15 Capstone](#phase-15-capstone)
 
 **Phase 16 — Communication & Collaboration**
-- [16.1 — Why Communication Is a Technical Skill](#161--why-communication-is-a-technical-skill)
-- [16.2 — Written Communication](#162--written-communication)
-- [16.3 — Code Reviews](#163--code-reviews)
-- [16.4 — Meetings & Working in a Team](#164--meetings--working-in-a-team)
-- [16.5 — Communicating Technical Concepts](#165--communicating-technical-concepts)
-- [16.6 — Async-First Communication](#166--async-first-communication)
+- 🎯 [16.1 — Why Communication Is a Technical Skill](#161--why-communication-is-a-technical-skill)
+- 🎯 [16.2 — Written Communication](#162--written-communication)
+- 🎯 [16.3 — Code Reviews](#163--code-reviews)
+- 🎯 [16.4 — Meetings & Working in a Team](#164--meetings--working-in-a-team)
+- 🎯 [16.5 — Communicating Technical Concepts](#165--communicating-technical-concepts)
+- 🎯 [16.6 — Async-First Communication](#166--async-first-communication)
 - [Phase 16 Capstone](#phase-16-capstone)
 
 **Phase 17 — Engineering Practices & Methodologies**
-- [17.1 — Agile / Scrum / Kanban / XP](#171--agile--scrum--kanban--xp)
-- [17.2 — Lean / Lean Startup](#172--lean--lean-startup)
-- [17.3 — Domain-Driven Design (DDD) — Deep Dive](#173--domain-driven-design-ddd--deep-dive)
-- [17.4 — The 12-Factor App](#174--the-12-factor-app)
-- [17.5 — Technical Debt Quadrant](#175--technical-debt-quadrant)
-- [17.6 — Spikes, OKRs & FinOps](#176--spikes-okrs--finops)
+- 🎯 [17.1 — Agile / Scrum / Kanban / XP](#171--agile--scrum--kanban--xp)
+- 👀 [17.2 — Lean / Lean Startup](#172--lean--lean-startup)
+- 👀 [17.3 — Domain-Driven Design (DDD) — Deep Dive](#173--domain-driven-design-ddd--deep-dive)
+- 🎯 [17.4 — The 12-Factor App](#174--the-12-factor-app)
+- 🎯 [17.5 — Technical Debt Quadrant](#175--technical-debt-quadrant)
+- 👀 [17.6 — Spikes, OKRs & FinOps](#176--spikes-okrs--finops)
 - [Phase 17 Capstone](#phase-17-capstone)
 
 ---
 
 # Phase 15 — The Senior Mindset & Problem Solving
 
+**Phase tier: 🎯 Master — all of it, free and high-leverage**
+
 > Code is the output. Thinking is the work. The best engineers aren't the fastest typists — they ask the best questions.
 
 ## 15.1 — Developer vs Engineer
+
+**Tier: 🎯 Master**
 
 ### What to Learn
 
@@ -72,6 +76,8 @@
 
 ## 15.2 — First Principles Thinking
 
+**Tier: 🎯 Master**
+
 ### What to Learn
 - **Break every problem down to its fundamental truths** — rather than reasoning by analogy ("we always add a cache when things are slow") or by convention ("this is just how it's done here"), ask what is actually, verifiably true about *this specific* situation.
 - **The Five Whys** — ask "why?" repeatedly (traditionally five times, though the exact count isn't the point) until you reach an actual root cause, rather than stopping at the first plausible-sounding explanation.
@@ -89,6 +95,8 @@
 ---
 
 ## 15.3 — Debugging: The Scientific Method
+
+**Tier: 🎯 Master**
 
 ### What to Learn
 1. **Observe** — determine what is *actually* happening, not what you assume is happening; this often means adding logging/instrumentation *before* forming a theory, not after.
@@ -119,6 +127,8 @@
 
 ## 15.4 — Thinking in Tradeoffs
 
+**Tier: 🎯 Master**
+
 ### What to Learn
 - Every real engineering decision has a genuine cost somewhere: speed vs correctness, performance vs readability, consistency vs availability (Phase 10.3), short-term velocity vs long-term maintainability, build vs buy.
 - **There are no right answers in engineering — only defensible decisions.** The skill isn't finding the option with no downside (it usually doesn't exist); it's correctly identifying what you're trading away, deciding that tradeoff is acceptable *for this specific context*, and being able to explain that reasoning to someone else later.
@@ -135,6 +145,8 @@
 ---
 
 ## 15.5 — Estimation
+
+**Tier: 🎯 Master**
 
 ### What to Learn
 - **Break work into small chunks and estimate the pieces, not the whole** — a large estimate is really a sum of many smaller, more reliably estimable ones; estimating the whole directly tends to hide the pieces you haven't actually thought through yet.
@@ -155,6 +167,8 @@
 ---
 
 ## 15.6 — Core Daily Habits
+
+**Tier: 🎯 Master**
 
 ### What to Learn
 - Measure before optimizing — never guess (Phase 12's Golden Rule, restated as a personal habit, not just a performance-engineering rule).
@@ -183,9 +197,13 @@
 
 # Phase 16 — Communication & Collaboration
 
+**Phase tier: 🎯 Master — all of it, free and high-leverage**
+
 > The engineers who advance fastest make everyone around them more effective. Communication is a multiplier on every technical skill you have — a brilliant solution nobody can understand or act on has close to zero realized value.
 
 ## 16.1 — Why Communication Is a Technical Skill
+
+**Tier: 🎯 Master**
 
 ### What to Learn
 - Code is written once and read dozens of times afterward — writing it clearly *is* engineering work, not a "soft skill" bolted on separately from it.
@@ -197,6 +215,8 @@
 ---
 
 ## 16.2 — Written Communication
+
+**Tier: 🎯 Master**
 
 ### What to Learn
 - **README** — what the project is, how to actually run it, and *why* key decisions were made — not just installation steps.
@@ -217,6 +237,8 @@
 ---
 
 ## 16.3 — Code Reviews
+
+**Tier: 🎯 Master**
 
 ### What to Learn
 
@@ -245,6 +267,8 @@
 
 ## 16.4 — Meetings & Working in a Team
 
+**Tier: 🎯 Master**
+
 ### What to Learn
 - Come prepared — know the actual goal of a meeting before it starts, rather than treating it as a place to figure out what you think in real time at everyone else's expense.
 - Ask clarifying questions early — ambiguity left unresolved compounds the longer it goes unaddressed, since decisions get built on top of a shared misunderstanding.
@@ -269,6 +293,8 @@
 
 ## 16.5 — Communicating Technical Concepts
 
+**Tier: 🎯 Master**
+
 ### What to Learn
 - **The Feynman Technique** — explain a concept as if teaching someone with zero background in it; the specific places where your explanation gets vague, hand-wavy, or stuck are exactly the places you don't actually understand it as well as you thought.
 - **Know your audience** — a CTO or product stakeholder generally needs the tradeoff and the business impact, not the implementation detail; leading with implementation detail to a non-technical audience often loses the point you're actually trying to make.
@@ -286,6 +312,8 @@
 ---
 
 ## 16.6 — Async-First Communication
+
+**Tier: 🎯 Master**
 
 ### What to Learn
 - Default to written, searchable, durable communication over a synchronous meeting whenever the content allows it — a well-written message can be read, understood, and acted on by someone in a different timezone without ever needing to schedule a meeting.
@@ -311,9 +339,13 @@
 
 # Phase 17 — Engineering Practices & Methodologies
 
+**Phase tier: 🎯 Mostly Master — Agile/12-Factor/Tech Debt Master; Lean/deep DDD/FinOps Know Only**
+
 > Great engineers aren't just technically strong — they know how to operate effectively inside teams, products, and organizations. This is the operating system running underneath every technical skill in Parts I–IV.
 
 ## 17.1 — Agile / Scrum / Kanban / XP
+
+**Tier: 🎯 Master**
 
 ### What to Learn
 
@@ -366,6 +398,8 @@
 
 ## 17.2 — Lean / Lean Startup
 
+**Tier: 👀 Know Only**
+
 ### What to Learn
 - **Lean's core ideas** — eliminate waste (anything not adding real value to the customer), build quality in from the start (catch defects early rather than inspecting for them at the end), defer commitment (keep real options open as long as reasonably possible before locking in a decision), deliver in small batches for fast feedback.
 - **Build-Measure-Learn loop** — build the smallest thing that tests a real assumption, measure actual behavior, learn from it, and adjust.
@@ -385,6 +419,8 @@
 ---
 
 ## 17.3 — Domain-Driven Design (DDD) — Deep Dive
+
+**Tier: 👀 Know Only**
 
 > Phase 3.4 covered DDD's basics (Entities, Value Objects, Aggregates). This section is the strategic and organizational layer that makes DDD actually usable across a real, larger system — not just within a single class design.
 
@@ -436,6 +472,8 @@
 
 ## 17.4 — The 12-Factor App
 
+**Tier: 🎯 Master**
+
 ### What to Learn
 
 | Factor | What It Means | Why It Matters |
@@ -466,6 +504,8 @@
 ---
 
 ## 17.5 — Technical Debt Quadrant
+
+**Tier: 🎯 Master**
 
 ### What to Learn
 ```
@@ -506,6 +546,8 @@ PRUDENT ----------------+---------------- RECKLESS
 ---
 
 ## 17.6 — Spikes, OKRs & FinOps
+
+**Tier: 👀 Know Only**
 
 ### What to Learn
 
