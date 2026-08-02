@@ -706,7 +706,18 @@ God object (one class that knows/does everything), Singleton abuse (global mutab
 - **Hexagonal Architecture (Ports & Adapters)** — "ports" are interfaces defining how the outside world talks to your core logic; "adapters" are concrete implementations plugging specific technology into those ports (`UserRepository` is a port, `JpaUserRepository` is an adapter) — this is really the same idea as Clean Architecture and Dependency Inversion (3.2), viewed from a different angle.
 - **MVC** — separation of concerns across Model/View/Controller; the practically important thing to internalize is that business logic frequently does *not* belong in the "Model" as commonly implemented (it often ends up as thin data classes) — and that MVC as a pattern starts to strain in SPA/micro-frontend architectures where "the view" isn't a single server-rendered thing anymore.
 
-**Spring Boot Clean Architecture project layout** (you'll use this directly in Phase 5):
+**The same layering, in both Phase 5 tracks — same idea, different folder names:**
+
+NestJS (Track A, near-term):
+```
+src/
+├── domain/          ← Domain services, repository interfaces
+├── modules/         ← Feature modules: controllers, providers, DTOs
+├── common/          ← Guards, pipes, interceptors, exception filters
+└── prisma/          ← schema.prisma, migrations, Prisma service
+```
+
+Spring Boot (Track B, later):
 ```
 src/main/java/com/company/app/
 ├── domain/          ← Entities, domain services, repository interfaces

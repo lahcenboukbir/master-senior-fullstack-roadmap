@@ -81,18 +81,36 @@
 
 **All of 4.1–4.9 stays 🎯 MASTER.** This is literally half of "fullstack." No cuts here.
 
-### Phase 5 — Backend Engineering (Java + Spring Boot)
+### Phase 5 — Backend Engineering (Two Tracks: JS Now, Java Later)
+
+> **Sequencing decision, not a scope cut:** the plan is full-stack JS (React + Node/NestJS) first — this covers freelance work and lets you ship real projects fastest with one language end to end — then Java + Spring Boot once JS is solid, aimed specifically at the professional/enterprise job market. Track B isn't neglected, it's deliberately queued. NestJS was chosen over bare Express as the primary JS framework specifically because its architecture (DI, modules, decorators, guards/pipes/interceptors) pre-trains the same mental model Spring Boot uses — Track A is a rehearsal for Track B, not a detour from it.
+
+**Track A — Node.js + NestJS (learn this first)**
 
 | Section | Tier | Why |
 |---|---|---|
-| 5.1 Java Fundamentals (Deep) | 🎯 MASTER | Your primary language |
-| 5.2 Spring Boot Core Concepts | 🎯 MASTER | Your primary framework |
-| 5.3 Spring Data JPA | 🎯 MASTER | You'll write this every day |
-| 5.4 Spring Security | 🎯 MASTER | Every real app needs auth |
-| 5.5 Spring Boot Production Features | 🎯 MASTER | Actuator, profiles, graceful shutdown — real deployment basics |
-| 5.6 Async & Background Jobs | 🎯 MASTER | Common real-world need |
-| 5.7 Testing Spring Boot | 🎯 MASTER | Non-negotiable |
-| 5.8 Backend Production Concerns | 👀 KNOW ONLY | Webhooks/payments/multi-tenancy/search — high-value but situational; go deep the day a real project needs one specifically |
+| 5A.1 Node.js Fundamentals (Deep) | 🎯 MASTER | Your primary runtime, right now |
+| 5A.2 Express Fundamentals | 🎯 MASTER | Brief but necessary — understand what Nest abstracts before trusting the abstraction |
+| 5A.3 NestJS Core Concepts | 🎯 MASTER | Your primary framework, right now — and your rehearsal for Spring Boot's DI/annotation model |
+| 5A.4 Prisma & the Data Layer | 🎯 MASTER | You'll write this every day |
+| 5A.5 Auth & Security in NestJS | 🎯 MASTER | Every real app needs auth |
+| 5A.6 NestJS Production Features | 🎯 MASTER | Config, logging, health checks — real deployment basics |
+| 5A.7 Async & Background Jobs (BullMQ) | 🎯 MASTER | Common real-world need |
+| 5A.8 Testing NestJS | 🎯 MASTER | Non-negotiable |
+| 5A.9 Backend Production Concerns | 👀 KNOW ONLY | Webhooks/payments/multi-tenancy/search — high-value but situational; go deep the day a real project needs one specifically |
+
+**Track B — Java + Spring Boot (deferred until after the Track A capstone ships)**
+
+| Section | Tier | Why |
+|---|---|---|
+| 5B.1 Java Fundamentals (Deep) | ⏸️ SKIP FOR NOW | Deferred by design — this is the professional-job-market track, tackled after JS is solid, not neglected |
+| 5B.2 Spring Boot Core Concepts | ⏸️ SKIP FOR NOW | Same — revisit once the NestJS capstone is done |
+| 5B.3 Spring Data JPA | ⏸️ SKIP FOR NOW | Same |
+| 5B.4 Spring Security | ⏸️ SKIP FOR NOW | Same |
+| 5B.5 Spring Boot Production Features | ⏸️ SKIP FOR NOW | Same |
+| 5B.6 Async & Background Jobs | ⏸️ SKIP FOR NOW | Same |
+| 5B.7 Testing Spring Boot | ⏸️ SKIP FOR NOW | Same |
+| 5B.8 Backend Production Concerns | ⏸️ SKIP FOR NOW | Same — was already Know Only even at Master-tier timing, now simply later |
 
 ### Phase 6 — Mobile Engineering (React Native)
 
@@ -248,6 +266,8 @@ By raw subsection count across all 141 numbered subsections in the six detail fi
 | 🎯 Master | ~92 | ~65% |
 | 👀 Know Only | ~31 | ~22% |
 | ⏸️ Skip for Now | ~18 | ~13% |
+
+**Note on the counts below:** they predate the Phase 5 Track A/Track B split (Node.js/NestJS added as the near-term Master-tier backend, Java/Spring Boot's existing sections flipped to Skip For Now). That split adds roughly 9 new Master-tier subsections and moves roughly 8 existing ones from Master to Skip — a wash in total Master count, not a further shrink — so treat the percentages below as approximate rather than re-derived post-split.
 
 **That count alone understates the real relief, and here's why:** a "Know Only" subsection costs roughly 10-15% of the time a "Master" subsection does — no Practice exercises, no spaced repetition, no capstone drilling, just one read-through for vocabulary. A "Skip" subsection costs zero time right now. Weighted by actual effort, not heading count, you're closer to a **35-40% real time reduction** from this pass alone — and the two biggest single wins are things that don't show up proportionally in a heading count at all: **Phase 6 (the entire React Native mobile track, including app store deployment) drops to zero**, and **Phase 13 (Kubernetes + Terraform + full AWS service mastery) drops by roughly 70%** — both of which were disproportionately expensive relative to how many subsections they occupy.
 
