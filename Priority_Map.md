@@ -75,6 +75,8 @@
 | 3.4 Architecture Patterns | 🎯 MASTER | Layered/Clean Architecture is your default — full DDD strategic depth subset is 👀 Know Only (basics only needed) |
 | 3.5 Refactoring | 🎯 MASTER | You'll do this every week of your career |
 
+**Also 🎯 MASTER, standalone file:** `Project_Lifecycle_And_Planning.md` — briefs, user stories, C4/ERD/sequence diagramming via Mermaid, and running your own backlog/sprints. This isn't part of a numbered phase, but it's exactly the "how do I actually run a project, not just write code for one" skill — read it once after Phase 3, apply it before starting the Master Project's build.
+
 ---
 
 ## Part II — Building Software

@@ -17,6 +17,7 @@
 - [Phase 1 — Computer Science Fundamentals](#phase-1--computer-science-fundamentals)
 - [Phase 2 — Data Structures & Algorithms](#phase-2--data-structures--algorithms)
 - [Phase 3 — Software Design & Clean Code](#phase-3--software-design--clean-code)
+- [Project Lifecycle & Planning](#project-lifecycle--planning)
 - [Phase 4 — Frontend Engineering](#phase-4--frontend-engineering)
 - [Phase 5A — Backend: Node.js + NestJS](#phase-5a--backend-nodejs--nestjs)
 - [Phase 5B — Backend: Java + Spring Boot](#phase-5b--backend-java--spring-boot)
@@ -97,6 +98,25 @@ Take any messy 200+ line file (yours, or a deliberately bad one you write first)
 - Behavior is provably unchanged (a test suite, or manual verification, passes identically before and after).
 - You can point to each pattern used and say *why* it fit here, not just that you used it.
 - No function is longer than ~20 lines without a specific, stated reason.
+
+---
+
+## Project Lifecycle & Planning
+*(Not a numbered phase — see `Project_Lifecycle_And_Planning.md`, 🎯 Master. Do this milestone before starting the Master Project's build.)*
+
+### Quick Wins
+- Write a 1-page brief + 3-5 user stories with real Given/When/Then acceptance criteria for a small idea (even a throwaway one).
+- Draw a C4 Container diagram in Mermaid for an app you've already built (Phase 4/5 milestone) — retrofit the diagram to reality, not the other way around.
+- Draw the ERD for that same app's actual current schema and check it against what you'd have designed on paper first.
+- Run a lightweight solo Event Storming pass (sticky notes or a virtual board) on one feature idea — 45 minutes, timer on.
+
+### Milestone Project — Plan the Master Project Properly, Before Building It
+Before writing the Master Project's first line of code (Phase 5A milestone), produce: the 1-page brief, 5 core user stories with acceptance criteria, a C4 Container diagram, an ERD for the core entities, one sequence diagram (the refresh-token flow is a good first pick), and an initial backlog in GitHub Projects (or your tool of choice) broken down from the 11-step build order below.
+
+**Done when:**
+- All of the above exists as real files in the repo (`/docs` folder is a reasonable place) *before* the first feature branch, not written retroactively to look tidy.
+- The backlog has enough broken-down cards that you could open your tracker Monday morning and know exactly what to start on, with no re-thinking required.
+- **Feeds the Master Project:** this literally *is* the planning phase of the Master Project — everything built in the phases below traces back to a story or diagram from this milestone.
 
 ---
 

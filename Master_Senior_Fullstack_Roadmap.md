@@ -17,6 +17,14 @@
 - **Landscape / awareness topics** — you don't need production mastery, but you must know what they are, when to reach for them, and roughly how they work. These appear as "Ecosystem Awareness" call-out blocks throughout.
 - **Every phase ends with**: tools & practice, hands-on projects, and questions you should be able to answer cold.
 
+### Companion Files
+This document is the spine; these go deeper on specific concerns and are meant to be read alongside it, not instead of it:
+- `Priority_Map.md` — the honest 🎯/👀/⏸️ tiering reasoning behind every tag in this document.
+- `Part_0_Foundation_Reset_Detailed.md`, `Part_I` through `Part_VI_*_Detailed.md` — full-depth expansion of each Part above, including the "Under the Hood" mechanism-level deep-dives (V8 internals, React Fiber, Nest's DI container, Spring's proxy-based `@Transactional`, etc.).
+- `How_To_Learn_This_Roadmap.md` — the actual study method (active recall, spaced repetition, interleaving) to apply to Master-tier sections.
+- `Projects_And_Practice.md` — a Quick Wins + Milestone Project for every phase above, so you're building while you learn, not just reading.
+- `Project_Lifecycle_And_Planning.md` — **🎯 Master.** The layer above individual phases: how to take a raw idea through a 1-page brief, user stories, architecture/ERD/sequence diagrams (Mermaid, plus an honest verdict on what's left of UML), and a real solo backlog/sprint workflow, all the way to deployed. Read this once after Phase 3, then apply it at the start of the Master Project and every real project after.
+
 ---
 
 ## Table of Contents
