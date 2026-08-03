@@ -27,7 +27,7 @@
 0. 🎯 [Foundation Reset](#phase-0--foundation-reset)
 
 **Part I — Core Engineering Foundations**
-1. 🎯👀 [Computer Science Fundamentals](#phase-1--computer-science-fundamentals)
+1. 🎯 [Computer Science Fundamentals](#phase-1--computer-science-fundamentals)
 2. 🎯 [Data Structures & Algorithms](#phase-2--data-structures--algorithms)
 3. 🎯 [Software Design & Clean Code](#phase-3--software-design--clean-code)
 
@@ -113,12 +113,12 @@
 
 ## Phase 1 — Computer Science Fundamentals
 
-**Phase tier: 🎯👀 Mixed — half Master (memory, OS, browser), half Know Only (CPU internals, deep networking, compilers)**
+**Phase tier: 🎯 Master — all of it. This is the "why/how" underneath everything you build; no deadline means no reason to skip it**
 
 > Most coders use computers without understanding them. This is the mental model that separates engineers from developers.
 
 ### 1.1 — How a CPU Works
-**Tier: 👀 Know Only**
+**Tier: 🎯 Master**
 Fetch-decode-execute cycle; registers; ALU; clock speed vs instruction count (why GHz alone doesn't predict performance); binary representation (two's complement for negatives, IEEE 754 for floats); hexadecimal; instruction sets (x86-64, ARM) at awareness level.
 **Practice:** Convert decimal ↔ binary/hex by hand until automatic. Read `javap -c` output for a simple Java method.
 
@@ -141,7 +141,7 @@ Registers → L1 → L2 → L3 → RAM → SSD/HDD, with real latency numbers (r
 **Practice:** Write a Java program spawning threads that modify a shared variable — observe the race condition. Use VisualVM/JMC to watch GC behavior under pressure.
 
 ### 1.4 — Networking Deep Dive
-**Tier: 👀 Know Only**
+**Tier: 🎯 Master**
 OSI layers 3–7; IPv4/IPv6, subnets, CIDR; **TCP** — three-way handshake (why not two?), reliability/ordering, congestion control (slow start, AIMD), Nagle's algorithm vs `TCP_NODELAY`, teardown (FIN/FIN-ACK/ACK), `TIME_WAIT`; **UDP** — connectionless, when it beats TCP (DNS, gaming, VoIP), datagram boundaries; **DNS** — recursive vs authoritative resolution, TTL, propagation delay; **TLS 1.3** handshake, certificate chain validation, mTLS; **CORS** — same-origin policy, preflight OPTIONS, allowed origins; **HTTP/2 vs HTTP/3** — multiplexing, QUIC (built on UDP), 0-RTT, head-of-line blocking; **non-blocking I/O** — `select` vs `poll` vs `epoll` vs `io_uring`, how servers handle thousands of connections; **zero-copy** (`sendfile`) — why copying between kernel/user space is expensive; CDN edge caching mechanics.
 **Practice:** Wireshark on a real TLS handshake and DNS query. Use `dig`/`nslookup` to trace resolution step by step.
 
@@ -150,7 +150,7 @@ OSI layers 3–7; IPv4/IPv6, subnets, CIDR; **TCP** — three-way handshake (why
 URL → DNS → TCP → TLS → HTTP request → response; rendering pipeline: HTML parse → DOM, CSS parse → CSSOM, DOM+CSSOM → render tree → layout (reflow) → paint → composite; render-blocking resources (`<script>` in `<head>`, `@import`); reflow (expensive) vs repaint (cheaper); critical rendering path; why JS parsing blocks the parser (`defer`/`async`); cookies/sessions/localStorage in a stateless protocol; browser/CDN/server cache layers and how they interact.
 
 ### 1.6 — Compilers & Interpreters (Basics)
-**Tier: 👀 Know Only**
+**Tier: 🎯 Master**
 Lexing/tokenization; parsing and AST; compilation vs interpretation vs JIT; **JVM internals** — bytecode (not machine code), class loader delegation model (bootstrap/extension/application), bytecode interpretation, **JIT compilation** (hot method detection → native code), HotSpot optimizations (inlining, escape analysis, loop unrolling); `javap -c` to disassemble; JVM flags (`-XX:+PrintCompilation`).
 **Why this matters:** helps you write faster code and understand cryptic error messages.
 
@@ -174,7 +174,7 @@ Lexing/tokenization; parsing and AST; compilation vs interpretation vs JIT; **JV
 
 ## Phase 2 — Data Structures & Algorithms
 
-**Phase tier: 🎯 Mostly Master — core structures and patterns Master; heaps/graphs/DP Know Only; tries/union-find/advanced topics Skip**
+**Phase tier: 🎯 Mostly Master — core structures, heaps, graphs, and DP all Master (this is the deep-thinking/problem-solving core of the roadmap); only tries/union-find/advanced niche topics Skip**
 
 > You don't need 500 LeetCode problems. You need to think algorithmically — recognize patterns, reason about tradeoffs, choose the right tool. **Implement everything in Java** — understanding comes from building, not reading.
 
@@ -209,12 +209,12 @@ Binary tree; BST property (left < node < right); traversals — inorder (sorted 
 **Build:** BST with `insert`/`search`/`delete` + all four traversals iteratively and recursively; validate-BST check.
 
 ### 2.7 — Heaps
-**Tier: 👀 Know Only**
+**Tier: 🎯 Master**
 Binary heap as an array; max-heap vs min-heap; `siftUp`/`siftDown` (O(log n)); build-heap from array is O(n), not O(n log n); why heapsort isn't used in practice despite O(n log n) (cache misses vs quicksort); priority queue use cases (Dijkstra, scheduling, K-th largest); Java `PriorityQueue` (min-heap by default).
 **Build:** Min-heap from scratch (`insert`, `extractMin`, `peek`, `heapify`).
 
 ### 2.8 — Graphs
-**Tier: 👀 Know Only**
+**Tier: 🎯 Master**
 Directed vs undirected, weighted vs unweighted; adjacency list (sparse) vs adjacency matrix (dense, O(1) edge lookup); BFS (shortest path unweighted) vs DFS (cycle detection, topological sort); topological sort (DAGs only); cycle detection (white/gray/black states); connected components / union-find.
 **Build:** Graph via adjacency list — `addEdge`, BFS, DFS, cycle detection, topological sort.
 
@@ -237,7 +237,7 @@ Bubble/Selection/Insertion (O(n²), know why they're slow, insertion sort good f
 Linear search O(n); binary search O(log n) — the template (`left`, `right`, `mid = left + (right-left)/2` to avoid overflow), off-by-one traps, binary search on the answer space (not just arrays); BFS shortest path (unweighted); Dijkstra (weighted, fails on negative edges → Bellman-Ford instead); A* (heuristic-guided search).
 
 ### 2.13 — Dynamic Programming
-**Tier: 👀 Know Only**
+**Tier: 🎯 Master**
 Recognizing optimal substructure + overlapping subproblems (the hardest and most important skill); memoization (top-down) vs tabulation (bottom-up); 1D DP (Fibonacci, climbing stairs, house robber); 2D DP (LCS, edit distance, 0/1 knapsack); deriving the recurrence relation.
 **Build:** Fibonacci with/without memoization (compare performance); coin change; longest increasing subsequence; 0/1 knapsack.
 
@@ -1100,7 +1100,7 @@ Declarative infra; workflow — `init` → `plan` → `apply` → `destroy`; pro
 
 ## Phase 14 — Security Fundamentals
 
-**Phase tier: 🎯 Mostly Master — OWASP/auth/attack vectors Master (non-negotiable); Zero Trust/WAF/SIEM/compliance Skip**
+**Phase tier: 🎯 Mostly Master — OWASP/auth/attack vectors/cryptography fundamentals Master (non-negotiable); Zero Trust/WAF/SIEM/compliance Skip**
 
 > Security is a property of every feature, not a feature itself. The question is never "will we be attacked?" — it's "when, and will we be ready?"
 
@@ -1147,7 +1147,7 @@ Permissions-Policy
 ```
 
 ### 14.7 — Cryptography Fundamentals
-**Tier: 👀 Know Only**
+**Tier: 🎯 Master**
 Symmetric (AES-256, same key both ways) vs asymmetric (RSA/ECC, public encrypts/private decrypts); hashing (SHA-256 for integrity, Argon2/bcrypt for passwords — never MD5/SHA1); digital signatures; key management (never hardcode, rotate regularly, AWS KMS/HashiCorp Vault).
 
 ### 14.8 — Secrets Management

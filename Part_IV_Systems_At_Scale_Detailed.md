@@ -63,7 +63,7 @@
 - 🎯 [14.4 — Authorization](#144--authorization)
 - 🎯 [14.5 — Common Attack Vectors](#145--common-attack-vectors)
 - 🎯 [14.6 — Security Headers](#146--security-headers)
-- 👀 [14.7 — Cryptography Fundamentals](#147--cryptography-fundamentals)
+- 🎯 [14.7 — Cryptography Fundamentals](#147--cryptography-fundamentals)
 - 🎯 [14.8 — Secrets Management](#148--secrets-management)
 - 🎯 [14.9 — API Security](#149--api-security)
 - [Phase 14 Capstone](#phase-14-capstone)
@@ -857,7 +857,7 @@ Never optimize without data. Never guess.
 
 # Phase 14 — Security Fundamentals
 
-**Phase tier: 🎯 Mostly Master — OWASP/auth/attack vectors Master (non-negotiable); deep crypto Know Only, Zero Trust/WAF/SIEM/compliance Skip**
+**Phase tier: 🎯 Mostly Master — OWASP/auth/attack vectors/cryptography fundamentals Master (non-negotiable); Zero Trust/WAF/SIEM/compliance Skip**
 
 > Security is a property of every feature, not a feature itself. The question is never "will we be attacked?" — it's "when, and will we be ready?"
 
@@ -1001,7 +1001,7 @@ Permissions-Policy
 
 ## 14.7 — Cryptography Fundamentals
 
-**Tier: 👀 Know Only**
+**Tier: 🎯 Master**
 
 ### What to Learn
 - **Symmetric encryption** (AES-256 — the same key both encrypts and decrypts, fast, but requires securely sharing that one key with every party that needs it) vs **asymmetric encryption** (RSA/ECC — a public key encrypts, only the corresponding private key decrypts, solving the key-distribution problem at the cost of being much slower — which is why real systems like TLS use asymmetric crypto briefly to establish a shared symmetric key, then switch to symmetric encryption for the actual bulk data).

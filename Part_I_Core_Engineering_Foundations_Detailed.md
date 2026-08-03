@@ -12,12 +12,12 @@
 ## Table of Contents
 
 **Phase 1 — Computer Science Fundamentals**
-- 👀 [1.1 — How a CPU Works](#11--how-a-cpu-works)
+- 🎯 [1.1 — How a CPU Works](#11--how-a-cpu-works)
 - 🎯 [1.2 — Memory Hierarchy](#12--memory-hierarchy)
 - 🎯 [1.3 — Operating Systems Fundamentals](#13--operating-systems-fundamentals)
-- 👀 [1.4 — Networking Deep Dive](#14--networking-deep-dive)
+- 🎯 [1.4 — Networking Deep Dive](#14--networking-deep-dive)
 - 🎯 [1.5 — How the Browser Works](#15--how-the-browser-works)
-- 👀 [1.6 — Compilers, Interpreters & the JVM](#16--compilers-interpreters--the-jvm)
+- 🎯 [1.6 — Compilers, Interpreters & the JVM](#16--compilers-interpreters--the-jvm)
 - [Phase 1 Capstone](#phase-1-capstone)
 
 **Phase 2 — Data Structures & Algorithms**
@@ -27,13 +27,13 @@
 - 🎯 [2.4 — Stacks & Queues](#24--stacks--queues)
 - 🎯 [2.5 — Hash Maps & Hash Sets](#25--hash-maps--hash-sets)
 - 🎯 [2.6 — Trees](#26--trees)
-- 👀 [2.7 — Heaps](#27--heaps)
-- 👀 [2.8 — Graphs](#28--graphs)
+- 🎯 [2.7 — Heaps](#27--heaps)
+- 🎯 [2.8 — Graphs](#28--graphs)
 - ⏸️ [2.9 — Tries](#29--tries)
 - ⏸️ [2.10 — Union-Find (Disjoint Set Union)](#210--union-find-disjoint-set-union)
 - 🎯 [2.11 — Sorting Algorithms](#211--sorting-algorithms)
 - 🎯 [2.12 — Searching & Shortest Paths](#212--searching--shortest-paths)
-- 👀 [2.13 — Dynamic Programming](#213--dynamic-programming)
+- 🎯 [2.13 — Dynamic Programming](#213--dynamic-programming)
 - ⏸️ [2.14 — Advanced & Niche DS&A](#214--advanced--niche-dsa)
 - 🎯 [2.15 — Problem-Solving Patterns Reference](#215--problem-solving-patterns-reference)
 - [Phase 2 Capstone](#phase-2-capstone)
@@ -50,13 +50,13 @@
 
 # Phase 1 — Computer Science Fundamentals
 
-**Phase tier: 🎯👀 Mixed — half Master (memory, OS, browser), half Know Only (CPU internals, deep networking, compilers)**
+**Phase tier: 🎯 Master — all of it. This is the "why/how" underneath everything you build; no deadline means no reason to skip it**
 
 > Most coders use computers without understanding them. This is the mental model layer.
 
 ## 1.1 — How a CPU Works
 
-**Tier: 👀 Know Only**
+**Tier: 🎯 Master**
 
 ### What to Learn
 - **Fetch-decode-execute cycle** — the CPU fetches an instruction from memory, decodes what it means, executes it, and repeats — billions of times per second. Everything your code does eventually reduces to this loop.
@@ -173,7 +173,7 @@
 
 ## 1.4 — Networking Deep Dive
 
-**Tier: 👀 Know Only**
+**Tier: 🎯 Master**
 
 ### What to Learn
 - **OSI layers 3–7** — Network (IP — addressing/routing), Transport (TCP/UDP — end-to-end delivery), Session/Presentation (mostly folded into practice today), Application (HTTP, DNS, etc.) — you don't need to recite all 7 layers, but you need the mental model of "each layer only cares about its own job and hands off to the next."
@@ -228,7 +228,7 @@
 
 ## 1.6 — Compilers, Interpreters & the JVM
 
-**Tier: 👀 Know Only**
+**Tier: 🎯 Master**
 
 ### What to Learn
 - **Lexing/tokenization** — breaking source text into meaningful tokens (keywords, identifiers, literals, operators) before anything about structure is understood.
@@ -256,7 +256,7 @@
 
 # Phase 2 — Data Structures & Algorithms
 
-**Phase tier: 🎯 Mostly Master — core structures/patterns Master; heaps/graphs/DP Know Only; tries/union-find/advanced topics Skip**
+**Phase tier: 🎯 Mostly Master — core structures, heaps, graphs, and DP all Master (this is the deep-thinking/problem-solving core of the roadmap); only tries/union-find/advanced niche topics Skip**
 
 > Implement everything in Java, from scratch, no built-in collections for the "build" exercises. Understanding comes from building, not from reading someone else's implementation.
 
@@ -390,7 +390,7 @@ A BST with `insert`, `search`, `delete`, all four traversals (both recursively a
 
 ## 2.7 — Heaps
 
-**Tier: 👀 Know Only**
+**Tier: 🎯 Master**
 
 ### What to Learn
 - A binary heap is a complete binary tree stored as a flat array (child/parent indices computed arithmetically, no pointers needed).
@@ -411,7 +411,7 @@ A min-heap with `insert`, `extractMin`, `peek`, and a `heapify` (build-from-arra
 
 ## 2.8 — Graphs
 
-**Tier: 👀 Know Only**
+**Tier: 🎯 Master**
 
 ### What to Learn
 - Directed vs undirected; weighted vs unweighted.
@@ -513,7 +513,7 @@ Merge sort and quicksort, from memory, with no reference material.
 
 ## 2.13 — Dynamic Programming
 
-**Tier: 👀 Know Only**
+**Tier: 🎯 Master**
 
 ### What to Learn
 - Recognize **optimal substructure** (the optimal solution to the whole problem is built from optimal solutions to subproblems) and **overlapping subproblems** (the same subproblem gets solved repeatedly in a naive recursive approach) — these two properties together are the actual signal that DP applies.

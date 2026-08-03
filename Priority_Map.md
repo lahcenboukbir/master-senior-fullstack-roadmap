@@ -1,14 +1,16 @@
 # Priority Map — Master / Know-Only / Skip-for-Now
-### How to actually use this roadmap to become a senior fullstack web developer — not a distributed-systems staff engineer, not a DevOps/SRE, not a security researcher
+### How to actually use this roadmap to become a senior fullstack web developer who deeply understands *why*, *how*, and *when* — not five careers stapled together
 
-> **Ground rule: nothing gets deleted.** Every phase and subsection across all six detail files stays exactly as written. This file is a lens you look at them through, not an edit to them. Its only job is to answer one question honestly, for every single subsection you already have: *does a senior fullstack web developer need to drill this, or just recognize it when it shows up?*
+> **Ground rule: nothing gets deleted.** Every phase and subsection across all six detail files stays exactly as written. This file is a lens you look at them through, not an edit to them. Its only job is to answer one question honestly, for every single subsection you already have: *is this a fundamental — the "why/how/when" underneath everything you build — or is it a genuinely advanced, specialist, or enterprise-scale concern you can pick up later when a real project calls for it?*
+>
+> **This map has no deadline behind it.** You're not optimizing for fastest-employable or trimming hours off a schedule — you're optimizing for actually understanding the machine, the language, the data structures, and the systems you work with, not just calling the right library function. That changes the tiering: **fundamentals and core mechanics default to Master**, even the ones that don't show up in daily ticket work. What gets deprioritized is genuinely advanced, niche, or enterprise/platform-team territory (Kubernetes, Terraform, distributed consensus algorithms, DDD strategic design, FinOps, chaos engineering) — not "how a CPU works" or "how TCP actually behaves," which are exactly the kind of fundamentals that turn a coder into an engineer.
 >
 > **The three tiers:**
-> - 🎯 **MASTER** — do every Practice exercise, answer every "Answer This" question from memory, use spaced repetition (per `How_To_Learn_This_Roadmap.md`). This is your actual, daily, employable skillset.
-> - 👀 **KNOW ONLY** — read the subsection once, understand the vocabulary and the shape of the problem it solves, skip most of the Practice exercises. Revisit with real depth only when a real project or job forces you to — not on a schedule.
+> - 🎯 **MASTER** — do every Practice exercise, answer every "Answer This" question from memory, use spaced repetition (per `How_To_Learn_This_Roadmap.md`). This is both your daily employable skillset **and** the fundamentals that explain why it works.
+> - 👀 **KNOW ONLY** — read the subsection once, understand the vocabulary and the shape of the problem it solves, skip most of the Practice exercises. Reserved for things that are genuinely advanced, specialist, or situational — not for basics that happen to not show up in daily ticket work. Revisit with real depth once a real project or genuine curiosity pulls you there.
 > - ⏸️ **SKIP FOR NOW** — don't even read it yet. It's not wasted work — it's already written and waiting for the day a real need, a curious weekend, or a career pivot actually calls for it.
 >
-> **One honest caveat before the tables:** a chunk of what's tagged "Know Only" or "Skip" below (DSA graph/DP depth, system design, some distributed-systems theory) shows up disproportionately in **interview processes**, especially at larger or interview-heavy companies, independent of whether the job itself uses it daily. If you're specifically targeting that kind of company, bump those sections back up before an interview cycle — this map optimizes for *the job*, not *the gauntlet to get the job*, and those aren't always the same list.
+> **One honest caveat before the tables:** a chunk of what's tagged "Know Only" or "Skip" below (deep distributed-systems theory, advanced DDD, platform/infra depth) shows up disproportionately in **interview processes**, especially at larger or interview-heavy companies. If you're specifically targeting that kind of company, bump those sections back up before an interview cycle.
 
 ---
 
@@ -36,12 +38,12 @@
 
 | Section | Tier | Why |
 |---|---|---|
-| 1.1 How a CPU Works | 👀 KNOW ONLY | Good mental model, not something you'll drill or use daily |
+| 1.1 How a CPU Works | 🎯 MASTER | This is "how a computer actually works" — fetch-decode-execute, binary/hex, IEEE 754 — exactly the kind of fundamental that explains WHY code behaves the way it does |
 | 1.2 Memory Hierarchy | 🎯 MASTER | Directly explains real performance bugs you'll actually debug |
 | 1.3 Operating Systems Fundamentals | 🎯 MASTER | Concurrency, GC, deadlocks — daily-relevant for Java backend work |
-| 1.4 Networking Deep Dive | 👀 KNOW ONLY | You need HTTP/DNS/TLS/CORS practically (already covered at Master in 0.8) — TCP internals, `epoll`, zero-copy is infra-engineer territory |
+| 1.4 Networking Deep Dive | 🎯 MASTER | HTTP/DNS/TLS/CORS basics are covered at Master in 0.8 already — this is the layer underneath: TCP handshake, congestion control, DNS resolution, epoll. Core "how the internet actually works," not infra-specialist trivia |
 | 1.5 How the Browser Works | 🎯 MASTER | Explains frontend performance work you'll actually do |
-| 1.6 Compilers, Interpreters & the JVM | 👀 KNOW ONLY | Nice intuition, not something to drill regularly |
+| 1.6 Compilers, Interpreters & the JVM (general mechanics) | 🎯 MASTER | Lexing/parsing/AST/JIT is how your source code becomes execution — a real fundamental. The JVM-specific flags/tuning stay lighter-touch, but the general mechanics are core |
 
 ### Phase 2 — Data Structures & Algorithms
 
@@ -53,13 +55,13 @@
 | 2.4 Stacks & Queues | 🎯 MASTER | `ArrayDeque` shows up constantly in real code |
 | 2.5 Hash Maps & Hash Sets | 🎯 MASTER | You use `HashMap` every single day — know what it's actually doing |
 | 2.6 Trees | 🎯 MASTER | BSTs/B-trees underpin databases you'll use constantly (Phase 8) |
-| 2.7 Heaps | 👀 KNOW ONLY | You'll use `PriorityQueue`, rarely build one from scratch |
-| 2.8 Graphs | 👀 KNOW ONLY | BFS/DFS concept is useful; deep graph algorithms rarely needed in CRUD fullstack work |
+| 2.7 Heaps | 🎯 MASTER | Core structure — build one from scratch at least once even though `PriorityQueue` covers daily use |
+| 2.8 Graphs | 🎯 MASTER | BFS/DFS, topological sort, cycle detection are core algorithmic thinking tools, not a fullstack-CRUD niche |
 | 2.9 Tries | ⏸️ SKIP FOR NOW | Niche, autocomplete-specific |
 | 2.10 Union-Find | ⏸️ SKIP FOR NOW | Competitive-programming territory |
 | 2.11 Sorting Algorithms | 🎯 MASTER | Understanding tradeoffs matters even though libraries do the sorting |
 | 2.12 Searching & Shortest Paths | 🎯 MASTER | Binary search is essential; Dijkstra/Bellman-Ford/A\* is the lighter part of this one |
-| 2.13 Dynamic Programming | 👀 KNOW ONLY | Rarely used directly in fullstack CRUD work — **bump to Master if interviewing at DSA-heavy companies** |
+| 2.13 Dynamic Programming | 🎯 MASTER | This *is* the "recognize the pattern, reason from first principles" skill — the deep problem-solving thinking this whole roadmap is meant to build, not just an interview trick |
 | 2.14 Advanced & Niche DS&A | ⏸️ SKIP FOR NOW | Segment trees, string matching, comp geometry — genuinely specialist |
 | 2.15 Problem-Solving Patterns Reference | 🎯 MASTER | Your cheat sheet — cheap and high-value to internalize |
 
@@ -215,7 +217,7 @@
 | 14.4 Authorization | 🎯 MASTER | IDOR is one of the most common real bugs — non-negotiable |
 | 14.5 Common Attack Vectors | 🎯 MASTER | Non-negotiable |
 | 14.6 Security Headers | 🎯 MASTER | Cheap, high-value, every app needs these |
-| 14.7 Cryptography Fundamentals | 👀 KNOW ONLY | You'll use libraries, not implement crypto — conceptual fluency is enough |
+| 14.7 Cryptography Fundamentals | 🎯 MASTER | You'll use libraries, not implement crypto yourself — but understanding WHY Argon2 beats MD5, WHY symmetric vs asymmetric keys work the way they do, is the fundamental this roadmap is about, not just library trivia |
 | 14.8 Secrets Management | 🎯 MASTER | Practical, needed for any real deployment |
 | 14.9 API Security | 🎯 MASTER | Non-negotiable |
 | Ecosystem Awareness (Zero Trust/WAF/SIEM/pentest/compliance) | ⏸️ SKIP FOR NOW | Genuine security-specialist territory |
@@ -257,21 +259,17 @@ Drop from the required path: the React Native mobile app (Phase 6, skipped), the
 
 ---
 
-## The Shrink, Honestly Quantified
+## What Actually Got Deprioritized, Honestly
 
-By raw subsection count across all 141 numbered subsections in the six detail files:
+This isn't a time-cutting exercise — you have no deadline, so total hours isn't the metric that matters here. What this map actually does is separate **what a senior fullstack web developer needs to deeply understand** from **what belongs to adjacent specialties** (platform/DevOps engineering, mobile engineering, distributed-systems architecture, security research). Fundamentals — CS internals, networking, core DSA, core algorithmic thinking, cryptography concepts — stay at Master regardless of whether you'll type them into a ticket next week, because understanding WHY is the whole point.
 
-| Tier | Count | % |
-|---|---|---|
-| 🎯 Master | ~92 | ~65% |
-| 👀 Know Only | ~31 | ~22% |
-| ⏸️ Skip for Now | ~18 | ~13% |
+What's genuinely deprioritized to 👀 Know Only or ⏸️ Skip is specialist/adjacent-career territory, not basics:
+- **Phase 6** — the entire React Native mobile track (a different specialization: mobile engineering, not web)
+- **Phase 13** — Kubernetes, Terraform, and deep AWS service design (platform/DevOps-engineer territory, not fullstack-dev-who-understands-deployment territory)
+- **10.8** — 2PC/Saga/consensus algorithms (genuine distributed-systems specialty)
+- **17.3 / 17.6** — full DDD strategic design and FinOps (architect/cost-engineering specialties)
 
-**Note on the counts below:** they predate the Phase 5 Track A/Track B split (Node.js/NestJS added as the near-term Master-tier backend, Java/Spring Boot's existing sections flipped to Skip For Now). That split adds roughly 9 new Master-tier subsections and moves roughly 8 existing ones from Master to Skip — a wash in total Master count, not a further shrink — so treat the percentages below as approximate rather than re-derived post-split.
-
-**That count alone understates the real relief, and here's why:** a "Know Only" subsection costs roughly 10-15% of the time a "Master" subsection does — no Practice exercises, no spaced repetition, no capstone drilling, just one read-through for vocabulary. A "Skip" subsection costs zero time right now. Weighted by actual effort, not heading count, you're closer to a **35-40% real time reduction** from this pass alone — and the two biggest single wins are things that don't show up proportionally in a heading count at all: **Phase 6 (the entire React Native mobile track, including app store deployment) drops to zero**, and **Phase 13 (Kubernetes + Terraform + full AWS service mastery) drops by roughly 70%** — both of which were disproportionately expensive relative to how many subsections they occupy.
-
-This is now an honest, achievable "senior fullstack web developer" curriculum — not five careers stapled together.
+This is an honest "senior fullstack web developer who understands the fundamentals deeply" curriculum — not five careers stapled together, and not a speed-run either.
 
 ---
 
