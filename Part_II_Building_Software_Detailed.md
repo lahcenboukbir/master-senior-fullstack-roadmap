@@ -6,6 +6,8 @@
 > **Why this part matters the way it does:** this is where Part I's fundamentals stop being abstract. The event loop (Phase 1) is why `useEffect` timing confuses people, and it's the same event loop underneath Node's Phase 5A. The JVM (Phase 1) is why Spring Boot's startup behaves the way it does — relevant once you reach Track B. Hash maps (Phase 2) are why `HashMap` vs `LinkedHashMap` is a real decision, not trivia. SOLID and Repository (Phase 3) are why both Prisma (Track A) and Spring Data JPA (Track B) are structured the way they are. Treat every "why" in this document as a pointer back to something you already learned — if a "why" doesn't click, that's a signal to revisit Part I, not to memorize this part harder.
 >
 > Go in order within each phase. Frontend before backend if you're newer to the stack — but if backend is your stronger side already, it's fine to start there. Within Phase 5, do Track A (Node/NestJS) in full before touching Track B (Java/Spring Boot) — that sequencing is deliberate, see the note at the top of Phase 5. Mobile assumes Frontend (React) is already solid. API Design assumes Backend is underway, since REST design decisions are made *in* your backend's code, whichever track you're currently on.
+>
+> **"Under the Hood" sections:** several key subsections (4.1 JS Core, 4.2 Async JS, 4.3 TypeScript, 4.5 React, 5A.3 NestJS, 5B.1 Java, 5B.2 Spring Boot) include an extra "Under the Hood" block going one level deeper than "what to use and why" — into the actual mechanism (V8's hidden classes, React's fiber tree, TypeScript's structural typing, Nest's `reflect-metadata`-driven DI container, Java bridge methods, Spring's proxy-based `@Transactional`). These come with their own "build a toy version from scratch" exercises (a hand-rolled Promise, a minimal vDOM diff, a minimal DI container, a minimal transactional proxy) — do these once each; they're what turns "I can use this API" into "I know why this API behaves the way it does."
 
 ---
 
@@ -97,17 +99,32 @@
 - Generators/iterators (`function*`, `yield`) — lazy sequences, the mechanism underlying custom iteration protocols.
 - `WeakMap`/`WeakSet` — keys are weakly referenced, meaning they don't prevent garbage collection — useful for caching metadata about objects without causing a memory leak.
 
+### Under the Hood — How V8 Actually Runs Your Code
+This is the layer underneath everything above — it's *why* JS behaves and performs the way it does, not just *that* it does.
+
+- **Parsing** — your source text becomes tokens (lexer), then an AST (parser). V8 doesn't fully parse everything up front: it **pre-parses** (a fast scan that just finds function boundaries and checks for syntax errors) and only does a full parse of a function's body the first time that function actually runs (**lazy parsing**). This is why a large bundle full of code paths you never hit doesn't cost as much at startup as its raw size suggests.
+- **Ignition (the bytecode interpreter)** — the AST compiles to bytecode, and Ignition starts executing that bytecode immediately. There's no separate "compile the whole program" step blocking execution — this is *why* JS feels like it "just runs" instead of needing an explicit build step to start.
+- **TurboFan (the optimizing JIT)** — V8 profiles bytecode as it runs. A function called enough times is considered "hot" and gets compiled by TurboFan into optimized machine code — but that optimized code is built around the *actual types V8 has observed so far*, not the full range JavaScript theoretically allows.
+- **Hidden classes (a.k.a. "Shapes" or "Maps")** — V8 does not store every object as a generic hash map. When you create `{ x: 1, y: 2 }`, V8 assigns it a hidden class describing that exact shape (which properties, in which order). Objects built the same way — same constructor, same properties added in the same order — share a hidden class, which lets V8 compile property access to a fixed memory offset instead of a runtime lookup. Add properties in a different order, or add/delete properties after construction, and you fragment your objects across different hidden classes. **This is the real, mechanical reason** "always initialize every property in the constructor, in the same order every time" is genuine performance advice and not superstition.
+- **Inline caching** — at a specific call site (e.g., `obj.x` inside a loop), V8 remembers which hidden class it saw last time. Same hidden class again next time → **monomorphic**, fastest path, cached offset reused directly. A handful of different hidden classes hitting the same call site → **polymorphic**, still cached but slower (a small lookup table instead of one offset). Many different shapes → **megamorphic**, V8 gives up caching and falls back to a slow generic property lookup. This is the actual mechanism behind "don't pass wildly differently-shaped objects through the same hot function."
+- **Deoptimization** — TurboFan's optimized machine code is built on assumptions (e.g., "this variable has always been a small integer here"). If a later call violates that assumption, V8 throws away the optimized code and falls back to the interpreter — a **deopt**. A function that keeps getting optimized, deoptimized, and reoptimized in a hot loop is a genuine, measurable performance problem, and it's invisible unless you know to look for it.
+
 ### Practice
 1. Write a closure-based counter (`function makeCounter() { let count = 0; return () => ++count; }`) and explain, in your own words, exactly why `count` survives after `makeCounter` returns.
 2. Deliberately write a `this`-binding bug (pass `obj.method` as a callback without binding it) and observe/fix it three ways: `.bind(obj)`, an arrow-function wrapper, and converting the callback itself to an arrow function.
 3. Write five expressions and predict their truthy/falsy/coercion outcome *before* running them: `'' == 0`, `null == undefined`, `[] == false`, `'0' == false`, `NaN === NaN`. Then verify and explain any surprises.
 4. Reproduce a real memory leak: add an event listener inside a component/module that never gets removed, and confirm via a heap snapshot (Phase 0, 0.4) that the associated object is retained after it should have been eligible for collection.
+5. Write two versions of a function that reads `.x` off 10 million objects in a loop: one where every object is built via the same constructor with properties added in the same order, one where property order/presence varies between objects. Time both with `console.time`/`console.timeEnd` and confirm the monomorphic version is meaningfully faster.
+6. Run a small script with `node --trace-opt --trace-deopt your-script.js` where a function is called many times with consistent types, then once with an inconsistent type (e.g., a number then a string) — watch V8 optimize the function and then deoptimize it in the trace output.
 
 ### Answer This
 - Why does a closure keep a variable alive after its enclosing function has already returned?
 - Why does `this` inside a regular callback function often not refer to what you expect, and why do arrow functions fix that?
 - Why is `??` safer than `||` for defaulting a value that might legitimately be `0` or `''`?
 - Concretely, what makes a DOM node "detached" but still leak memory?
+- Why does `obj.x` inside a hot loop get faster over time — what is V8 actually doing differently on the 10,000th call versus the first?
+- What's a hidden class, and why does the *order* you add properties in change which hidden class an object gets?
+- What's the practical difference between a monomorphic, polymorphic, and megamorphic call site, and why does it matter for performance?
 
 ---
 
@@ -123,16 +140,28 @@
 - **`async/await`** — syntactic sugar over promises; `await` only pauses the *current async function*, not the whole program — the rest of your JS keeps running via the event loop while it waits.
 - **Concurrent patterns** — `Promise.all` (run all in parallel, rejects immediately if any one rejects — "fail fast"), `Promise.allSettled` (run all in parallel, always resolves with each individual outcome — use when partial failure is acceptable), `Promise.race` (settles as soon as the first one settles, whether fulfilled or rejected), `Promise.any` (settles as soon as the first one *fulfills*, ignoring rejections unless all reject).
 
+### Under the Hood — Build Your Own Promise From Scratch
+`async`/`await` and `.then()` chaining feel like magic until you've built the mechanism yourself. A Promise is really just a small state machine plus two callback queues — nothing more.
+
+The core mechanics to implement:
+- **State machine** — a promise starts `pending` and can transition exactly once, either to `fulfilled` (with a value) or `rejected` (with a reason); once settled, it never changes state again, no matter how many times `resolve`/`reject` get called afterward.
+- **Callback queuing** — if `.then(onFulfilled, onRejected)` is called *before* the promise settles, the callbacks must be stored and run later, once settlement happens; if `.then()` is called *after* it's already settled, the callback should still run — asynchronously, not immediately, which is why real Promises schedule their callbacks via the microtask queue (4.2 above) instead of calling them synchronously inline.
+- **Chaining** — `.then()` must itself return a *new* promise, whose resolution depends on what the handler function returns: a plain value fulfills the new promise directly; a thrown error rejects it; and — the trickiest part — if the handler returns *another* promise, the new promise must wait on that inner promise's outcome instead of resolving immediately (this recursive "unwrap thenables" behavior is what makes chained `.then()` calls flatten instead of nesting into `Promise<Promise<Promise<T>>>`).
+
 ### Practice
 1. Predict, on paper, the console output order of a script mixing `console.log`, `setTimeout(fn, 0)`, and `Promise.resolve().then(fn)` — then run it and confirm your prediction. Repeat until the microtask-before-macrotask rule feels automatic, not memorized.
 2. Fetch data from a real API using plain `fetch` + `async/await`, with a loading state and proper `try/catch` error handling — no framework.
 3. Fire off 5 independent API calls using `Promise.all` and time it against firing them sequentially with `await` in a loop — measure and explain the difference.
 4. Deliberately let one of five parallel requests fail and compare the behavior of `Promise.all` (whole thing rejects) vs `Promise.allSettled` (you get all 5 outcomes, one marked rejected).
+5. **Build a `MyPromise` class from scratch** — no `Promise` allowed internally — implementing `pending`/`fulfilled`/`rejected` state, a constructor that takes an `executor(resolve, reject)` function, a `.then(onFulfilled, onRejected)` that queues callbacks for a still-pending promise and returns a new chainable `MyPromise`, and correct handling of a handler that returns another `MyPromise` (must unwrap it, not nest it). Get `new MyPromise(r => setTimeout(() => r(1), 100)).then(x => x + 1).then(x => console.log(x))` printing `2` before you consider it done.
+6. Once your `MyPromise` works, implement `MyPromise.all` on top of it (an array of promises in, one promise out, resolving with an array of results or rejecting on the first failure) — this forces you to actually track "how many of these have settled so far," which is the real mechanic `Promise.all` hides from you.
 
 ### Answer This
 - Why does a `Promise.resolve().then()` callback run before a `setTimeout(fn, 0)` callback, even though both appear "immediate"?
 - What does `await` actually pause — the whole program, or just the current function? What keeps running while it waits?
 - When would you deliberately choose `Promise.allSettled` over `Promise.all`?
+- In your own `MyPromise`, why does `.then()` have to return a *new* promise instead of just running the callback and returning nothing?
+- Why does a `.then()` handler that returns another promise need special "unwrapping" logic, instead of just fulfilling immediately with that inner promise object?
 
 ---
 
@@ -150,15 +179,26 @@
 - **Utility types** — `Partial<T>` (all fields optional), `Required<T>` (all fields required), `Pick<T, K>` (select specific fields), `Omit<T, K>` (exclude specific fields), `ReturnType<T>` (extract a function's return type), `Record<K, V>` (a typed object/dictionary) — these let you derive new types from existing ones instead of manually duplicating shapes.
 - **Declaration files (`.d.ts`)** — how TypeScript understands the shape of JavaScript libraries that weren't written in TypeScript.
 
+### Under the Hood — Structural Typing & How Narrowing Actually Works
+Most languages with static types (Java, C#) use **nominal typing** — two types are compatible only if one explicitly declares itself as (or extends/implements) the other, by name. TypeScript does not work this way, and not understanding that difference is why TS's type errors sometimes feel surprising.
+
+- **Structural typing ("duck typing," but checked at compile time)** — TypeScript asks *"does this value have the required shape?"*, never *"was this value declared as this specific type?"*. A plain object literal `{ x: 1, y: 2 }` satisfies a `type Point = { x: number; y: number }` even though it was never declared as a `Point` anywhere — it just happens to have the right shape. This is *why* two completely unrelated interfaces with identical fields are freely interchangeable in TypeScript, and it's also why an object with *extra* properties can still fail to satisfy a type in a literal assignment (**excess property checking**) even though structurally it has everything required — TS special-cases object literals specifically to catch typos like `{ nmae: 'x' }`.
+- **Type narrowing — control flow analysis** — TypeScript tracks a variable's possible type as it flows through your code, refining it at each branch. `typeof x === 'string'` narrows `x` to `string` inside that branch; `x instanceof Foo` narrows to `Foo`; a discriminated union's shared literal field (`if (shape.kind === 'circle')`) narrows the *whole object* to the matching variant, not just that one field. This isn't runtime magic — it's a compile-time-only analysis of your code's control flow graph; TypeScript is reasoning about which branch you're in and eliminating impossible types from the union at each point, then erasing all of it before the code ever runs.
+- **Why this matters for `unknown`** — `unknown` is deliberately the *opposite* of a structural free pass: TypeScript won't let you access any property or call any method on an `unknown` value until you've narrowed it (via `typeof`, `instanceof`, or a custom type guard), which is exactly why it's the safe replacement for `any` at real boundaries like a parsed API response.
+
 ### Practice
 1. Take a real `.js` file and convert it to TypeScript with `strict: true` from the start. Fix every single error before moving on — don't reach for `any` as an escape hatch except as a last resort, and if you do, leave a comment explaining why.
 2. Model a real domain concept (e.g., an API response that can be `{ status: 'success', data: T }` or `{ status: 'error', message: string }`) as a discriminated union, then write a function that narrows it correctly in a `switch`.
 3. Take a function currently typed with `any` for an incoming argument and retype it as `unknown`, then add the narrowing logic required to actually use it safely.
+4. Declare two unrelated interfaces with identical fields (e.g., `interface Dog { name: string }` and `interface Company { name: string }`) and confirm TypeScript happily accepts a `Dog` value being passed where a `Company` is expected — then explain, from the structural typing rule, why that's not a bug.
+5. Write a custom type guard function (`function isError(x: unknown): x is { message: string }`) and use it to narrow an `unknown` caught error into something you can safely read `.message` from.
 
 ### Answer This
 - Why is over-annotating every variable a sign you're not trusting TypeScript's inference, rather than a sign of extra safety?
 - What's the concrete difference in what `any` and `unknown` let you do with a value before you've checked its type?
 - Why does a discriminated union let TypeScript narrow types automatically inside a `switch`, when a plain union of unrelated shapes wouldn't?
+- Why does TypeScript accept an object with the right shape as satisfying an interface it was never declared to implement — what would a nominally-typed language (Java) require instead?
+- What is "excess property checking," and why does it only trigger on object literals and not on a variable holding the same shape?
 
 ---
 
@@ -236,17 +276,29 @@
 **Routing**
 - React Router v6 — nested routes, data loaders/actions, protected routes (auth guards that redirect before rendering a protected page), and using URL query params as a legitimate form of state (shareable, back-button-friendly).
 
+### Under the Hood — Fiber, Priority Lanes & the Actual Diffing Algorithm
+"Reconciliation" and "Fiber" get named constantly and explained rarely. Here's the actual mechanism.
+
+- **The Fiber tree** — for every element in your component tree, React keeps a corresponding **fiber**: a plain JS object holding that component's type, props, state, and — critically — pointers to its `child` (first child fiber), `sibling` (next sibling fiber), and `return` (parent fiber). This linked-list-like structure, not a recursive call stack, is what lets React's work be **interruptible**: walking `child`→`sibling`→`return` pointers can pause after any single fiber and resume later, something a plain recursive tree-walk (React's pre-Fiber, pre-16 architecture) cannot do, because you can't pause and resume a JS call stack mid-recursion.
+- **Two trees, not one** — React actually keeps *two* fiber trees at once: the `current` tree (what's on screen right now) and a `workInProgress` tree being built for the next render. Reconciliation compares the new element tree against `current` while building `workInProgress`, then atomically swaps `workInProgress` in to become the new `current` once the whole tree is ready — this "double buffering" is why a render is never partially visible to the user, it's all-or-nothing at the commit step.
+- **Priority lanes** — not all updates are equal. A user's keystroke is urgent; a background data refresh triggered by `startTransition` is not. React 18 assigns each update a **lane** (a priority bucket), and can pause low-priority work to let a higher-priority update (like the next keystroke) jump ahead and commit first — this is the actual mechanism behind `startTransition` and concurrent rendering, not a vague "React gets smarter about scheduling."
+- **The diffing rules (why keys matter, mechanically)** — React's diff is deliberately **not** a general tree-diff algorithm (those are O(n³) and too slow to run on every render). Instead it uses two cheap heuristics: (1) elements of a **different type** at the same position (e.g., a `<div>` replaced by a `<span>`) are assumed completely unrelated — React tears down the whole old subtree (including all its state) and builds a fresh one, rather than trying to reconcile them; (2) for a **list of children**, React matches old fibers to new elements by `key`, not by position — a stable key lets React recognize "this is the same logical item, just possibly moved" and reuse its fiber (and state) instead of discarding and rebuilding it. Using the array index as the key defeats this: when the list reorders, the *index* stays put but the *item* at that index changes, so React matches the wrong old fiber to the wrong new element and state ends up attached to the wrong row — this is the mechanical root cause behind the bug in Practice item 1 below, not just "a bad practice you're supposed to remember."
+
 ### Practice
 1. Deliberately use array index as a `key` in a reorderable/filterable list, introduce a bug where an input's local state ends up attached to the wrong row after reordering, then fix it with a stable ID key and explain exactly why the bug happened.
 2. Build one component correctly using `useEffect` to subscribe to an external event source (e.g., `window.resize`) with proper cleanup in the returned function, and confirm — via a console log — that the cleanup actually runs on unmount and before every re-subscription.
 3. Replace a `useEffect`-based data-fetching pattern (with manual loading/error state) with TanStack Query, and note concretely what code you got to delete.
 4. Use the React DevTools Profiler on a real component tree to find one component re-rendering unnecessarily; fix it with `React.memo` or by moving state down, and confirm the re-render disappears in a second profiling pass.
+5. **Build a minimal virtual-DOM diff function from scratch** (plain JS, no React): given an `oldTree` and `newTree` represented as simple nested objects (`{ type, props, children }`), write a `diff(oldTree, newTree)` function that returns a list of patch operations (`REPLACE`, `UPDATE_PROPS`, `ADD_CHILD`, `REMOVE_CHILD`). Implement React's actual heuristics: different `type` at the same position → `REPLACE` the whole subtree, don't try to reconcile it; same `type` → diff props and recurse into children. Then extend it to diff a **list** of children two ways — once by array position (no keys) and once by a `key` field — and reproduce, in your own tiny diff, the exact reordering bug from Practice item 1. Seeing your own function produce the bug is what makes the `key` rule click permanently.
 
 ### Answer This
 - Why does using an array index as a `key` cause bugs specifically when the list can reorder or have items removed from the middle?
 - Why is `useEffect` the wrong tool for computing derived state, and what should you do instead?
 - Concretely, what causes a child component to re-render even when its own props haven't changed?
 - Why does TanStack Query solve a different problem than `useState`, rather than just being "fancier `useState`"?
+- Why does the fiber tree's `child`/`sibling`/`return` pointer structure let React pause and resume rendering, when a plain recursive tree-walk can't?
+- What are React's two fiber trees (`current` and `workInProgress`) each for, and why does keeping both prevent the user from ever seeing a half-finished render?
+- Why does React tear down and rebuild an entire subtree when an element's *type* changes at a given position, instead of trying to patch it in place?
 
 ---
 
@@ -430,17 +482,29 @@
 - **Exception filters** (`@Catch()`, `ExceptionFilter`) — centralize error-to-HTTP-response mapping app-wide — the same role as `@ControllerAdvice` + `@ExceptionHandler` in Spring.
 - **Custom decorators** (`createParamDecorator`) — extract and reuse a piece of request data (e.g., `@CurrentUser()` pulling the authenticated user off the request) across many handlers without repeating the extraction logic.
 
+### Under the Hood — How Nest's DI Container Actually Resolves `@Injectable()`
+`@Injectable()` and constructor injection look like magic the first time you use them: you declare a dependency as a constructor parameter type, and it just... appears, already instantiated. Here's the actual mechanism, and it depends on a JavaScript feature almost nobody encounters outside of Nest/Angular-style frameworks.
+
+- **The problem decorators alone can't solve** — a decorator like `@Injectable()` runs at class-definition time and can see the class itself, but by default, plain JavaScript (even TypeScript) **erases type information at compile time** — by the time your code runs, `constructor(private usersService: UsersService)` has no runtime record that the first parameter's type was `UsersService`. Nest needs that type information *at runtime* to know what to instantiate and pass in.
+- **`reflect-metadata` + `emitDecoratorMetadata`** — this is the missing piece. With `"emitDecoratorMetadata": true` in `tsconfig.json`, TypeScript's compiler emits extra calls to `Reflect.defineMetadata` alongside any decorated class, recording metadata under keys like `design:paramtypes` — literally an array of the constructor parameter types, preserved as real runtime values (the actual class references, e.g. `[UsersService]`), not erased. The `reflect-metadata` package provides the `Reflect.defineMetadata`/`Reflect.getMetadata` polyfill that makes this possible in plain JS, since it isn't (yet) a standard part of the language.
+- **How the container resolves a graph from that** — when Nest instantiates `UsersController`, it calls `Reflect.getMetadata('design:paramtypes', UsersController)` to get back `[UsersService]`, recursively resolves `UsersService` the same way (which might itself depend on `PrismaService`, and so on), and only once every dependency in the chain is resolved does it call `new UsersController(usersServiceInstance)`. This is why forgetting `@Injectable()` on a provider, or forgetting to register it in a module's `providers` array, produces a runtime "cannot resolve dependency" error rather than a compile error — the whole mechanism is metadata-driven and only checked when the container actually tries to build the object graph at startup.
+- **Why this is the same idea as Spring, different implementation** — Spring's container does the equivalent resolution using Java reflection over constructor parameter types directly (Java never erases this information the way compiled JS does), which is *why* Java doesn't need an equivalent of `reflect-metadata` — the runtime type information Nest has to manufacture via decorator metadata, the JVM already provides natively.
+
 ### Practice
 1. Build one resource end to end — module, controller, service, DTO with `class-validator` decorators, and a global `ValidationPipe` — then send an invalid request via Postman/curl and confirm it's rejected with a 400 before your handler method body ever executes (same discipline as the Spring `@Valid` exercise in 5B.2).
 2. Write a custom guard checking for a hardcoded role on the request (real JWT auth comes in 5A.5) and confirm a request without the right role never reaches the controller — verify with a breakpoint that's never hit, the same technique as the Spring Security exercise.
 3. Write one global exception filter that catches at least three different exception types and converts them into the same consistent JSON error envelope defined in Phase 7.2 — the envelope shape should be identical regardless of which backend produced it, since a shared frontend will eventually consume both.
 4. Write a custom `@CurrentUser()` param decorator and use it in place of manually reading `req.user` in every handler.
+5. In a scratch project, add `reflect-metadata` and `"emitDecoratorMetadata": true`, write a plain `@Injectable()`-decorated class with a constructor parameter of another class type, and call `Reflect.getMetadata('design:paramtypes', YourClass)` directly yourself — print the result and confirm it's really the actual class reference, not just a string.
+6. **Build a minimal DI container from scratch** — no Nest, no Angular. Write your own `@Injectable()` decorator (it can just tag the class for now) and a `Container` class with a `resolve(SomeClass)` method that: reads `design:paramtypes` via `reflect-metadata`, recursively resolves each dependency the same way, and returns a fully-constructed instance with everything wired in. Prove it works on a 3-level chain (`A` depends on `B`, `B` depends on `C`) resolved with a single `container.resolve(A)` call. This is the exercise that makes "the container just wires it up" stop being a black box.
 
 ### Answer This
 - Why does constructor injection make a Nest service trivially testable without booting the Nest application context, mirroring the exact same argument for Spring's constructor injection?
 - What's the actual sequence of what runs, in order, when a request with an invalid DTO hits a route protected by a `ValidationPipe` — where exactly does it get rejected?
 - Where do guards run relative to pipes and the route handler, and why does that ordering matter specifically for an auth check?
 - What Spring Boot concept does a Nest interceptor most directly correspond to, and why?
+- Why can't Nest just read a constructor parameter's type directly at runtime the way Spring/Java can, and what mechanism does it use instead to get the same information?
+- What actually goes wrong, mechanically, when you forget to add a provider to a module's `providers` array — why is it a runtime error instead of a compile-time one?
 
 ---
 
@@ -662,17 +726,26 @@
 - Custom exception hierarchies — model your own domain's failure modes explicitly instead of throwing generic exceptions everywhere.
 - Try-with-resources — automatic, guaranteed resource closing (`AutoCloseable`), eliminating a whole class of "forgot to close the stream/connection" bugs.
 
+### Under the Hood — What Generics Actually Compile To: Bridge Methods
+Type erasure (above) is usually taught as "generic type info disappears at runtime" and left there. The more interesting question is: if `List<String>` and `List<Integer>` really are the same class at runtime, how does method overriding involving generics still work correctly? The answer is a compiler-generated mechanism most Java developers never see directly.
+
+- **The problem** — suppose `class IntBox implements Comparable<Integer>` and overrides `compareTo(Integer other)`. After erasure, `Comparable`'s interface method is really `compareTo(Object other)` at the bytecode level (erasure replaces `T` with `Object`, or with the bound if one was declared). `IntBox`'s `compareTo(Integer other)` has a genuinely different method signature than `compareTo(Object other)` — by the JVM's normal rules, that's an overload, not an override, which would silently break polymorphism.
+- **The fix — synthetic bridge methods** — the compiler generates an additional, hidden method on `IntBox`: `compareTo(Object other)` that casts `other` to `Integer` and delegates to your real `compareTo(Integer other)`. This bridge method is what actually satisfies the interface at the bytecode level; it's marked `synthetic` and `bridge` in the class file and is invisible in your source code and in normal IDE navigation.
+- **Why this matters** — it's the mechanical reason generics + overriding "just works" despite erasure, and it's also why reflection over a class's declared methods sometimes surfaces a mysterious extra method with the erased signature that you never wrote.
+
 ### Practice
 1. Write a method with an upper-bounded wildcard parameter (`List<? extends Animal>`) and attempt to add an element to it — observe the compile error, and explain in your own words exactly why the compiler can't allow it.
 2. Convert a hand-written immutable value class (with manual constructor, `equals`, `hashCode`, `toString`) into a `record` and confirm the generated behavior matches.
 3. Write a virtual-threads version of a program that makes 1,000 concurrent blocking I/O calls (or simulate with `Thread.sleep`), and compare thread/resource usage against doing the same with a traditional bounded `ExecutorService` thread pool.
 4. Deliberately misuse `volatile` where mutual exclusion (not just visibility) was actually required, reproduce the resulting race condition, then fix it with `synchronized`/`AtomicInteger` and explain why `volatile` alone wasn't enough.
+5. Write a class implementing `Comparable<Integer>`, compile it, and run `javap -p -c YourClass.class` — find the synthetic `bridge` method the compiler generated for `compareTo(Object)` and confirm it just casts and delegates to your real `compareTo(Integer)`.
 
 ### Answer This
 - Why can't you safely add to a `List<? extends Animal>`, but you can safely read from it as an `Animal`?
 - Why does type erasure mean `List<String>` and `List<Integer>` are the same class at runtime?
 - What specific problem does `volatile` solve, and what problem does it *not* solve (that `synchronized` does)?
 - Why do virtual threads let you write simple blocking-style code and still get high concurrency for I/O-bound work?
+- Why does the compiler need to generate a synthetic bridge method for a class implementing `Comparable<Integer>`, and what would break if it didn't?
 
 ---
 
@@ -698,16 +771,31 @@
 - Pagination — `Pageable` parameter + `Page<T>` return type gives you paginated results, total counts, and sort handling with minimal code.
 - API versioning — URL versioning (`/v1/...` — explicit, simple, cacheable) vs header versioning (cleaner URLs, less visible/discoverable) — URL versioning is the more common practical default.
 
+### Under the Hood — How the ApplicationContext Is Actually Built, and How `@Transactional` Actually Works
+This is the direct analogue of the NestJS "how does `@Injectable()` actually resolve dependencies" deep-dive in 5A.3 — same underlying question (how does the framework build the object graph and intercept method calls), answered with Java's tools instead of TypeScript's.
+
+- **Component scanning → `BeanDefinition`s, not beans** — on startup, Spring scans the classpath for `@Component`/`@Service`/`@Repository`/`@Controller`-annotated classes and, for each one, creates a `BeanDefinition` — metadata describing *how* to build that bean (its class, scope, constructor, dependencies) — without actually instantiating anything yet. The `ApplicationContext` only starts constructing real objects afterward, walking the dependency graph described by these definitions.
+- **Why Spring doesn't need Nest's `reflect-metadata` trick** — the `BeanFactory` resolves each bean's constructor dependencies using **Java reflection directly** (`Constructor.getParameterTypes()`), because Java, unlike compiled JavaScript, never erases a constructor parameter's declared type at the bytecode level — the type information Nest has to manufacture via `emitDecoratorMetadata` is something the JVM already gives Spring for free.
+- **The circular dependency problem, and why constructor injection can hit it** — if bean `A`'s constructor needs `B`, and `B`'s constructor needs `A`, there is no valid order to construct either one first — Spring throws `BeanCurrentlyInCreationException` rather than deadlocking or guessing. (Spring *can* work around circular dependencies for **singleton** beans using field/setter injection, via an early-reference cache — but this is a workaround for a design smell, not something to rely on; a real circular dependency between two services is a sign they should be refactored, not injected around.)
+- **`@Transactional` is not special JVM magic — it's a dynamic proxy** — when Spring sees a bean with a `@Transactional` method, it doesn't modify your class's bytecode. Instead, at startup it wraps your real bean inside a **proxy** object and registers the proxy — not your original object — in the application context. Two proxy strategies: a **JDK dynamic proxy** (`java.lang.reflect.Proxy`) if your class implements an interface, generating a proxy that implements the same interface and forwards calls; or a **CGLIB proxy** (a runtime-generated subclass) if there's no interface to proxy. Either way, calling the method through the proxy runs the transaction-management code (begin transaction → invoke your real method → commit/rollback) *around* your actual method body — this is the exact same Proxy-pattern mechanism named in Phase 3.3, applied by the framework instead of by you.
+- **The classic self-invocation gotcha, explained mechanically** — if a `@Transactional` method calls *another* `@Transactional` method on `this` from within the same class, that second call goes directly to the real object's method (`this.otherMethod()`), completely bypassing the proxy — because `this` inside your own class refers to the real instance, not the proxy wrapping it. The transaction annotation on that inner call is silently ignored. This is one of the most common real Spring bugs, and it's now a fact you can *derive* from the proxy mechanism instead of memorizing as a gotcha.
+
 ### Practice
 1. Build one endpoint using constructor injection exclusively, then try to unit test the controller/service by just calling `new` on it with mock dependencies — no Spring context needed at all — and confirm how straightforward that is compared to a field-injected equivalent.
 2. Trigger a validation failure on a `@Valid @RequestBody` DTO and confirm, via a debugger breakpoint, that your handler method body never actually executes — Spring rejects the request before that.
 3. Build a global `@ControllerAdvice` that converts at least three different exception types into a consistent JSON error shape (matching the error envelope from Phase 7 of the master roadmap).
 4. Set up MapStruct for one entity↔DTO pair and compare the generated mapper against what you'd have hand-written.
+5. Inject a `@Service` bean somewhere and print `yourBean.getClass().getName()` — if the class has no interface, confirm it's actually a CGLIB-generated subclass (something like `UserService$$SpringCGLIB$$0`), not your literal class, and explain why.
+6. **Reproduce the self-invocation bug on purpose** — write a service with method `a()` calling `this.b()`, where `b()` is `@Transactional`, call `a()` from outside, and (with logging or a failing assertion inside a forced rollback) confirm `b()`'s transaction never actually applies. Then fix it the standard way (move `b()` into a separate injected bean and call it through that bean instead) and confirm the transaction now applies correctly.
+7. **Build a minimal transactional proxy from scratch** using `java.lang.reflect.Proxy` — given a plain interface and a real implementation, write an `InvocationHandler` that prints `"BEGIN TX"` before calling the real method and `"COMMIT TX"` (or `"ROLLBACK TX"` on exception) after, then wrap your real object with `Proxy.newProxyInstance(...)` and call methods only through the proxy. This is a small, direct model of what Spring is actually doing for every `@Transactional` bean in your app.
 
 ### Answer This
 - Why does constructor injection make a class trivially testable without Spring, while field injection doesn't?
 - What specifically happens, in order, when a request hits a `@Valid @RequestBody` parameter that fails validation?
 - Why should a controller never return a JPA entity directly, even if the DTO would currently look identical to it?
+- Why doesn't Spring need anything like Nest's `reflect-metadata` to resolve constructor dependencies?
+- What's actually sitting in the `ApplicationContext` for a `@Transactional` bean — your original object, or something else? What is that something else?
+- Why does calling a `@Transactional` method on `this` from inside the same class silently skip the transaction, and what does that tell you about what a Spring proxy actually wraps?
 
 ---
 
