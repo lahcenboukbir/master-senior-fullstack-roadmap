@@ -15,7 +15,7 @@
 - 🎯 [1.1 — How a CPU Works](#11--how-a-cpu-works)
 - 🎯 [1.2 — Memory Hierarchy](#12--memory-hierarchy)
 - 🎯 [1.3 — Operating Systems Fundamentals](#13--operating-systems-fundamentals)
-- 🎯 [1.4 — Networking Deep Dive](#14--networking-deep-dive)
+- 👀 [1.4 — Networking Deep Dive](#14--networking-deep-dive)
 - 🎯 [1.5 — How the Browser Works](#15--how-the-browser-works)
 - 🎯 [1.6 — Compilers, Interpreters & the JVM](#16--compilers-interpreters--the-jvm)
 - [Phase 1 Capstone](#phase-1-capstone)
@@ -173,7 +173,7 @@
 
 ## 1.4 — Networking Deep Dive
 
-**Tier: 🎯 Master**
+**Tier: 👀 Know Only**
 
 ### What to Learn
 - **OSI layers 3–7** — Network (IP — addressing/routing), Transport (TCP/UDP — end-to-end delivery), Session/Presentation (mostly folded into practice today), Application (HTTP, DNS, etc.) — you don't need to recite all 7 layers, but you need the mental model of "each layer only cares about its own job and hands off to the next."
@@ -706,18 +706,9 @@ God object (one class that knows/does everything), Singleton abuse (global mutab
 - **Hexagonal Architecture (Ports & Adapters)** — "ports" are interfaces defining how the outside world talks to your core logic; "adapters" are concrete implementations plugging specific technology into those ports (`UserRepository` is a port, `JpaUserRepository` is an adapter) — this is really the same idea as Clean Architecture and Dependency Inversion (3.2), viewed from a different angle.
 - **MVC** — separation of concerns across Model/View/Controller; the practically important thing to internalize is that business logic frequently does *not* belong in the "Model" as commonly implemented (it often ends up as thin data classes) — and that MVC as a pattern starts to strain in SPA/micro-frontend architectures where "the view" isn't a single server-rendered thing anymore.
 
-**The same layering, in both Phase 5 tracks — same idea, different folder names:**
+**The same layering, in your Spring Boot backend — same idea as the diagram above, concrete folder names:**
 
-NestJS (Track A, near-term):
-```
-src/
-├── domain/          ← Domain services, repository interfaces
-├── modules/         ← Feature modules: controllers, providers, DTOs
-├── common/          ← Guards, pipes, interceptors, exception filters
-└── prisma/          ← schema.prisma, migrations, Prisma service
-```
-
-Spring Boot (Track B, later):
+Spring Boot:
 ```
 src/main/java/com/company/app/
 ├── domain/          ← Entities, domain services, repository interfaces

@@ -72,7 +72,7 @@ This is where Lean (Phase 17.2) becomes practical instead of conceptual. For eve
 Four zoom levels, and in practice you'll draw the middle two constantly and the outer two rarely:
 - **Context** — your system as one box, plus the humans and external systems around it (rarely drawn in detail for a small project — usually just a sentence).
 - **Container** — the actually-deployable pieces (frontend, API, database, cache, worker) and how they talk to each other. **This is the diagram you'll draw for almost every project.**
-- **Component** — inside one container, its major internal modules (e.g., inside the NestJS API: Auth module, Billing module, Notifications module). Draw this only when a single container has gotten complex enough that a newcomer would be lost without it.
+- **Component** — inside one container, its major internal modules (e.g., inside the Spring Boot API: Auth module, Billing module, Notifications module). Draw this only when a single container has gotten complex enough that a newcomer would be lost without it.
 - **Code** — class-level detail. Almost never worth drawing by hand; if you need this, it's what a class diagram is for, and only for a genuinely complex domain model.
 
 A real Container diagram, for a typical app in this roadmap's stack:
@@ -84,10 +84,10 @@ flowchart TB
 
     subgraph System["Your Application"]
         Web["React + Next.js\n(frontend)"]
-        API["NestJS API\n(backend)"]
+        API["Spring Boot API\n(backend)"]
         DB[("PostgreSQL")]
         Cache[("Redis")]
-        Worker["BullMQ Worker"]
+        Worker["RabbitMQ Worker"]
     end
 
     User -->|HTTPS| Web
@@ -127,7 +127,7 @@ erDiagram
     }
 ```
 
-Drawing this *before* writing your Prisma schema forces you to think about relationships and cardinality up front — catching "wait, can a user actually have more than one active subscription?" on paper instead of via a migration you have to walk back later.
+Drawing this *before* writing your JPA entities / Flyway schema forces you to think about relationships and cardinality up front — catching "wait, can a user actually have more than one active subscription?" on paper instead of via a migration you have to walk back later.
 
 ### Sequence Diagrams — For the Flows That Are Actually Tricky
 Don't diagram every endpoint — diagram the ones with real branching or multi-step state, where a paragraph of prose gets confusing. The refresh-token rotation flow from Phase 14.3 is a textbook case:
@@ -233,4 +233,4 @@ SUCCESS      — I can hand this repo to another developer and they
 
 The Container diagram and refresh-token sequence diagram in §2 above **are** the real diagrams for this project, not just examples — reuse them directly. The ERD in §2 is the starting core (`USER`, `API_KEY`, `SUBSCRIPTION`) — extend it as you add usage analytics and RAG search tables.
 
-From here, the backlog is just the Master Project's build order from `Projects_And_Practice.md`, turned into GitHub Projects cards: one card per numbered step (Core API, Frontend, Testing, Infra, Advanced backend, Deploy, Monitoring, AI feature, Billing, Security pass, Track B rebuild) — broken further into the smaller stories each step actually contains. You already have the backlog; this file is what turns it into something you plan and run cycle by cycle, instead of a wall of text you build against in a random order.
+From here, the backlog is just the Master Project's build order from `Projects_And_Practice.md`, turned into GitHub Projects cards: one card per numbered step (Core API, Frontend, Testing, Infra, Advanced backend, Deploy, Monitoring, AI feature, Billing, Security pass) — broken further into the smaller stories each step actually contains. You already have the backlog; this file is what turns it into something you plan and run cycle by cycle, instead of a wall of text you build against in a random order.

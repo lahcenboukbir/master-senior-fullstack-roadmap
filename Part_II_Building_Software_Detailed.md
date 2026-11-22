@@ -1,13 +1,13 @@
 # Part II — Building Software (Detailed)
 ### Companion deep-dive to `Master_Senior_Fullstack_Roadmap.md` → Phases 4, 5, 6, 7
 
-> This file expands **Phase 4 (Frontend Engineering)**, **Phase 5 (Backend Engineering — Track A: Node.js + NestJS now, Track B: Java + Spring Boot later)**, **Phase 6 (Mobile Engineering — React Native)**, and **Phase 7 (API Design)** into full depth.
+> This file expands **Phase 4 (Frontend Engineering)**, **Phase 5 (Backend Engineering — Java + Spring Boot, the single backend language)**, **Phase 6 (Mobile Engineering — React Native)**, and **Phase 7 (API Design)** into full depth.
 >
-> **Why this part matters the way it does:** this is where Part I's fundamentals stop being abstract. The event loop (Phase 1) is why `useEffect` timing confuses people, and it's the same event loop underneath Node's Phase 5A. The JVM (Phase 1) is why Spring Boot's startup behaves the way it does — relevant once you reach Track B. Hash maps (Phase 2) are why `HashMap` vs `LinkedHashMap` is a real decision, not trivia. SOLID and Repository (Phase 3) are why both Prisma (Track A) and Spring Data JPA (Track B) are structured the way they are. Treat every "why" in this document as a pointer back to something you already learned — if a "why" doesn't click, that's a signal to revisit Part I, not to memorize this part harder.
+> **Why this part matters the way it does:** this is where Part I's fundamentals stop being abstract. The JVM (Phase 1) is why Spring Boot's startup and memory behave the way they do. The browser event loop (Phase 1) is why `useEffect` timing confuses people. Hash maps (Phase 2) are why `HashMap` vs `LinkedHashMap` is a real decision, not trivia. SOLID and Repository (Phase 3) are why Spring Data JPA is structured the way it is. Treat every "why" in this document as a pointer back to something you already learned — if a "why" doesn't click, that's a signal to revisit Part I, not to memorize this part harder.
 >
-> Go in order within each phase. Frontend before backend if you're newer to the stack — but if backend is your stronger side already, it's fine to start there. Within Phase 5, do Track A (Node/NestJS) in full before touching Track B (Java/Spring Boot) — that sequencing is deliberate, see the note at the top of Phase 5. Mobile assumes Frontend (React) is already solid. API Design assumes Backend is underway, since REST design decisions are made *in* your backend's code, whichever track you're currently on.
+> Go in order within each phase. Backend before frontend is now the recommended order: study Java (5B.1) together with Phase 2 (DSA) and Phase 1, then Spring Boot (5B.2+) together with Phase 8 (databases); Phase 4 (frontend) is mostly consolidation of what you already know and then consumes the Java API you built. Mobile assumes Frontend (React) is already solid. API Design (Phase 7) is applied inside your Spring Boot code.
 >
-> **"Under the Hood" sections:** several key subsections (4.1 JS Core, 4.2 Async JS, 4.3 TypeScript, 4.5 React, 5A.3 NestJS, 5B.1 Java, 5B.2 Spring Boot) include an extra "Under the Hood" block going one level deeper than "what to use and why" — into the actual mechanism (V8's hidden classes, React's fiber tree, TypeScript's structural typing, Nest's `reflect-metadata`-driven DI container, Java bridge methods, Spring's proxy-based `@Transactional`). These come with their own "build a toy version from scratch" exercises (a hand-rolled Promise, a minimal vDOM diff, a minimal DI container, a minimal transactional proxy) — do these once each; they're what turns "I can use this API" into "I know why this API behaves the way it does."
+> **"Under the Hood" sections:** several key subsections (4.1 JS Core, 4.2 Async JS, 4.3 TypeScript, 4.5 React, 5B.1 Java, 5B.2 Spring Boot) include an extra "Under the Hood" block going one level deeper than "what to use and why" — into the actual mechanism (V8's hidden classes, React's fiber tree, TypeScript's structural typing, Java bridge methods, Spring's proxy-based `@Transactional`). These come with their own "build a toy version from scratch" exercises (a hand-rolled Promise, a minimal vDOM diff, a minimal DI container, a minimal transactional proxy) — do these once each; they're what turns "I can use this API" into "I know why this API behaves the way it does."
 
 ---
 
@@ -25,25 +25,15 @@
 - 🎯 [4.9 — Frontend Performance](#49--frontend-performance)
 - [Phase 4 Capstone](#phase-4-capstone)
 
-**Phase 5 — Backend Engineering (Track A: Node.js/NestJS now · Track B: Java/Spring Boot later)**
-- 🎯 [5A.1 — Node.js Fundamentals (Deep)](#5a1--nodejs-fundamentals-deep)
-- 🎯 [5A.2 — Express Fundamentals](#5a2--express-fundamentals)
-- 🎯 [5A.3 — NestJS Core Concepts](#5a3--nestjs-core-concepts)
-- 🎯 [5A.4 — Prisma & the Data Layer](#5a4--prisma--the-data-layer)
-- 🎯 [5A.5 — Auth & Security in NestJS](#5a5--auth--security-in-nestjs)
-- 🎯 [5A.6 — NestJS Production Features](#5a6--nestjs-production-features)
-- 🎯 [5A.7 — Async & Background Jobs (BullMQ)](#5a7--async--background-jobs-bullmq)
-- 🎯 [5A.8 — Testing NestJS](#5a8--testing-nestjs)
-- 👀 [5A.9 — Backend Production Concerns](#5a9--backend-production-concerns)
-- [Track A Capstone](#track-a-capstone)
-- ⏸️ [5B.1 — Java Fundamentals (Deep)](#5b1--java-fundamentals-deep)
-- ⏸️ [5B.2 — Spring Boot Core Concepts](#5b2--spring-boot-core-concepts)
-- ⏸️ [5B.3 — Spring Data JPA](#5b3--spring-data-jpa)
-- ⏸️ [5B.4 — Spring Security](#5b4--spring-security)
-- ⏸️ [5B.5 — Spring Boot Production Features](#5b5--spring-boot-production-features)
-- ⏸️ [5B.6 — Async & Background Jobs](#5b6--async--background-jobs)
-- ⏸️ [5B.7 — Testing Spring Boot](#5b7--testing-spring-boot)
-- ⏸️ [5B.8 — Backend Production Concerns](#5b8--backend-production-concerns)
+**Phase 5 — Backend Engineering (Java + Spring Boot — the single backend language)**
+- 🎯 [5B.1 — Java Fundamentals (Deep)](#5b1--java-fundamentals-deep)
+- 🎯 [5B.2 — Spring Boot Core Concepts](#5b2--spring-boot-core-concepts)
+- 🎯 [5B.3 — Spring Data JPA](#5b3--spring-data-jpa)
+- 🎯 [5B.4 — Spring Security](#5b4--spring-security)
+- 🎯 [5B.5 — Spring Boot Production Features](#5b5--spring-boot-production-features)
+- 🎯 [5B.6 — Async & Background Jobs](#5b6--async--background-jobs)
+- 🎯 [5B.7 — Testing Spring Boot](#5b7--testing-spring-boot)
+- 👀 [5B.8 — Backend Production Concerns](#5b8--backend-production-concerns)
 - [Track B Capstone](#track-b-capstone)
 
 **Phase 6 — Mobile Engineering (React Native)**
@@ -404,283 +394,21 @@ Most languages with static types (Java, C#) use **nominal typing** — two types
 
 ---
 
-# Phase 5 — Backend Engineering (Two Tracks: Node.js/NestJS Now, Java/Spring Boot Later)
+# Phase 5 — Backend Engineering (Java + Spring Boot — the single backend language)
 
-**Phase tier: 🎯 Track A (Node.js + NestJS) — Master now, in full. ⏸️ Track B (Java + Spring Boot) — deferred until Track A's capstone ships.**
+**Phase tier: 🎯 Master — Java + Spring Boot is the one and only backend track.**
 
-> This sequencing is deliberate, not a downgrade of Java. Full-stack JavaScript (React from Phase 4 + Node/NestJS below) comes first because it lets you ship real freelance projects fastest with one language across the entire stack. Java + Spring Boot comes second, aimed specifically at the professional/enterprise job market, once JS is genuinely solid — not because "big projects need Java," but because that's where the job market and hiring pools for it actually are. NestJS is the deliberate bridge between the two tracks: its architecture — dependency injection, modules, decorators, guards/pipes/interceptors — is functionally the same mental model Spring Boot uses under different syntax, so mastering Track A pre-trains the hardest part of Track B rather than being a detour from it. Every Track A subsection below explicitly notes its Track B analogue for exactly this reason. Go through Track A in full, ship its capstone, then come back for Track B exactly where it's written below — untouched and waiting.
+> **Decision (2026-11-22): one backend language — Java.** Depth in one ecosystem beats breadth across three: a senior is judged on how deeply they understand the JVM, concurrency, Spring internals, JPA, testing and production debugging, not on how many frameworks they have touched. Java + Spring Boot is the enterprise/fintech industry standard, strongly typed, and everything learned here (OOP, DI, transactions, concurrency) transfers to any other language later. TypeScript stays — as the **frontend** language only. The earlier Node.js/NestJS track was deleted on 2026-11-22. **Section IDs are kept stable on purpose:** the sections are still numbered `5B.x` (there is no 5A any more), so every cross-reference in the other files still resolves. **How to study it:** do 5B.1 (Java) *together with* Phase 2 (DSA, practiced in Java) and Phase 1 (CPU/memory/OS/JVM); do 5B.2–5B.7 (Spring Boot) *together with* Phase 8 (databases) so JPA and transactions make sense against what PostgreSQL is really doing.
 
-## Track A — Node.js + NestJS
+## Track B — Java + Spring Boot (the primary backend track)
 
-**Tier: 🎯 Master — this is your near-term backend, do all of it**
+**Phase tier: 🎯 Master — 5B.1–5B.7 drilled in full; 5B.8 (production concerns) is 👀 Know Only until a real project needs one specifically.**
 
-## 5A.1 — Node.js Fundamentals (Deep)
-
-**Tier: 🎯 Master**
-
-### What to Learn
-- **The runtime, not the language** — Node embeds V8 (the JS engine) plus **libuv** (the C library providing the event loop, a thread pool, and async I/O); JS syntax itself is already covered in Phase 4.1/4.2 — this section is specifically what's different about running JS outside a browser.
-- **Module systems** — CommonJS (`require`/`module.exports`, resolved synchronously at runtime) vs ESM (`import`/`export`, the modern standard, statically analyzable — which is exactly what enables tree-shaking in bundlers, per Phase 4.8); Node supports both, but mixing them within one project causes real, recurring interop pain (a CJS package's default export not being what you expect under `import` syntax) — pick one as primary per project and understand why the other exists.
-- **Node's event loop phases, specifically** — this is *not* the same diagram as the browser's event loop from 4.2: timers → pending callbacks → idle/prepare → poll → check → close callbacks, cycling in that order; `process.nextTick()` and Promise microtasks both drain fully between every phase, with `nextTick` taking priority over Promise microtasks — a subtlety that trips up anyone assuming the browser model carries over unchanged.
-- **Streams** — Readable, Writable, Duplex, Transform; **backpressure** — a writable stream signals when its internal buffer is full via the return value of `.write()`, and ignoring that signal (writing faster than the destination can drain) is a real, common source of memory blowups in file uploads and proxying; `pipe()` handles backpressure for you automatically, which is why it's preferred over manually wiring `data`/`write` events.
-- **Core built-in modules** — `fs` (sync vs async vs promise-based variants — always prefer async/promise versions in a server, since a sync `fs` call blocks the *entire* event loop for every concurrent request), `path` (cross-platform path handling — never concatenate paths with string `+`), `process` (`process.env`, `process.argv`, `process.exit`, signal handling for graceful shutdown), `Buffer` (raw binary data, relevant for file uploads and network protocols).
-- **npm/package.json mechanics** — semver ranges (`^`, `~`, exact) and what each actually permits; `package-lock.json` pins the exact resolved dependency tree and must be committed; `node_modules` resolution (why a nested dependency's version can differ from a top-level one); `npm ci` vs `npm install` — CI should always use `ci`, since it installs exactly what the lockfile says and fails loudly if it can't, instead of silently updating.
-- **Environment configuration** — `.env` files (via `dotenv`, or Node's built-in `--env-file` in modern versions), and why secrets live in environment variables, never committed to the repo — ties forward to Phase 14.8 Secrets Management.
-
-### Practice
-1. Write a script that reads a large file with `fs.createReadStream` and pipes it to a writable stream, then repeat it with `fs.readFileSync` on the same large file and observe the memory spike difference via `process.memoryUsage()`.
-2. Deliberately call a synchronous `fs` method inside an HTTP request handler under concurrent load (fire several requests at once with `curl` or `autocannon`) and observe every other request stall until the sync call finishes — then fix it with the async version and confirm requests interleave properly.
-3. Write one CommonJS module and one ESM module in the same project, deliberately hit an interop issue (e.g., a CJS package's default export not matching what `import` expects), then resolve it and explain exactly what happened.
-4. Run `npm ci` on a project whose lockfile is out of sync with `package.json`, observe the failure, and explain why that failure is correct, intended CI behavior rather than a bug.
-
-### Answer This
-- Why does a synchronous `fs` call block every concurrent request on a Node server, when async JS is supposed to not block?
-- What does backpressure mean concretely for a writable stream, and why does `pipe()` handle it for you automatically?
-- Why does `process.nextTick()` run before a Promise microtask, and why does understanding "both run before the next event loop phase" matter more in practice than the exact ordering between them?
-- Why should CI always use `npm ci` instead of `npm install`?
-
----
-
-## 5A.2 — Express Fundamentals
-
-**Tier: 🎯 Master (deliberately brief — this exists to demystify what NestJS abstracts, not to become your primary framework)**
-
-### What to Learn
-- **The middleware pattern** — `(req, res, next) => {}`, where every middleware either ends the response or calls `next()` to pass control forward; this single pattern is the entire mental model of Express, and it's also, under the hood, what NestJS's guards/interceptors/pipes are built on top of.
-- **Routing** — `app.get/post/put/delete/patch`, route params (`req.params`), query strings (`req.query`), request bodies (`req.body`, which requires `express.json()` middleware to be populated at all).
-- **Error handling** — a 4-argument middleware `(err, req, res, next)` is Express's special signature for centralized error handling; forgetting to call `next(err)` inside an async route handler is a classic bug that silently swallows errors, since Express doesn't automatically catch rejected promises in route handlers (pre-Express 5).
-- **Router-level modularity** — `express.Router()` groups related routes into their own file/module — the crude ancestor of what Nest's module system formalizes properly.
-- **Why this stays intentionally shallow** — the point here is to be able to look at NestJS's Express adapter and know exactly what it's doing underneath, not to build production apps directly on bare Express.
-
-### Practice
-1. Build 3–4 CRUD routes for one resource on bare Express, no framework beyond it — in-memory data is fine. Include one deliberately broken async route handler that throws inside an `async` function without a try/catch, and confirm the request just hangs/crashes ungracefully — exactly the failure mode Nest's exception filters exist to prevent.
-2. Write one custom middleware logging method + path + response time for every request, mounted globally with `app.use()`.
-3. Split your routes into an `express.Router()` module, mounted under a path prefix (`app.use('/api/users', userRouter)`).
-
-### Answer This
-- What does calling `next()` inside a middleware actually do, mechanically?
-- Why doesn't a thrown error inside an `async` Express route handler get caught automatically (in Express 4), and what's the practical consequence of forgetting to handle it?
-- What is `express.Router()` doing that foreshadows what a NestJS module does more formally?
-
----
-
-## 5A.3 — NestJS Core Concepts
-
-**Tier: 🎯 Master**
-
-> This is the direct analogue of 5B.2 (Spring Boot Core Concepts) — same architecture, different syntax. Learning it well here is what makes Track B faster later.
-
-### What to Learn
-- **Modules** (`@Module()`) — the unit of organization; every Nest app has a root module and feature modules grouping related controllers/providers/imports — directly analogous to how a Spring Boot app organizes packages with `@Configuration`/component scanning, except Nest makes the module graph explicit instead of relying on classpath scanning.
-- **Dependency Injection** — Nest's IoC container instantiates and wires providers (services) for you; constructor injection is the default and the only pattern to use (`constructor(private readonly usersService: UsersService) {}`) — the exact same "constructor injection always, never field injection" rule from Spring Boot (5B.2), for the exact same reason: explicit dependencies, trivial unit testing without booting the framework.
-- **Providers/Services** (`@Injectable()`) — where business logic lives, injected into controllers rather than controllers doing the work themselves — the same separation Spring enforces with `@Service`.
-- **Controllers** (`@Controller('users')`, `@Get()`/`@Post()`/`@Put()`/`@Delete()`/`@Patch()`) — the HTTP-facing layer, thin by design, delegating to services — same role as `@RestController` in Spring.
-- **DTOs + `class-validator`/`class-transformer`** — decorate a DTO class with `@IsEmail()`, `@IsNotEmpty()`, `@MinLength()`, etc.; a global `ValidationPipe` rejects invalid requests before the handler body runs — the direct analogue of `@Valid` + Bean Validation in Spring (5B.2); never return a database entity directly from a controller here either, for the identical reason (API shape and persistence shape *will* diverge).
-- **Guards** (`@UseGuards()`, implementing `CanActivate`) — run before a route handler to decide whether the request is allowed to proceed at all (authentication/authorization) — the same conceptual slot as a Spring Security filter/`@PreAuthorize`.
-- **Pipes** — transform or validate incoming data before it reaches a handler (the built-in `ValidationPipe` is the main one you'll use; custom pipes handle parsing/transforming specific params).
-- **Interceptors** (`NestInterceptor`, wrapping the handler call with `next.handle()`) — cross-cutting concerns wrapping a request/response (logging, response transformation, caching) — directly analogous to Spring AOP / the Proxy pattern from Phase 3.3.
-- **Exception filters** (`@Catch()`, `ExceptionFilter`) — centralize error-to-HTTP-response mapping app-wide — the same role as `@ControllerAdvice` + `@ExceptionHandler` in Spring.
-- **Custom decorators** (`createParamDecorator`) — extract and reuse a piece of request data (e.g., `@CurrentUser()` pulling the authenticated user off the request) across many handlers without repeating the extraction logic.
-
-### Under the Hood — How Nest's DI Container Actually Resolves `@Injectable()`
-`@Injectable()` and constructor injection look like magic the first time you use them: you declare a dependency as a constructor parameter type, and it just... appears, already instantiated. Here's the actual mechanism, and it depends on a JavaScript feature almost nobody encounters outside of Nest/Angular-style frameworks.
-
-- **The problem decorators alone can't solve** — a decorator like `@Injectable()` runs at class-definition time and can see the class itself, but by default, plain JavaScript (even TypeScript) **erases type information at compile time** — by the time your code runs, `constructor(private usersService: UsersService)` has no runtime record that the first parameter's type was `UsersService`. Nest needs that type information *at runtime* to know what to instantiate and pass in.
-- **`reflect-metadata` + `emitDecoratorMetadata`** — this is the missing piece. With `"emitDecoratorMetadata": true` in `tsconfig.json`, TypeScript's compiler emits extra calls to `Reflect.defineMetadata` alongside any decorated class, recording metadata under keys like `design:paramtypes` — literally an array of the constructor parameter types, preserved as real runtime values (the actual class references, e.g. `[UsersService]`), not erased. The `reflect-metadata` package provides the `Reflect.defineMetadata`/`Reflect.getMetadata` polyfill that makes this possible in plain JS, since it isn't (yet) a standard part of the language.
-- **How the container resolves a graph from that** — when Nest instantiates `UsersController`, it calls `Reflect.getMetadata('design:paramtypes', UsersController)` to get back `[UsersService]`, recursively resolves `UsersService` the same way (which might itself depend on `PrismaService`, and so on), and only once every dependency in the chain is resolved does it call `new UsersController(usersServiceInstance)`. This is why forgetting `@Injectable()` on a provider, or forgetting to register it in a module's `providers` array, produces a runtime "cannot resolve dependency" error rather than a compile error — the whole mechanism is metadata-driven and only checked when the container actually tries to build the object graph at startup.
-- **Why this is the same idea as Spring, different implementation** — Spring's container does the equivalent resolution using Java reflection over constructor parameter types directly (Java never erases this information the way compiled JS does), which is *why* Java doesn't need an equivalent of `reflect-metadata` — the runtime type information Nest has to manufacture via decorator metadata, the JVM already provides natively.
-
-### Practice
-1. Build one resource end to end — module, controller, service, DTO with `class-validator` decorators, and a global `ValidationPipe` — then send an invalid request via Postman/curl and confirm it's rejected with a 400 before your handler method body ever executes (same discipline as the Spring `@Valid` exercise in 5B.2).
-2. Write a custom guard checking for a hardcoded role on the request (real JWT auth comes in 5A.5) and confirm a request without the right role never reaches the controller — verify with a breakpoint that's never hit, the same technique as the Spring Security exercise.
-3. Write one global exception filter that catches at least three different exception types and converts them into the same consistent JSON error envelope defined in Phase 7.2 — the envelope shape should be identical regardless of which backend produced it, since a shared frontend will eventually consume both.
-4. Write a custom `@CurrentUser()` param decorator and use it in place of manually reading `req.user` in every handler.
-5. In a scratch project, add `reflect-metadata` and `"emitDecoratorMetadata": true`, write a plain `@Injectable()`-decorated class with a constructor parameter of another class type, and call `Reflect.getMetadata('design:paramtypes', YourClass)` directly yourself — print the result and confirm it's really the actual class reference, not just a string.
-6. **Build a minimal DI container from scratch** — no Nest, no Angular. Write your own `@Injectable()` decorator (it can just tag the class for now) and a `Container` class with a `resolve(SomeClass)` method that: reads `design:paramtypes` via `reflect-metadata`, recursively resolves each dependency the same way, and returns a fully-constructed instance with everything wired in. Prove it works on a 3-level chain (`A` depends on `B`, `B` depends on `C`) resolved with a single `container.resolve(A)` call. This is the exercise that makes "the container just wires it up" stop being a black box.
-
-### Answer This
-- Why does constructor injection make a Nest service trivially testable without booting the Nest application context, mirroring the exact same argument for Spring's constructor injection?
-- What's the actual sequence of what runs, in order, when a request with an invalid DTO hits a route protected by a `ValidationPipe` — where exactly does it get rejected?
-- Where do guards run relative to pipes and the route handler, and why does that ordering matter specifically for an auth check?
-- What Spring Boot concept does a Nest interceptor most directly correspond to, and why?
-- Why can't Nest just read a constructor parameter's type directly at runtime the way Spring/Java can, and what mechanism does it use instead to get the same information?
-- What actually goes wrong, mechanically, when you forget to add a provider to a module's `providers` array — why is it a runtime error instead of a compile-time one?
-
----
-
-## 5A.4 — Prisma & the Data Layer
-
-**Tier: 🎯 Master**
-
-> The direct analogue of 5B.3 (Spring Data JPA) — same problems (schema management, N+1, transactions), different tool.
-
-### What to Learn
-- **`schema.prisma`** — a single declarative file defining your models, fields, relations, and DB provider; `npx prisma migrate dev` generates and applies a versioned SQL migration from a schema change, and `npx prisma generate` regenerates the fully-typed client — this type safety is compile-time, a real advantage over hand-written SQL or a loosely-typed ORM.
-- **The Prisma Client** — a generated, fully-typed query builder (`prisma.user.findMany({ where: { ... } })`); unlike Hibernate/JPA's Active-Record-adjacent entity model, Prisma is a **data-mapper** — your models are plain generated types, not classes with behavior attached.
-- **Relations** — `@relation` fields, `include`/`select` to control what related data a query actually fetches (analogous to JPA's lazy vs eager loading, except Prisma makes the fetch explicit per-query rather than configured on the entity).
-- **The N+1 problem, Prisma's version** — calling `.findMany()` and then, in a loop, calling a related lookup per row reproduces the identical N+1 pattern from 5B.3; the fix is the same shape as `JOIN FETCH`/`@EntityGraph` — use `include` to fetch relations in the same query instead of one query per row.
-- **Transactions** — `prisma.$transaction([...])` for a batch of operations that must all succeed or all fail together, and the interactive transaction API (`prisma.$transaction(async (tx) => {...})`) for logic that needs to read-then-write atomically.
-- **Migrations discipline** — the same hard rule as Flyway in 5B.3: never hand-edit a migration that's already been applied in a shared environment; Prisma tracks applied migrations and flags drift — write a new migration instead.
-- **Seeding** — `prisma/seed.ts`, run via `npx prisma db seed`, for reproducible local/test data.
-- **Prisma Studio** — a GUI for browsing/editing real database data during development, genuinely useful for quickly checking what a query actually wrote.
-
-### Practice
-1. Model two related entities (e.g., `User` and `Post`, one-to-many) in `schema.prisma`, run a migration, then write a query that loops and fetches a related record per row — enable Prisma's query logging, count actual queries executed, and confirm the N+1 pattern; fix it with `include` and confirm the query count drops to a small constant, mirroring the exact exercise from 5B.3.
-2. Write one interactive transaction that reads a value, computes something based on it, then writes back — explain why doing the read and write as two separate non-transactional calls would be unsafe under concurrent requests.
-3. Apply one migration, then edit the already-applied migration file directly and try to run migrations again — observe Prisma's drift detection and understand why that's a feature, mirroring the Flyway checksum exercise from 5B.3.
-
-### Answer This
-- Concretely, why does looping over a list and calling a related-record query per item reproduce the N+1 problem, and why does `include` collapse it to one query?
-- Why is Prisma described as a "data-mapper" rather than "Active Record," and what does that mean for how your model types are structured versus JPA entities?
-- Why shouldn't a read-then-write sequence be split into two separate non-transactional database calls when concurrent requests are possible?
-
----
-
-## 5A.5 — Auth & Security in NestJS
-
-**Tier: 🎯 Master**
-
-> The direct analogue of 5B.4 (Spring Security).
-
-### What to Learn
-- **Authentication vs authorization**, the same distinction as 5B.4 — identity vs permission — and the same classic bug class of checking only "is this user logged in" instead of "does this specific user own this specific resource."
-- **Passport.js integration** (`@nestjs/passport`) — Nest wraps Passport strategies as guards; a `JwtStrategy` validates an incoming token and attaches the decoded payload to `request.user`, which your `@CurrentUser()` decorator (5A.3) then reads.
-- **`AuthGuard('jwt')`**, applied via `@UseGuards()` on a controller or individual route — conceptually identical to a Spring Security filter chain entry, just declared per-route/controller instead of globally configured.
-- **Role/permission-based guards** — a custom guard reading required roles off route metadata (`@SetMetadata`/a custom `@Roles()` decorator) and comparing against `request.user`'s roles — the direct analogue of `@PreAuthorize("hasRole('ADMIN')")`; the same discipline applies: check actual resource ownership, not just role, wherever that distinction matters.
-- **Password hashing** — `bcrypt` or `argon2` npm packages, same non-negotiable rule as 5B.4: never a fast hash (MD5/SHA-1/plain SHA-256) for passwords — you want it deliberately slow.
-- **Refresh token rotation** — issue a short-lived access token + a longer-lived refresh token, store the refresh token's hash (not the raw token) server-side, and rotate it on every use so a stolen, already-used refresh token is detectable.
-- **CORS in Nest** — `app.enableCors({ origin: [...], credentials: true })` configured explicitly at bootstrap, same warning as 5B.4: never combine a wildcard origin with credentialed requests.
-- **Helmet** (`helmet` middleware) — sets a battery of security-related HTTP headers (CSP, X-Frame-Options, etc.) with sane defaults in one line — a genuine ergonomic win of the Node ecosystem worth noting here, with no single equally-concise Spring Boot equivalent.
-
-### Practice
-1. Implement JWT auth end to end — a login endpoint issuing an access + refresh token pair, a `JwtStrategy`/`AuthGuard('jwt')` protecting a route, and confirm a request without a valid token is rejected before the controller method runs (breakpoint never hit — same verification technique as 5B.4).
-2. Build a custom `@Roles()` decorator + `RolesGuard` checking actual resource ownership (not just role), and write a test proving a non-owner is correctly denied even with a valid token — the identical exercise to 5B.4's ownership-check practice, done in Nest instead of Spring.
-3. Implement refresh token rotation, then simulate a stolen-and-reused refresh token scenario and confirm your system detects and rejects the reuse.
-4. Deliberately configure CORS with a wildcard origin plus `credentials: true` and confirm the browser rejects the combination outright, same as the Spring exercise.
-
-### Answer This
-- Where in the request lifecycle does a Nest `AuthGuard('jwt')` run relative to the route handler, and why does that matter for what code executes after it?
-- Why is checking "is this token valid" insufficient for authorization, and what specific bug does that gap produce?
-- Why does rotating refresh tokens on every use let you detect a stolen, already-used refresh token?
-
----
-
-## 5A.6 — NestJS Production Features
-
-**Tier: 🎯 Master**
-
-> The direct analogue of 5B.5.
-
-### What to Learn
-- **`@nestjs/config`** — typed, validated environment configuration (via `Joi` or `class-validator` schema validation of `process.env`), loaded once at bootstrap — the analogue of Spring profiles/`application.yml`, environment-variable-driven rather than file-per-profile by convention (though `.env.development`/`.env.production` per-environment files are also common).
-- **Structured logging** — `nestjs-pino` or Winston for JSON-structured logs with a correlation/request ID attached per request (via middleware or an interceptor that generates/propagates the ID) — the direct analogue of Spring's MDC correlation ID logging in 5B.5, solving the identical problem: filtering concurrent requests' logs down to one request's full trace.
-- **Health checks** — `@nestjs/terminus` provides `/health` endpoints checking DB connectivity, memory usage, disk space, etc. — the analogue of Spring Actuator's `/actuator/health`, used the same way by orchestration systems (Kubernetes liveness/readiness probes).
-- **Graceful shutdown** — `app.enableShutdownHooks()` plus listening for `SIGTERM` to stop accepting new connections while letting in-flight requests finish — the same non-negotiable requirement as 5B.5 for zero-downtime rolling deploys.
-- **Global prefix + versioning** — `app.setGlobalPrefix('api')`, `app.enableVersioning()` — built-in support for the URL-versioning convention from Phase 7.2.
-- **Swagger/OpenAPI** — `@nestjs/swagger` generates a live Swagger UI directly from your DTOs and controller decorators (`@ApiProperty()`, `@ApiOperation()`) — the direct analogue of Springdoc in Phase 7.5; docs stay in sync with code because they're generated from it, not hand-maintained separately.
-
-### Practice
-1. Set up `@nestjs/config` with schema validation so the app refuses to start if a required environment variable is missing or malformed — confirm by deliberately omitting one and observing a clear startup failure instead of a confusing runtime error later.
-2. Add correlation IDs to your logging via an interceptor, fire two concurrent requests, and confirm you can filter the combined log output down to just one request's lines — the identical exercise to 5B.5, done in Nest.
-3. Set up `@nestjs/terminus` with a database health check, then stop your database and confirm `/health` correctly reports unhealthy.
-4. Enable graceful shutdown, start a slow endpoint, send `SIGTERM` mid-request, and confirm the in-flight request completes instead of being cut off — same verification as the Spring exercise.
-
-### Answer This
-- Why should an app refuse to start at all if a required config value is missing, rather than failing later when that value is first used?
-- What specific problem does a correlation ID solve here, identically to the Spring/MDC case in 5B.5?
-- Why does graceful shutdown matter specifically for zero-downtime rolling deployments, regardless of which backend stack is doing the deploying?
-
----
-
-## 5A.7 — Async & Background Jobs (BullMQ)
-
-**Tier: 🎯 Master**
-
-> The direct analogue of 5B.6.
-
-### What to Learn
-- **BullMQ** (Redis-backed job queue) — `Queue` for producers to add jobs, `Worker` for consumers to process them — conceptually the same producer/consumer decoupling as RabbitMQ + Spring AMQP in 5B.6, just backed by Redis instead of a dedicated message broker; a consumer being down simply means jobs wait in Redis until it's back.
-- **`@nestjs/bullmq`** — Nest's integration wraps queues as injectable providers and workers as decorated processor classes (`@Processor()`, `@Process()`), the same "framework wires it for you" convenience Spring AMQP provides with `@RabbitListener`.
-- **Retries and backoff** — configure a job's retry count and backoff strategy (fixed or exponential) declaratively when adding it to the queue.
-- **Dead letter handling** — BullMQ has no built-in DLQ identical to RabbitMQ's, but the same outcome is achieved by moving a job to a "failed" state after exhausting retries and building a small process to inspect/requeue failed jobs — the same underlying requirement (don't silently lose or infinitely retry a failing job) implemented slightly differently than 5B.6's native DLQ.
-- **Idempotency** — the identical non-negotiable requirement from 5B.6: every job handler must produce the same correct end state whether it runs once or is retried, because at-least-once delivery is the norm, not an edge case.
-- **`@Cron()`** (`@nestjs/schedule`) — recurring scheduled jobs defined directly in application code, the analogue of Spring's `@Scheduled`.
-
-### Practice
-1. Set up a BullMQ producer/consumer pair via Docker Compose Redis, stop the worker, add several jobs, confirm they queue up in Redis, then restart the worker and confirm they all process — the identical exercise to 5B.6's RabbitMQ practice.
-2. Configure retries with exponential backoff, force a job handler to fail every time, and confirm it eventually lands in the "failed" job state instead of retrying forever silently.
-3. Write a genuinely idempotent job handler (using an idempotency key stored in the DB, exactly as in 5B.6) and deliver the same logical job twice, confirming the end state is correct either way.
-
-### Answer This
-- Why must a background job handler in any real system — regardless of which queue technology sits underneath — be designed to tolerate running more than once for the same logical event?
-- What's the practical difference between RabbitMQ's native dead letter queue and BullMQ's failed-job-state approach, and why do they solve the same underlying problem?
-
----
-
-## 5A.8 — Testing NestJS
-
-**Tier: 🎯 Master**
-
-> The direct analogue of 5B.7.
-
-### What to Learn
-- **Jest** — Nest's default test runner, configured out of the box; `describe`/`it`/`expect`, mocking via `jest.fn()`/`jest.spyOn()` — the rough analogue of JUnit 5 + Mockito combined into one tool.
-- **`Test.createTestingModule()`** — Nest's testing utility for building a real (or partially mocked) DI container for a test, letting you `.overrideProvider()` swap a real service for a mock — the analogue of `@SpringBootTest`/`@MockBean`, at a similarly heavier weight than a pure unit test.
-- **Pure unit tests without the Nest testing module** — since Nest services are just classes with constructor injection, you can `new UsersService(mockRepo)` directly in a plain Jest test with zero framework involvement — this is the *fast* end of the pyramid, the same argument made for why Spring's constructor injection enables trivial no-framework unit tests in 5B.2/5B.7.
-- **Supertest** — HTTP-level testing against a running (in-memory) Nest app instance (`request(app.getHttpServer()).get('/users')`), the analogue of `MockMvc`/`TestRestTemplate`.
-- **Testcontainers for Node** (`testcontainers` npm package) — spin up a real PostgreSQL/Redis in Docker for integration tests, the identical tool and identical motivation as 5B.7: avoid the "works on a lightweight substitute, breaks on the real database" gap.
-- **e2e vs unit test file conventions** — Nest's CLI scaffolds `.spec.ts` (unit) separately from `.e2e-spec.ts` (full app, Supertest-driven) by convention, reinforcing the same testing-pyramid discipline (Phase 11) as the Java track.
-
-### Practice
-1. Write the same feature test three ways — a pure unit test with manually-constructed mocks (no Nest testing module at all), a `Test.createTestingModule()` test with one provider overridden, and a full e2e test with Supertest against a real running instance — time all three and build the same testing-pyramid intuition the equivalent 5B.7 exercise builds for Spring.
-2. Set up Testcontainers for PostgreSQL in a Node test suite, write a repository-level test against it, and use a Postgres-specific feature (JSONB, `ILIKE`) to confirm why testing against the real engine matters.
-3. Use `jest.spyOn()` to confirm a service called a mocked email-sending dependency with the exact expected arguments, not just that it was called at all — the Jest equivalent of Mockito's `ArgumentCaptor`.
-
-### Answer This
-- Why can a Nest service be unit-tested with a plain `new ClassName(mockDep)` call, with no framework involved at all — and why is that a direct consequence of constructor injection, the same argument as in 5B.2?
-- What specific class of bug does testing against a real Testcontainers-backed PostgreSQL catch that a lighter substitute wouldn't, identically to the 5B.7 case?
-- What's the practical difference between a `.spec.ts` unit test and an `.e2e-spec.ts` test in a standard Nest project layout?
-
----
-
-## 5A.9 — Backend Production Concerns
-
-**Tier: 👀 Know Only**
-
-> The Node/NestJS equivalents of 5B.9 — same real-world concerns, situational rather than universal, so this stays a single read-through rather than a drilled section.
-
-### What to Learn
-- **Webhooks** — identical principles to 5B.9: verify signatures (HMAC-SHA256) before trusting a payload, respond `200` fast and process asynchronously, design every handler idempotently. In Node, this is typically a raw-body-parsing route (signature verification needs the *unparsed* body) handled outside Nest's default JSON body parser for that one route.
-- **Payments** — Stripe's official Node SDK is arguably the most ergonomic of any language's; same rules apply regardless of language: never store raw card data, use idempotency keys on payment-creation calls, never trust a client-side success callback alone.
-- **Full-text search** — same PostgreSQL `tsvector`/`tsquery`/GIN-index-first approach as 5B.9, queried through Prisma's raw query escape hatch (`$queryRaw`) since Prisma's query builder doesn't model full-text search natively.
-- **Multi-tenancy** — same tradeoffs as 5B.9 (RLS vs schema-per-tenant vs database-per-tenant); Prisma middleware (`$use()`) can enforce a `tenant_id` filter on every query as an app-layer safety net, though RLS at the database layer remains the stronger guarantee for the same reason it does in Postgres regardless of which backend sits on top.
-- **Rate limiting** — `@nestjs/throttler` for basic in-process limiting, or a Redis-backed token bucket (via `ioredis`) for the same per-user/per-IP distributed enforcement described in 5B.9.
-
-### Practice
-1. Build a webhook receiver with a dedicated raw-body route (bypassing global JSON parsing for just that route), verify an HMAC signature, reject anything that fails, and confirm the same payload delivered twice doesn't double-process.
-2. Set up PostgreSQL full-text search via `$queryRaw` and compare its query plan against a naive `LIKE` search, mirroring the 5B.9 exercise.
-
-### Answer This
-- Why does verifying a webhook's HMAC signature require access to the *raw*, unparsed request body rather than the parsed JSON object?
-- Why is database-level row-level security still the stronger multi-tenancy guarantee even when Prisma middleware can enforce the same filter at the application layer?
-
----
-
-### Track A Capstone
-
-> **PROJECT:** Build a complete REST API with NestJS — user management with JWT + refresh token rotation and Argon2/bcrypt password hashing, full CRUD via Prisma + PostgreSQL (with at least one deliberately-introduced-then-fixed N+1 query, documented with before/after query counts), Prisma migrations (including one migration added *after* the fact, never editing a previously-applied one), an async background job via BullMQ with a genuinely idempotent handler and a documented failed-job-retry path, health checks via `@nestjs/terminus`, structured logging with correlation IDs, and complete test coverage using the right test type for each layer (pure unit tests, `Test.createTestingModule()` tests, and Testcontainers-backed integration tests) — finished off with Swagger/OpenAPI documentation via `@nestjs/swagger`. **This is your near-term Master Project's backend** (see the top-level roadmap's Master Project section). When you return to Track B later, rebuild this exact same domain in Spring Boot as your natural re-entry point, and compare the two implementations directly.
-
----
-
-## Track B — Java + Spring Boot
-
-**Phase tier: ⏸️ Skip For Now — deferred until Track A's capstone ships, not neglected. The content below is complete, unchanged, and waiting exactly where it was written; come back and drill it in full once JS is solid.**
-
-> Java forces you to understand OOP, types, and memory more deeply than most languages let you get away with skipping. Spring Boot is the enterprise/fintech industry default — this combination opens doors that a more "trendy" stack alone often doesn't. Everything you built in Track A — DI, guards/pipes as filters, DTOs, migrations, N+1 fixes, idempotent jobs, layered testing — has a named equivalent here; expect this track to move faster than it would have cold.
+> Java forces you to understand OOP, types, and memory more deeply than most languages let you get away with skipping. Spring Boot is the enterprise/fintech industry default — this combination opens doors that a more "trendy" stack alone often doesn't. This is your only backend: go deep rather than wide.
 
 ## 5B.1 — Java Fundamentals (Deep)
 
-**Tier: ⏸️ Skip For Now (deferred — see the Track A/B note at the top of this phase)**
+**Tier: 🎯 Master**
 
 ### What to Learn
 
@@ -751,7 +479,7 @@ Type erasure (above) is usually taught as "generic type info disappears at runti
 
 ## 5B.2 — Spring Boot Core Concepts
 
-**Tier: ⏸️ Skip For Now (deferred — see the Track A/B note at the top of this phase)**
+**Tier: 🎯 Master**
 
 ### What to Learn
 - **Dependency Injection & IoC** — Inversion of Control means the framework (not your code) creates and wires object graphs; the Spring IoC container holds every managed bean and its lifecycle.
@@ -772,10 +500,10 @@ Type erasure (above) is usually taught as "generic type info disappears at runti
 - API versioning — URL versioning (`/v1/...` — explicit, simple, cacheable) vs header versioning (cleaner URLs, less visible/discoverable) — URL versioning is the more common practical default.
 
 ### Under the Hood — How the ApplicationContext Is Actually Built, and How `@Transactional` Actually Works
-This is the direct analogue of the NestJS "how does `@Injectable()` actually resolve dependencies" deep-dive in 5A.3 — same underlying question (how does the framework build the object graph and intercept method calls), answered with Java's tools instead of TypeScript's.
+The underlying question is how the framework builds the object graph and intercepts method calls — answered here with Java's tools.
 
 - **Component scanning → `BeanDefinition`s, not beans** — on startup, Spring scans the classpath for `@Component`/`@Service`/`@Repository`/`@Controller`-annotated classes and, for each one, creates a `BeanDefinition` — metadata describing *how* to build that bean (its class, scope, constructor, dependencies) — without actually instantiating anything yet. The `ApplicationContext` only starts constructing real objects afterward, walking the dependency graph described by these definitions.
-- **Why Spring doesn't need Nest's `reflect-metadata` trick** — the `BeanFactory` resolves each bean's constructor dependencies using **Java reflection directly** (`Constructor.getParameterTypes()`), because Java, unlike compiled JavaScript, never erases a constructor parameter's declared type at the bytecode level — the type information Nest has to manufacture via `emitDecoratorMetadata` is something the JVM already gives Spring for free.
+- **How Spring resolves constructor dependencies** — the `BeanFactory` resolves each bean's constructor dependencies using **Java reflection directly** (`Constructor.getParameterTypes()`), because Java never erases a constructor parameter's declared type at the bytecode level — the JVM gives Spring that type information for free.
 - **The circular dependency problem, and why constructor injection can hit it** — if bean `A`'s constructor needs `B`, and `B`'s constructor needs `A`, there is no valid order to construct either one first — Spring throws `BeanCurrentlyInCreationException` rather than deadlocking or guessing. (Spring *can* work around circular dependencies for **singleton** beans using field/setter injection, via an early-reference cache — but this is a workaround for a design smell, not something to rely on; a real circular dependency between two services is a sign they should be refactored, not injected around.)
 - **`@Transactional` is not special JVM magic — it's a dynamic proxy** — when Spring sees a bean with a `@Transactional` method, it doesn't modify your class's bytecode. Instead, at startup it wraps your real bean inside a **proxy** object and registers the proxy — not your original object — in the application context. Two proxy strategies: a **JDK dynamic proxy** (`java.lang.reflect.Proxy`) if your class implements an interface, generating a proxy that implements the same interface and forwards calls; or a **CGLIB proxy** (a runtime-generated subclass) if there's no interface to proxy. Either way, calling the method through the proxy runs the transaction-management code (begin transaction → invoke your real method → commit/rollback) *around* your actual method body — this is the exact same Proxy-pattern mechanism named in Phase 3.3, applied by the framework instead of by you.
 - **The classic self-invocation gotcha, explained mechanically** — if a `@Transactional` method calls *another* `@Transactional` method on `this` from within the same class, that second call goes directly to the real object's method (`this.otherMethod()`), completely bypassing the proxy — because `this` inside your own class refers to the real instance, not the proxy wrapping it. The transaction annotation on that inner call is silently ignored. This is one of the most common real Spring bugs, and it's now a fact you can *derive* from the proxy mechanism instead of memorizing as a gotcha.
@@ -793,7 +521,7 @@ This is the direct analogue of the NestJS "how does `@Injectable()` actually res
 - Why does constructor injection make a class trivially testable without Spring, while field injection doesn't?
 - What specifically happens, in order, when a request hits a `@Valid @RequestBody` parameter that fails validation?
 - Why should a controller never return a JPA entity directly, even if the DTO would currently look identical to it?
-- Why doesn't Spring need anything like Nest's `reflect-metadata` to resolve constructor dependencies?
+- How does Spring know which beans a constructor needs, without any extra metadata trick?
 - What's actually sitting in the `ApplicationContext` for a `@Transactional` bean — your original object, or something else? What is that something else?
 - Why does calling a `@Transactional` method on `this` from inside the same class silently skip the transaction, and what does that tell you about what a Spring proxy actually wraps?
 
@@ -801,7 +529,7 @@ This is the direct analogue of the NestJS "how does `@Injectable()` actually res
 
 ## 5B.3 — Spring Data JPA
 
-**Tier: ⏸️ Skip For Now (deferred — see the Track A/B note at the top of this phase)**
+**Tier: 🎯 Master**
 
 ### What to Learn
 - `JpaRepository<T, ID>` — gives you `save`, `findById`, `findAll`, `delete`, and more, for free, plus **derived query methods** (`findByEmailAndStatus(String email, Status status)` — Spring parses the method name itself and generates the query, no SQL/JPQL written by you).
@@ -826,7 +554,7 @@ This is the direct analogue of the NestJS "how does `@Injectable()` actually res
 
 ## 5B.4 — Spring Security
 
-**Tier: ⏸️ Skip For Now (deferred — see the Track A/B note at the top of this phase)**
+**Tier: 🎯 Master**
 
 ### What to Learn
 - **Authentication vs authorization** — authentication answers "who are you" (proving identity); authorization answers "what are you allowed to do" (given a proven identity) — conflating these is a common source of real security bugs (e.g., checking only that a user is logged in, not that *this* user owns *this* resource).
@@ -851,7 +579,7 @@ This is the direct analogue of the NestJS "how does `@Injectable()` actually res
 
 ## 5B.5 — Spring Boot Production Features
 
-**Tier: ⏸️ Skip For Now (deferred — see the Track A/B note at the top of this phase)**
+**Tier: 🎯 Master**
 
 ### What to Learn
 - **Profiles** — `application-dev.yml`/`application-prod.yml`, activated via `SPRING_PROFILES_ACTIVE`, for environment-specific configuration without code branching.
@@ -874,7 +602,7 @@ This is the direct analogue of the NestJS "how does `@Injectable()` actually res
 
 ## 5B.6 — Async & Background Jobs
 
-**Tier: ⏸️ Skip For Now (deferred — see the Track A/B note at the top of this phase)**
+**Tier: 🎯 Master**
 
 ### What to Learn
 - `@Async` (with `@EnableAsync`) — runs a method on a separate thread pool instead of the calling thread; the caller gets a `Future`/`CompletableFuture` (or fires-and-forgets, for `void` methods) instead of blocking.
@@ -897,7 +625,7 @@ This is the direct analogue of the NestJS "how does `@Injectable()` actually res
 
 ## 5B.7 — Testing Spring Boot
 
-**Tier: ⏸️ Skip For Now (deferred — see the Track A/B note at the top of this phase)**
+**Tier: 🎯 Master**
 
 ### What to Learn
 - `@SpringBootTest` — loads the full application context; the most realistic but also the slowest and heaviest test type — use it sparingly, for genuine end-to-end integration checks.
@@ -922,7 +650,7 @@ This is the direct analogue of the NestJS "how does `@Injectable()` actually res
 
 ## 5B.8 — Backend Production Concerns
 
-**Tier: ⏸️ Skip For Now (deferred — see the Track A/B note at the top of this phase)**
+**Tier: 👀 Know Only**
 
 ### What to Learn
 - **Webhooks** — verify every incoming webhook's signature (commonly HMAC-SHA256) before trusting its payload at all; respond `200` quickly and process the actual work asynchronously (many webhook senders will retry aggressively if your endpoint is slow or doesn't respond fast); design every handler idempotently, since retries are the normal case, not the exception; maintain a dead-letter path for payloads your app ultimately fails to process. Real examples: Stripe payment events, GitHub push events, Twilio delivery status.
@@ -946,7 +674,7 @@ This is the direct analogue of the NestJS "how does `@Injectable()` actually res
 
 ### Track B Capstone
 
-> **PROJECT:** Build a complete REST API with Spring Boot: user management with JWT + refresh token authentication, full CRUD via Spring Data JPA + PostgreSQL (with at least one deliberately-introduced-then-fixed N+1 query, documented with before/after query counts), Flyway migrations (including one migration added *after* the fact, never editing a previously-applied one), an async background job via RabbitMQ with a dead letter queue and a genuinely idempotent handler, a Stripe integration with signature-verified webhooks and idempotency keys, PostgreSQL full-text search on one resource, and complete test coverage using the right test type for each layer (`@WebMvcTest`, `@DataJpaTest` + Testcontainers, and a small number of full `@SpringBootTest`s) — finished off with Swagger/OpenAPI documentation. **Rebuild the exact same domain you already shipped in the Track A Capstone** — same resources, same auth model, same job/queue behavior — so the comparison between the two stacks is direct and concrete, not from memory.
+> **PROJECT:** Build a complete REST API with Spring Boot: user management with JWT + refresh token authentication, full CRUD via Spring Data JPA + PostgreSQL (with at least one deliberately-introduced-then-fixed N+1 query, documented with before/after query counts), Flyway migrations (including one migration added *after* the fact, never editing a previously-applied one), an async background job via RabbitMQ with a dead letter queue and a genuinely idempotent handler, a Stripe integration with signature-verified webhooks and idempotency keys, PostgreSQL full-text search on one resource, and complete test coverage using the right test type for each layer (`@WebMvcTest`, `@DataJpaTest` + Testcontainers, and a small number of full `@SpringBootTest`s) — finished off with Swagger/OpenAPI documentation. **This is your Master Project's backend** (see the top-level roadmap's Master Project section) — built once, in Java, with the React frontend from Phase 4 consuming it.
 
 ---
 
@@ -1184,8 +912,8 @@ This is the direct analogue of the NestJS "how does `@Injectable()` actually res
 { "error": { "code": "VALIDATION_ERROR", "message": "Email is invalid", "field": "email", "requestId": "abc-123" } }
 ```
 - **Never leak internal details** in an error response — no stack traces, no raw database error messages, no internal object IDs a client shouldn't know exist.
-- **`requestId`/correlation ID on every response** — ties directly back to Phase 5's correlation-ID logging (5A.6 now, 5B.5 later): the same ID that traces a request through your logs should be visible to the client so a bug report can reference it directly.
-- **Idempotency keys** — a client-supplied unique key on a POST request that lets the server recognize and safely no-op a retried request instead of creating a duplicate resource (directly relevant to Phase 5's payment example, 5A.9 now / 5B.8 later).
+- **`requestId`/correlation ID on every response** — ties directly back to Phase 5's correlation-ID logging (5B.5): the same ID that traces a request through your logs should be visible to the client so a bug report can reference it directly.
+- **Idempotency keys** — a client-supplied unique key on a POST request that lets the server recognize and safely no-op a retried request instead of creating a duplicate resource (directly relevant to Phase 5's payment example, 5B.8).
 
 ### Practice
 1. Implement cursor-based pagination on a genuinely large table and compare its performance at a "deep" page against OFFSET-based pagination on the same query, at the same depth.

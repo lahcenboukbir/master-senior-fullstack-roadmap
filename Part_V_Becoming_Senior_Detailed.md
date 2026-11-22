@@ -486,8 +486,8 @@
 | 6. Processes | Execute the app as stateless processes | No sticky sessions, no in-memory state — state lives in backing services (Phase 10.2) |
 | 7. Port Binding | Export services via port binding | The app is self-contained; a reverse proxy routes to it, not the reverse |
 | 8. Concurrency | Scale out via the process model | Horizontal scaling (Phase 10.2) — more processes, not bigger ones |
-| 9. Disposability | Fast startup, graceful shutdown | Handle `SIGTERM` (Phase 1.3, 5A.6 now / 5B.5 later) — drain in-flight requests, release locks |
-| 10. Dev/Prod Parity | Keep development and production as similar as possible | Docker Compose with a real Postgres locally (Phase 5A.8 now / 5B.7 later), not an in-memory substitute |
+| 9. Disposability | Fast startup, graceful shutdown | Handle `SIGTERM` (Phase 1.3, 5B.5) — drain in-flight requests, release locks |
+| 10. Dev/Prod Parity | Keep development and production as similar as possible | Docker Compose with a real Postgres locally (Phase 5B.7), not an in-memory substitute |
 | 11. Logs | Treat logs as event streams | Write to stdout, let the platform aggregate — **violated most often** |
 | 12. Admin Processes | Run admin tasks as one-off processes | Migrations and data cleanups run from the same codebase, not ad-hoc scripts |
 

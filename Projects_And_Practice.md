@@ -19,8 +19,7 @@
 - [Phase 3 — Software Design & Clean Code](#phase-3--software-design--clean-code)
 - [Project Lifecycle & Planning](#project-lifecycle--planning)
 - [Phase 4 — Frontend Engineering](#phase-4--frontend-engineering)
-- [Phase 5A — Backend: Node.js + NestJS](#phase-5a--backend-nodejs--nestjs)
-- [Phase 5B — Backend: Java + Spring Boot](#phase-5b--backend-java--spring-boot)
+- [Phase 5B — Backend: Java + Spring Boot (the single backend track)](#phase-5b--backend-java--spring-boot-the-single-backend-track)
 - [Phase 6 — Mobile (React Native)](#phase-6--mobile-react-native)
 - [Phase 7 — API Design](#phase-7--api-design)
 - [Phase 8 — Databases](#phase-8--databases)
@@ -44,7 +43,7 @@
 - Build a responsive 3-column-to-1-column layout from a mockup using zero CSS frameworks — pure box model, Flexbox/Grid.
 
 ### Milestone Project — Raw HTTP Server
-Build an HTTP/1.1 server from scratch using raw TCP sockets (Node's `net` module — no `http` module, no Express). It must parse the raw request line/headers/body itself, and respond with correct status lines and headers.
+Build an HTTP/1.1 server from scratch using raw TCP sockets (Java's `ServerSocket` — no `HttpServer`, no Spring). It must parse the raw request line/headers/body itself, and respond with correct status lines and headers.
 
 **Done when:**
 - `curl -v` against it shows a well-formed response (status line, headers, blank line, body) for at least GET and POST.
@@ -111,7 +110,7 @@ Take any messy 200+ line file (yours, or a deliberately bad one you write first)
 - Run a lightweight solo Event Storming pass (sticky notes or a virtual board) on one feature idea — 45 minutes, timer on.
 
 ### Milestone Project — Plan the Master Project Properly, Before Building It
-Before writing the Master Project's first line of code (Phase 5A milestone), produce: the 1-page brief, 5 core user stories with acceptance criteria, a C4 Container diagram, an ERD for the core entities, one sequence diagram (the refresh-token flow is a good first pick), and an initial backlog in GitHub Projects (or your tool of choice) broken down from the 11-step build order below.
+Before writing the Master Project's first line of code (Phase 5B milestone), produce: the 1-page brief, 5 core user stories with acceptance criteria, a C4 Container diagram, an ERD for the core entities, one sequence diagram (the refresh-token flow is a good first pick), and an initial backlog in GitHub Projects (or your tool of choice) broken down from the 11-step build order below.
 
 **Done when:**
 - All of the above exists as real files in the repo (`/docs` folder is a reasonable place) *before* the first feature branch, not written retroactively to look tidy.
@@ -138,42 +137,27 @@ Not a todo list — pick something with real data shape complexity (a recipe man
 
 ---
 
-## Phase 5A — Backend: Node.js + NestJS
+## Phase 5B — Backend: Java + Spring Boot (the single backend track)
 
-### Quick Wins
-- Do the "Under the Hood" DI container build exercise from `Part_II_Building_Software_Detailed.md` — a working `Container.resolve()` using `reflect-metadata`, resolving a 3-level dependency chain.
-- Build one resource (module/controller/service/DTO) with a global `ValidationPipe` and confirm a bad request never reaches your handler.
-- Write a custom guard, confirm (with a breakpoint that never gets hit) that an unauthorized request never reaches the controller.
-- Add one BullMQ job with a genuinely idempotent handler — run it twice on purpose, confirm no duplicate side effect.
-
-### Milestone Project — A Real NestJS + Prisma API
-The backend for the same domain as your Phase 4 frontend (recipe manager, habit tracker, whatever you picked) — or a new one if you'd rather. Auth with JWT + refresh rotation + Argon2. Full CRUD via Prisma. At least one relation where you can demonstrate an N+1 problem and then fix it with `include`.
-
-**Done when:**
-- You have a documented before/after query count for the N+1 fix (log Prisma's queries, count them).
-- A Prisma migration was added *after* the fact (not just the initial one) — proving you understand the "never edit an applied migration" discipline.
-- Swagger/OpenAPI docs are generated and actually usable to explore the API.
-- **Feeds the Master Project:** this becomes the backend's auth + core CRUD layer in Part VI — don't throw it away.
-
----
-
-## Phase 5B — Backend: Java + Spring Boot
-
-*(Deferred in study order — see Priority_Map.md — but build it well when you get here, don't shortcut it because it's "later.")*
+*(Java is the only backend language on this roadmap — see Priority_Map.md. Study Java fundamentals together with Phase 2, and Spring Boot together with Phase 8.)*
 
 ### Quick Wins
 - Do the two "Under the Hood" build exercises from `Part_II_Building_Software_Detailed.md`: inspect a synthetic bridge method with `javap -p -c`, and build a minimal transactional proxy from scratch with `java.lang.reflect.Proxy`.
 - Deliberately trigger the `@Transactional` self-invocation bug, confirm it silently fails, then fix it properly.
 - Convert a hand-written immutable value class into a `record` and diff the generated behavior.
+- Build a tiny dependency-injection container with annotations + reflection that resolves a 3-level dependency chain — then compare it to what Spring does.
+- Write a custom security filter, confirm (with a breakpoint that never gets hit) that an unauthorized request never reaches the controller.
+- Add one RabbitMQ listener with a genuinely idempotent handler — deliver the same message twice on purpose, confirm no duplicate side effect.
 
-### Milestone Project — Rebuild the Track A API in Spring Boot
-The exact same domain as your NestJS capstone (same entities, same endpoints, same auth flow) — rebuilt in Spring Boot + Spring Data JPA + Spring Security. The point is a **direct comparison**, not a new project.
+### Milestone Project — A Real Spring Boot + JPA API
+The backend for the same domain as your Phase 4 frontend (recipe manager, habit tracker, whatever you picked) — or a new one if you would rather. Auth with JWT + refresh rotation + Argon2. Full CRUD via Spring Data JPA + PostgreSQL. At least one relation where you can demonstrate an N+1 problem and then fix it with `JOIN FETCH` or `@EntityGraph`.
 
 **Done when:**
-- Every endpoint your NestJS API has, this one has too, same request/response shapes.
-- You've written down (even briefly) where the two implementations genuinely differ in ergonomics, not just syntax — e.g. what Prisma's `include` fix looked like vs `@EntityGraph`, what Nest's guards felt like vs `@PreAuthorize`.
-- Full Testcontainers coverage matching the NestJS version's Testcontainers tests.
-- **Feeds the Master Project:** this becomes the Track B rebuild in Part VI, proving both backends against the same React frontend.
+- You have a documented before/after query count for the N+1 fix (enable Hibernate SQL logging, count the queries).
+- A Flyway migration was added *after* the fact (not just the initial one) — proving you understand the "never edit an applied migration" discipline.
+- Swagger/OpenAPI docs are generated and actually usable to explore the API.
+- Full Testcontainers coverage, with the right test type per layer (`@WebMvcTest`, `@DataJpaTest`, a few full `@SpringBootTest`s).
+- **Feeds the Master Project:** this becomes the backend's auth + core CRUD layer in Part VI — don't throw it away.
 
 ---
 
@@ -191,7 +175,7 @@ The exact same domain as your NestJS capstone (same entities, same endpoints, sa
 - Write one consistent error envelope (per the shape in 7.2) and use it across at least 3 different error types.
 
 ### Milestone Project — A WebSocket Feature, End to End
-Add a real-time feature to your Phase 5A backend + Phase 4 frontend — live notifications, a live comment thread, a presence indicator, whatever fits your domain. Auth on connect (not via header on the initial handshake — token in the connect message, per 7.3), heartbeat, and a reconnect strategy on the frontend.
+Add a real-time feature to your Phase 5B backend + Phase 4 frontend — live notifications, a live comment thread, a presence indicator, whatever fits your domain. Auth on connect (not via header on the initial handshake — token in the connect message, per 7.3), heartbeat, and a reconnect strategy on the frontend.
 
 **Done when:**
 - Killing the server and restarting it, the frontend reconnects on its own without a page reload.
@@ -293,7 +277,7 @@ Deploy your Master-Project-track app to a single real environment — a single E
 
 ### Quick Wins
 - Complete the SQL injection and XSS learning paths on PortSwigger Web Security Academy.
-- Build the full auth system properly once: Argon2, JWT + refresh rotation, TOTP MFA — this likely already exists from Phase 5A/5B, revisit it specifically through a security lens.
+- Build the full auth system properly once: Argon2, JWT + refresh rotation, TOTP MFA — this likely already exists from Phase 5B, revisit it specifically through a security lens.
 - Add every header from 14.6 (`CSP`, `X-Content-Type-Options`, `HSTS`, etc.) to a real app and verify with a header-scanning tool.
 
 ### Milestone Project — Attack Your Own App
@@ -311,7 +295,7 @@ These are cheap, high-leverage, and most people skip them because they don't pro
 
 ### Quick Wins
 - **Debugging as a discipline (15.3):** next time you hit a real bug, write down the 5 steps (observe → hypothesize → predict → test → repeat) *as you go*, not after — most people skip writing it down and lose the discipline under pressure.
-- **ADR practice (16.2):** write one real Architecture Decision Record for a choice you already made in the Master Project (why NestJS over bare Express, why Postgres over Mongo, whatever) — problem, options considered, decision, consequences.
+- **ADR practice (16.2):** write one real Architecture Decision Record for a choice you already made in the Master Project (why Spring Boot over a lighter framework, why Postgres over Mongo, whatever) — problem, options considered, decision, consequences.
 - **Post-mortem practice (16.2):** the next time something breaks in your own project (it will), write a real post-mortem — what happened, root cause, concrete prevention step — even though no one's making you.
 - **Code review practice (16.3):** find one open-source PR in a project you use and leave a genuinely useful review comment (a real question or a real correctness concern, not a nitpick) — this is free reps at a skill you can't practice alone.
 - **The 12-Factor audit (17.4):** run your Master Project against all 12 factors as a literal checklist — you will find at least one violation (config in code, or logs not going to stdout, are the two most common). Fix it.
@@ -331,16 +315,15 @@ The Master Project (full spec in `Master_Senior_Fullstack_Roadmap.md` and `Part_
 
 | Step | What | Which phase milestone this *is* |
 |---|---|---|
-| 1 | Core API — auth, JWT, basic CRUD + PostgreSQL | Phase 5A milestone |
+| 1 | Core API — auth, JWT, basic CRUD + PostgreSQL | Phase 5B milestone |
 | 2 | Frontend — React + TypeScript wired to the API | Phase 4 milestone |
 | 3 | Testing from the start | Phase 11 milestone (build the CI pipeline now, not later) |
 | 4 | Infrastructure — Docker Compose, then CI/CD | Phase 13 milestone |
-| 5 | Advanced backend — background jobs, WebSockets, Redis caching | Phase 5A quick wins + Phase 7 milestone + Phase 8 milestone |
+| 5 | Advanced backend — background jobs, WebSockets, Redis caching | Phase 5B quick wins + Phase 7 milestone + Phase 8 milestone |
 | 6 | Deploy somewhere real | Phase 13 milestone |
 | 7 | Monitoring | Phase 12 practice, lightweight per the trimmed Phase 13 scope |
 | 8 | AI feature — RAG search with pgvector | Stretch goal on top of the Phase 8 full-text-search milestone |
 | 9 | Billing — Stripe integration | New, no dedicated phase milestone above — build it fresh here |
 | 10 | Security pass | Phase 14 milestone, applied to the real app instead of a throwaway copy |
-| 11 | Track B rebuild — same domain in Spring Boot | Phase 5B milestone |
 
 **Done when (the real finish line):** a stranger could clone the repo, follow a README, get it running locally in under 15 minutes, and understand from the code alone — not from you explaining it — why the significant decisions were made the way they were.

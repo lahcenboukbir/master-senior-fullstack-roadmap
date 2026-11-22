@@ -1,7 +1,9 @@
 # Priority Map — Master / Know-Only / Skip-for-Now
 ### How to actually use this roadmap to become a senior fullstack web developer who deeply understands *why*, *how*, and *when* — not five careers stapled together
 
-> **Ground rule: nothing gets deleted.** Every phase and subsection across all six detail files stays exactly as written. This file is a lens you look at them through, not an edit to them. Its only job is to answer one question honestly, for every single subsection you already have: *is this a fundamental — the "why/how/when" underneath everything you build — or is it a genuinely advanced, specialist, or enterprise-scale concern you can pick up later when a real project calls for it?*
+> **Review log (2026-11-22):** every Part and Phase below was re-reviewed section by section. Net changes: 0.3 IDE Mastery deleted; Node/NestJS track deleted (Java is the only backend); 1.4 → Know Only; 10.4 and 12.2 → Master; 13.5 Kubernetes, 13.6 Terraform and the Phase 14 ecosystem block → Know Only. Everything else was confirmed as tagged.
+>
+> **Original ground rule: nothing gets deleted** (relaxed on 2026-11-22 — deletions are now allowed when you decide so explicitly, and everything stays recoverable from git history). Every phase and subsection across all six detail files stays exactly as written. This file is a lens you look at them through, not an edit to them. Its only job is to answer one question honestly, for every single subsection you already have: *is this a fundamental — the "why/how/when" underneath everything you build — or is it a genuinely advanced, specialist, or enterprise-scale concern you can pick up later when a real project calls for it?*
 >
 > **This map has no deadline behind it.** You're not optimizing for fastest-employable or trimming hours off a schedule — you're optimizing for actually understanding the machine, the language, the data structures, and the systems you work with, not just calling the right library function. That changes the tiering: **fundamentals and core mechanics default to Master**, even the ones that don't show up in daily ticket work. What gets deprioritized is genuinely advanced, niche, or enterprise/platform-team territory (Kubernetes, Terraform, distributed consensus algorithms, DDD strategic design, FinOps, chaos engineering) — not "how a CPU works" or "how TCP actually behaves," which are exactly the kind of fundamentals that turn a coder into an engineer.
 >
@@ -20,7 +22,7 @@
 |---|---|---|
 | 0.1 Linux as Daily Driver | 🎯 MASTER | Cheap, foundational, you'll live in a terminal regardless of specialization |
 | 0.2 Terminal Mastery | 🎯 MASTER | Daily-use skill, high leverage relative to effort |
-| 0.3 IDE Mastery | 🎯 MASTER | Where you spend 80% of your hours |
+| 0.3 IDE Mastery | 🗑️ REMOVED | Deleted from the roadmap on 2026-11-22 — you chose to learn your editor on the job; numbering of 0.4–0.9 kept stable |
 | 0.4 Chrome DevTools Mastery | 🎯 MASTER | Non-negotiable for fullstack web debugging |
 | 0.5 Git Internals & Discipline | 🎯 MASTER | Every job, every day |
 | 0.6 HTML Semantics | 🎯 MASTER | Core web fundamentals |
@@ -28,7 +30,7 @@
 | 0.8 How HTTP Really Works | 🎯 MASTER | Everything you build sits on this |
 | 0.9 Environment & Habits Checklist | 🎯 MASTER | Free — just habits |
 
-**All of Part 0 stays Master.** It's small and it's the floor everything else stands on.
+**Part 0 reviewed section by section on 2026-11-22: everything stays Master except 0.3 IDE Mastery, which was deleted.** It's small and it's the floor everything else stands on.
 
 ---
 
@@ -41,7 +43,7 @@
 | 1.1 How a CPU Works | 🎯 MASTER | This is "how a computer actually works" — fetch-decode-execute, binary/hex, IEEE 754 — exactly the kind of fundamental that explains WHY code behaves the way it does |
 | 1.2 Memory Hierarchy | 🎯 MASTER | Directly explains real performance bugs you'll actually debug |
 | 1.3 Operating Systems Fundamentals | 🎯 MASTER | Concurrency, GC, deadlocks — daily-relevant for Java backend work |
-| 1.4 Networking Deep Dive | 🎯 MASTER | HTTP/DNS/TLS/CORS basics are covered at Master in 0.8 already — this is the layer underneath: TCP handshake, congestion control, DNS resolution, epoll. Core "how the internet actually works," not infra-specialist trivia |
+| 1.4 Networking Deep Dive | 👀 KNOW ONLY | HTTP/DNS/TLS/CORS basics are covered at Master in 0.8 already — this is the layer underneath: TCP handshake, congestion control, DNS resolution, epoll. Core "how the internet actually works," not infra-specialist trivia |
 | 1.5 How the Browser Works | 🎯 MASTER | Explains frontend performance work you'll actually do |
 | 1.6 Compilers, Interpreters & the JVM (general mechanics) | 🎯 MASTER | Lexing/parsing/AST/JIT is how your source code becomes execution — a real fundamental. The JVM-specific flags/tuning stay lighter-touch, but the general mechanics are core |
 
@@ -85,36 +87,22 @@
 
 **All of 4.1–4.9 stays 🎯 MASTER.** This is literally half of "fullstack." No cuts here.
 
-### Phase 5 — Backend Engineering (Two Tracks: JS Now, Java Later)
+### Phase 5 — Backend Engineering (Java + Spring Boot — the single backend language)
 
-> **Sequencing decision, not a scope cut:** the plan is full-stack JS (React + Node/NestJS) first — this covers freelance work and lets you ship real projects fastest with one language end to end — then Java + Spring Boot once JS is solid, aimed specifically at the professional/enterprise job market. Track B isn't neglected, it's deliberately queued. NestJS was chosen over bare Express as the primary JS framework specifically because its architecture (DI, modules, decorators, guards/pipes/interceptors) pre-trains the same mental model Spring Boot uses — Track A is a rehearsal for Track B, not a detour from it.
+> **Decision (2026-11-22): one backend language — Java.** Depth in one ecosystem beats breadth across three; TypeScript is kept for the frontend only. Java fundamentals are studied *together with* Phase 2 (DSA, practiced in Java) and Phase 1 (CPU/memory/OS/JVM); Spring Boot is studied *with* Phase 8 (databases). The earlier Node.js/NestJS track was **deleted** on 2026-11-22. Section IDs stay stable: the sections are still numbered 5B (there is no 5A any more).
 
-**Track A — Node.js + NestJS (learn this first)**
-
-| Section | Tier | Why |
-|---|---|---|
-| 5A.1 Node.js Fundamentals (Deep) | 🎯 MASTER | Your primary runtime, right now |
-| 5A.2 Express Fundamentals | 🎯 MASTER | Brief but necessary — understand what Nest abstracts before trusting the abstraction |
-| 5A.3 NestJS Core Concepts | 🎯 MASTER | Your primary framework, right now — and your rehearsal for Spring Boot's DI/annotation model |
-| 5A.4 Prisma & the Data Layer | 🎯 MASTER | You'll write this every day |
-| 5A.5 Auth & Security in NestJS | 🎯 MASTER | Every real app needs auth |
-| 5A.6 NestJS Production Features | 🎯 MASTER | Config, logging, health checks — real deployment basics |
-| 5A.7 Async & Background Jobs (BullMQ) | 🎯 MASTER | Common real-world need |
-| 5A.8 Testing NestJS | 🎯 MASTER | Non-negotiable |
-| 5A.9 Backend Production Concerns | 👀 KNOW ONLY | Webhooks/payments/multi-tenancy/search — high-value but situational; go deep the day a real project needs one specifically |
-
-**Track B — Java + Spring Boot (deferred until after the Track A capstone ships)**
+**Java + Spring Boot (the only backend track)**
 
 | Section | Tier | Why |
 |---|---|---|
-| 5B.1 Java Fundamentals (Deep) | ⏸️ SKIP FOR NOW | Deferred by design — this is the professional-job-market track, tackled after JS is solid, not neglected |
-| 5B.2 Spring Boot Core Concepts | ⏸️ SKIP FOR NOW | Same — revisit once the NestJS capstone is done |
-| 5B.3 Spring Data JPA | ⏸️ SKIP FOR NOW | Same |
-| 5B.4 Spring Security | ⏸️ SKIP FOR NOW | Same |
-| 5B.5 Spring Boot Production Features | ⏸️ SKIP FOR NOW | Same |
-| 5B.6 Async & Background Jobs | ⏸️ SKIP FOR NOW | Same |
-| 5B.7 Testing Spring Boot | ⏸️ SKIP FOR NOW | Same |
-| 5B.8 Backend Production Concerns | ⏸️ SKIP FOR NOW | Same — was already Know Only even at Master-tier timing, now simply later |
+| 5B.1 Java Fundamentals (Deep) | 🎯 MASTER | Your only backend language — OOP, generics, collections internals, concurrency, modern Java 8–21. Also the vehicle for all DSA practice |
+| 5B.2 Spring Boot Core Concepts | 🎯 MASTER | DI/IoC, Spring Web, validation, DTOs, error handling — the framework you will use daily |
+| 5B.3 Spring Data JPA | 🎯 MASTER | Study alongside Phase 8 so you understand what the database is doing under the ORM; N+1, transactions, Flyway |
+| 5B.4 Spring Security | 🎯 MASTER | Every real app needs auth; pairs with Phase 14 |
+| 5B.5 Spring Boot Production Features | 🎯 MASTER | Profiles, Actuator, Micrometer, structured logging, graceful shutdown |
+| 5B.6 Async & Background Jobs | 🎯 MASTER | @Async, @Scheduled, RabbitMQ + Spring AMQP, idempotency |
+| 5B.7 Testing Spring Boot | 🎯 MASTER | JUnit 5, Mockito, MockMvc, Testcontainers — non-negotiable |
+| 5B.8 Backend Production Concerns | 👀 KNOW ONLY | Webhooks/payments/multi-tenancy/search — high-value but situational; go deep the day a real project needs one specifically |
 
 ### Phase 6 — Mobile Engineering (React Native)
 
@@ -163,7 +151,7 @@
 | 10.1 The Foundation Questions | 🎯 MASTER | Cheap mental model, useful in every design conversation |
 | 10.2 Scalability & Availability | 🎯 MASTER | Conceptual fluency expected of any senior engineer |
 | 10.3 Consistency Models | 🎯 MASTER | Directly relevant to real data decisions you'll make |
-| 10.4 Load Balancing | 👀 KNOW ONLY | Recognize the concepts, rarely configure this yourself |
+| 10.4 Load Balancing | 🎯 MASTER | Promoted on 2026-11-22 — worth real depth even if you rarely configure it yourself |
 | 10.5 Caching Architecture | 🎯 MASTER | Extremely practical, directly usable |
 | 10.6 Asynchronous Communication | 👀 KNOW ONLY | Practical RabbitMQ side already Mastered in 5.6 — this is the deeper theory layer |
 | 10.7 Microservices vs Monolith | 🎯 MASTER | You'll be part of this decision even as an IC |
@@ -188,7 +176,7 @@
 |---|---|---|
 | 12.0 The Golden Rule | 🎯 MASTER | Cheap, universal mindset |
 | 12.1 Database Performance | 🎯 MASTER | Reinforces Phase 8 — the highest-value performance work you'll do |
-| 12.2 Java / Spring Boot Performance | 👀 KNOW ONLY | JVM/GC tuning depth is specialist territory until you hit a real wall |
+| 12.2 Java / Spring Boot Performance | 🎯 MASTER | Promoted on 2026-11-22 — Java is your only backend, so JVM/GC/virtual-thread depth is worth drilling |
 | 12.3 Frontend Performance | 🎯 MASTER | Reinforces Phase 4 |
 | 12.4 Caching & Infrastructure Performance | 👀 KNOW ONLY | Conceptual fluency is enough |
 | 12.5 Load Testing | 👀 KNOW ONLY | Same as 11.5 |
@@ -201,8 +189,8 @@
 | 13.2 Linux & Bash for Operations | 👀 KNOW ONLY | Basics already Mastered in Part 0; `strace`/eBPF-level tooling is ops-specialist |
 | 13.3 Containerization: Docker | 🎯 MASTER | Genuinely essential even for a non-DevOps fullstack dev — local dev + understanding your own deploy |
 | 13.4 CI/CD: GitHub Actions | 🎯 MASTER | A basic lint→test→build→deploy pipeline is table stakes for a senior dev |
-| 13.5 Container Orchestration: Kubernetes | ⏸️ SKIP FOR NOW | Platform/DevOps-engineer territory |
-| 13.6 Infrastructure as Code: Terraform | ⏸️ SKIP FOR NOW | Same |
+| 13.5 Container Orchestration: Kubernetes | 👀 KNOW ONLY | Promoted from Skip on 2026-11-22 — read once, recognize it; not drilled, not required for the Master Project |
+| 13.6 Infrastructure as Code: Terraform | 👀 KNOW ONLY | Promoted from Skip on 2026-11-22 — read once, recognize it; the Master Project still uses a simple deploy |
 | 13.7 AWS Core Services | 👀 KNOW ONLY | Know what EC2/S3/RDS *are* conceptually; deep IAM/VPC/ECS design is not your job |
 | 13.8 Web Servers & Proxies | 👀 KNOW ONLY | Recognize what Nginx is doing, rarely configure it yourself |
 | 13.9 Monitoring & Observability | 👀 KNOW ONLY | Actuator itself is already Mastered in 5.5 — building the Prometheus/Grafana stack from scratch is not |
@@ -222,7 +210,7 @@
 | 14.7 Cryptography Fundamentals | 🎯 MASTER | You'll use libraries, not implement crypto yourself — but understanding WHY Argon2 beats MD5, WHY symmetric vs asymmetric keys work the way they do, is the fundamental this roadmap is about, not just library trivia |
 | 14.8 Secrets Management | 🎯 MASTER | Practical, needed for any real deployment |
 | 14.9 API Security | 🎯 MASTER | Non-negotiable |
-| Ecosystem Awareness (Zero Trust/WAF/SIEM/pentest/compliance) | ⏸️ SKIP FOR NOW | Genuine security-specialist territory |
+| Ecosystem Awareness (Zero Trust/WAF/SIEM/pentest/compliance) | 👀 KNOW ONLY | Promoted from Skip on 2026-11-22 — one read-through for the vocabulary |
 
 ---
 
@@ -257,7 +245,7 @@ Part VI isn't phase-tagged the same way (it's reference/synthesis material), so 
 
 ### Trimmed Master Project Scope
 Keep: auth (JWT + refresh + Argon2 + MFA), API key management, Redis rate limiting, RabbitMQ background jobs, WebSocket notifications, pgvector RAG search, Grafana dashboard (basic), Stripe billing, row-level-security multi-tenancy, full test suite, CI pipeline (GitHub Actions), Docker Compose locally, and a **simple deploy** — a single EC2 instance or a PaaS (Railway/Render/Fly.io) is genuinely fine here.
-Drop from the required path: the React Native mobile app (Phase 6, skipped), the full Terraform-provisioned multi-service AWS stack (Phase 13.6, skipped), Kubernetes (Phase 13.5, skipped).
+Drop from the required path: the React Native mobile app (Phase 6, skipped), the full Terraform-provisioned multi-service AWS stack (Phase 13.6, Know Only — read, not built), Kubernetes (Phase 13.5, Know Only — read, not built).
 
 ---
 

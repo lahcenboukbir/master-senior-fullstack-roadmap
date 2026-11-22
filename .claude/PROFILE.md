@@ -10,9 +10,13 @@ Become a **senior fullstack developer** — not just someone who writes code tha
 
 Explicitly **not** just "a coder" — wants full understanding from scratch: computer fundamentals, language internals, data structures, databases, architecture, security, and the senior mindset (tradeoffs, communication, problem-solving), not only framework APIs.
 
-## Stack Sequencing (deliberate, not accidental)
-1. **JS fullstack first** (React, Next.js, Node.js, Express, NestJS, JavaScript, TypeScript) — used for freelancing, personal projects, and startup work. This is the near-term, hands-on track.
-2. **Java + Spring Boot last** — deliberately deferred to the end, specifically to target larger/enterprise job-market opportunities once the JS track is solid.
+## Stack Decision (updated 2026-11-22)
+**One backend language: Java + Spring Boot.** Depth in a single ecosystem beats breadth across several.
+- **Backend:** Java 21 + Spring Boot only. Learned together with DSA (practiced in Java), CS fundamentals (CPU/memory/OS/JVM), and PostgreSQL/databases.
+- **Frontend:** React, Next.js, TypeScript (already partly known — mostly consolidation).
+- **Deleted (2026-11-22):** the Node.js/Express/NestJS/Prisma/BullMQ track. Previously the plan was JS first, Java last; that was reversed and then the Node track was removed entirely (recoverable from git history).
+- **Existing PHP/Laravel knowledge:** fine to keep using for current work, but not a learning goal.
+- **Algorithms:** keep Phase 2 as-is (Tries/Union-Find/niche stay skipped); time-boxed, pattern-focused, not endless grinding. CS/system-design fundamentals matter at least as much as hard algorithm puzzles for a backend senior.
 
 ## Learning Constraints & Preferences
 - **No deadline.** Studying ~2 hours/day, indefinitely — optimize for depth and real understanding, not speed-to-employable.

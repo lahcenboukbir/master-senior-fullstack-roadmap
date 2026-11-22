@@ -13,7 +13,7 @@
 
 - 🎯 [0.1 — Your Operating Environment (Linux as Daily Driver)](#01--your-operating-environment-linux-as-daily-driver)
 - 🎯 [0.2 — Terminal Mastery](#02--terminal-mastery)
-- 🎯 [0.3 — IDE Mastery](#03--ide-mastery)
+- *(0.3 — IDE Mastery was removed on 2026-11-22; numbering of 0.4–0.9 is kept stable so cross-references still work.)*
 - 🎯 [0.4 — Chrome DevTools Mastery](#04--chrome-devtools-mastery)
 - 🎯 [0.5 — Git Internals & Discipline](#05--git-internals--discipline)
 - 🎯 [0.6 — HTML Semantics](#06--html-semantics)
@@ -92,38 +92,6 @@ Whichever you pick, the rule is the same: **do your daily development work, git,
 - How do you redirect both stdout and stderr into the same file?
 - What's the difference between `>` and `>>`?
 - Why would a `curl` request work in verbose mode but fail silently without `-v`?
-
----
-
-## 0.3 — IDE Mastery
-
-**Tier: 🎯 Master**
-
-> Your editor is where you'll spend 80% of your working hours. Mouse-dependency here is a permanent tax on your speed — pay it down once.
-
-### What to Learn (IntelliJ IDEA — primary, for Java/Spring work)
-- **Navigation without the mouse** — Go to Class/File/Symbol (`Ctrl+N`/`Ctrl+Shift+N`), Go to Declaration, Find Usages, Recent Files, Navigate Back/Forward.
-- **Editing** — multi-cursor editing, column selection, Extend/Shrink Selection, Duplicate Line, Move Line Up/Down, Surround With.
-- **Refactoring built-ins** — Rename (`Shift+F6`), Extract Method/Variable/Constant/Field, Inline, Change Signature, Safe Delete — these are the same refactorings from Phase 3 of the master roadmap, except IntelliJ automates the mechanical part so you can focus on the design decision.
-- **Live Templates** — typing `psvm`, `sout`, `iter` and expanding boilerplate instantly; learn to create your own.
-- **Debugger** — breakpoints, conditional breakpoints, "Evaluate Expression" mid-debug, watches, step into/over/out, the difference between "Force Step Into" and regular step-into (library vs your code).
-- **Run configurations** — understanding what actually gets executed (main class, VM options, environment variables, working directory) instead of just clicking the green triangle blindly.
-- **Version control panel** — viewing diffs, staging hunks, resolving conflicts, browsing history — all without leaving the IDE, while still understanding what Git commands this maps to underneath (see 0.5).
-- **Inspections** — turn on all warnings, understand each one before disabling it, use "Analyze → Inspect Code" on a whole project to find dead code and smells.
-
-### If your primary editor is VS Code instead (frontend/TypeScript work)
-The same categories apply — Command Palette (`Ctrl+Shift+P`) mastery, multi-cursor, Go to Definition/References, integrated debugger with `launch.json`, built-in Git panel, and extensions that matter for this stack: ESLint, Prettier, Tailwind CSS IntelliSense, Error Lens.
-
-### Practice
-1. For one full day, physically disconnect or ignore your mouse while coding. Force yourself to find the keyboard shortcut instead of clicking.
-2. Debug a real bug using only breakpoints, watches, and "Evaluate Expression" — no `System.out.println`/`console.log` statements.
-3. Set up 3 custom Live Templates (IntelliJ) or snippets (VS Code) for boilerplate you personally write often.
-4. Run "Inspect Code" (or ESLint with all rules on) across an existing project and fix 10 real warnings.
-
-### Answer This
-- What is the actual difference between "Step Into" and "Step Into (Force)" in a debugger?
-- Why is a conditional breakpoint often better than a manually-placed `if` + print statement?
-- What does "Safe Delete" actually check before letting you delete a method?
 
 ---
 
@@ -317,7 +285,6 @@ The same categories apply — Command Palette (`Ctrl+Shift+P`) mastery, multi-cu
 ### Environment Checklist
 - [ ] Daily-driving Linux (native, WSL2, or VM) for development work.
 - [ ] A dotfiles repo tracking your shell config, Git config, and editor settings.
-- [ ] IDE/editor configured with your own Live Templates/snippets, all inspections/lint rules enabled.
 - [ ] `EXPLAIN ANALYZE` (or equivalent) is a reflex, not an afterthought, on every query you write (this becomes fully relevant in Phase 8, but the habit starts now).
 - [ ] A learning journal — even two lines per session — tracking what you learned and what confused you.
 
@@ -335,6 +302,6 @@ The same categories apply — Command Palette (`Ctrl+Shift+P`) mastery, multi-cu
 
 > One project that forces you to touch every section above.
 
-> **PROJECT — "Zero-to-Running":** Starting from a bare Linux install (WSL2, VM, or dual boot), write a single provisioning script that installs your entire toolchain (Git, a JDK, Node, Docker, your editor's CLI tools). Use it to clone a small existing project of yours. Configure Git properly (your name/email, a useful `.gitignore`, aliases you'll actually use). Open the project in your IDE and navigate it for 15 minutes using **only the keyboard**. Rebuild one real page's markup with correct semantic HTML and validate it. Rebuild its layout in plain CSS, no framework, and intentionally trigger and then fix a stacking-context bug. Serve it locally and inspect the raw request/response with `curl -v`, then in the Network and Performance tabs of Chrome DevTools. Make a deliberate mess of Git history on a feature branch, then clean it up with interactive rebase before treating it as "done."
+> **PROJECT — "Zero-to-Running":** Starting from a bare Linux install (WSL2, VM, or dual boot), write a single provisioning script that installs your entire toolchain (Git, a JDK, Node, Docker, your editor's CLI tools). Use it to clone a small existing project of yours. Configure Git properly (your name/email, a useful `.gitignore`, aliases you'll actually use). Rebuild one real page's markup with correct semantic HTML and validate it. Rebuild its layout in plain CSS, no framework, and intentionally trigger and then fix a stacking-context bug. Serve it locally and inspect the raw request/response with `curl -v`, then in the Network and Performance tabs of Chrome DevTools. Make a deliberate mess of Git history on a feature branch, then clean it up with interactive rebase before treating it as "done."
 >
 > If you can do all of that comfortably, Phase 0 is complete — move on to **Phase 1 — Computer Science Fundamentals** in `Master_Senior_Fullstack_Roadmap.md`.

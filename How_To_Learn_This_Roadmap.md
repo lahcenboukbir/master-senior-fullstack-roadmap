@@ -41,7 +41,7 @@ Re-reading a section feels like progress because it's fluent and easy — you re
 Anything you learn once and never revisit fades — this is not a character flaw, it's how memory works (the "forgetting curve"). The fix isn't "learn it more thoroughly the first time," it's **deliberately revisiting it at increasing intervals**: a day later, a week later, a month later. For genuinely foundational facts (Big-O complexities, HTTP status code meanings, isolation-level guarantees, OWASP Top 10 items), a spaced-repetition tool (Section 7) turns this from "I have to remember to review" into a five-minute daily habit that runs almost on autopilot.
 
 ### Interleaving, Not Blocking
-It's tempting to spend three straight weeks doing nothing but Data Structures & Algorithms problems, then three straight weeks of nothing but NestJS. This feels efficient but actually produces weaker, more brittle learning than **interleaving** — mixing problem types and topics within the same week. Interleaving forces you to actively identify *which* concept applies to a given situation (a skill you'll need in real work, where nobody labels the problem "this is a DP question"), instead of pattern-matching to whatever you happened to study yesterday.
+It's tempting to spend three straight weeks doing nothing but Data Structures & Algorithms problems, then three straight weeks of nothing but Spring Boot. This feels efficient but actually produces weaker, more brittle learning than **interleaving** — mixing problem types and topics within the same week. Interleaving forces you to actively identify *which* concept applies to a given situation (a skill you'll need in real work, where nobody labels the problem "this is a DP question"), instead of pattern-matching to whatever you happened to study yesterday.
 
 **Practical version for this roadmap:** don't do all of Phase 2 (DSA) in isolation for a month, then move to Phase 4. Instead, run DSA practice as an ongoing *background thread* (e.g., 20–30 minutes, most days) while your main focus block each week moves through Parts II–IV in sequence. The DSA thread never fully stops until it's genuinely internalized — it just runs alongside everything else.
 
@@ -188,7 +188,7 @@ Every few weeks, spend five minutes writing down why you're actually doing this 
 
 | Day | Focus | Notes |
 |---|---|---|
-| Mon | Main roadmap block (e.g., Part II — NestJS now, Spring Boot once Track B begins) | 90 min: 10 min review of last week's "Answer This" questions, then new material + its Practice exercise |
+| Mon | Main roadmap block (e.g., Part II — Java fundamentals alongside DSA, then Spring Boot alongside databases) | 90 min: 10 min review of last week's "Answer This" questions, then new material + its Practice exercise |
 | Tue | DSA background thread + main roadmap block | 20–30 min DSA warm-up, then continue Monday's topic or move to the next subsection |
 | Wed | Fun-track project (Strategy 2) | Zero pressure, zero "should I be doing the roadmap instead" guilt — this session is protected |
 | Thu | Main roadmap block, different "kind" of work (Strategy 3) | If Monday/Tuesday were building-heavy, make this a design/think session (e.g., a Part IV system-design write-up) |

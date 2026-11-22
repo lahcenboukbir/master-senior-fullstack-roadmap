@@ -15,7 +15,7 @@
 - 🎯 [10.1 — The Foundation Questions](#101--the-foundation-questions)
 - 🎯 [10.2 — Scalability & Availability](#102--scalability--availability)
 - 🎯 [10.3 — Consistency Models](#103--consistency-models)
-- 👀 [10.4 — Load Balancing](#104--load-balancing)
+- 🎯 [10.4 — Load Balancing](#104--load-balancing)
 - 🎯 [10.5 — Caching Architecture](#105--caching-architecture)
 - 👀 [10.6 — Asynchronous Communication](#106--asynchronous-communication)
 - 🎯 [10.7 — Microservices vs Monolith](#107--microservices-vs-monolith)
@@ -36,7 +36,7 @@
 **Phase 12 — Performance Engineering**
 - 🎯 [12.0 — The Golden Rule](#120--the-golden-rule)
 - 🎯 [12.1 — Database Performance](#121--database-performance)
-- 👀 [12.2 — Backend Performance (Track A: Node.js/NestJS now, Track B: Java/Spring Boot later)](#122--backend-performance-track-a-nodejsnestjs-now-track-b-javaspring-boot-later)
+- 🎯 [12.2 — Backend Performance (Java/Spring Boot)](#122--backend-performance-javaspring-boot)
 - 🎯 [12.3 — Frontend Performance](#123--frontend-performance)
 - 👀 [12.4 — Caching & Infrastructure Performance](#124--caching--infrastructure-performance)
 - 👀 [12.5 — Load Testing](#125--load-testing)
@@ -47,8 +47,8 @@
 - 👀 [13.2 — Linux & Bash for Operations](#132--linux--bash-for-operations)
 - 🎯 [13.3 — Containerization: Docker](#133--containerization-docker)
 - 🎯 [13.4 — CI/CD: GitHub Actions](#134--cicd-github-actions)
-- ⏸️ [13.5 — Container Orchestration: Kubernetes](#135--container-orchestration-kubernetes)
-- ⏸️ [13.6 — Infrastructure as Code: Terraform](#136--infrastructure-as-code-terraform)
+- 👀 [13.5 — Container Orchestration: Kubernetes](#135--container-orchestration-kubernetes)
+- 👀 [13.6 — Infrastructure as Code: Terraform](#136--infrastructure-as-code-terraform)
 - 👀 [13.7 — AWS Core Services](#137--aws-core-services)
 - 👀 [13.8 — Web Servers & Proxies](#138--web-servers--proxies)
 - 👀 [13.9 — Monitoring & Observability](#139--monitoring--observability)
@@ -141,7 +141,7 @@
 
 ## 10.4 — Load Balancing
 
-**Tier: 👀 Know Only**
+**Tier: 🎯 Master**
 
 ### What to Learn
 - **Algorithms** — round robin (simplest, ignores current load per server), least connections (routes to the currently-least-busy server), IP hash (the same client consistently reaches the same server — useful when session affinity is needed), **consistent hashing** (the specific technique that matters most for distributed caches/databases: when a node is added or removed, only roughly 1/N of keys need to be remapped, instead of nearly all of them as with naive modulo-based hashing).
@@ -183,13 +183,13 @@
 
 ### What to Learn
 - **Message queues vs direct HTTP calls** — a queue decouples the producer from the consumer's availability; the consumer can be down entirely and the message simply waits, whereas a direct HTTP call fails immediately if the callee is unreachable.
-- **At-least-once vs exactly-once delivery** — at-least-once (a message may be delivered more than once — consumers must be idempotent, Phase 5A.7 now / 5B.6 later) is the realistic, commonly-implemented guarantee; true exactly-once delivery across a real distributed system is extraordinarily hard to guarantee end-to-end, and most systems that claim it are really doing at-least-once delivery plus idempotent processing, which produces an *effectively* exactly-once outcome without the underlying delivery guarantee actually being exactly-once.
+- **At-least-once vs exactly-once delivery** — at-least-once (a message may be delivered more than once — consumers must be idempotent, Phase 5B.6) is the realistic, commonly-implemented guarantee; true exactly-once delivery across a real distributed system is extraordinarily hard to guarantee end-to-end, and most systems that claim it are really doing at-least-once delivery plus idempotent processing, which produces an *effectively* exactly-once outcome without the underlying delivery guarantee actually being exactly-once.
 - **Backpressure** — what happens when consumers process slower than producers produce; the queue fills up, and the system needs an explicit strategy (slow the producer, drop low-priority messages, scale out consumers) rather than silently growing an unbounded queue until something else breaks.
 - **Dead letter queues** — messages that fail processing repeatedly get routed aside for inspection and manual/automated retry, instead of blocking the whole queue or being silently lost.
 - **Event-driven architecture** — services communicate by emitting/reacting to events instead of direct calls; know the real distinction between **event notification** (a lightweight "something happened, go find out more if you care" signal) and **event-carried state transfer** (the event itself carries the full data needed, so subscribers don't need to call back to the source) — this distinction changes coupling and failure characteristics significantly.
 
 ### Practice
-1. Design a message handler that is genuinely idempotent (using an idempotency key, Phase 5A.7/5A.9 now, 5B.6/5B.8 later) and then deliberately deliver the same message to it twice, confirming the end state is correct either time.
+1. Design a message handler that is genuinely idempotent (using an idempotency key, Phase 5B.6/5B.8) and then deliberately deliver the same message to it twice, confirming the end state is correct either time.
 2. Design (on paper) what should happen to a producer, a queue, and a consumer under sustained backpressure — what's your actual strategy, and what would happen without one?
 
 ### Answer This
@@ -238,7 +238,7 @@
 - **2PC (Two-Phase Commit)** — a coordinator asks all participants to prepare, then commits only if all agreed; the real weakness is that a coordinator failure mid-protocol can leave participants blocked, holding locks, indefinitely.
 - **Saga pattern** (Phase 3.3) — a sequence of local transactions with compensating actions, avoiding 2PC's blocking-coordinator weakness by trading strict atomicity for eventual, compensatable consistency.
 - **TCC (Try-Confirm-Cancel)** — a variant distributed-transaction pattern (reserve/try, then confirm or cancel) — know it exists as a third option alongside 2PC and Saga, each with different practical tradeoffs.
-- **Idempotency** and **idempotency keys** (Phase 5A.9/5B.8, 7.2) as the practical foundation that makes "at-least-once delivery" tolerable.
+- **Idempotency** and **idempotency keys** (Phase 5B.8, 7.2) as the practical foundation that makes "at-least-once delivery" tolerable.
 - **Distributed locking with Redis** (`SET key value NX EX 30` — atomic set-if-not-exists with an expiry, used as a simple distributed lock) — know its real limitations (clock drift, a process holding the lock past the TTL due to a pause) rather than treating it as a perfect mutex.
 - **Circuit breaker** (Phase 3.3) and **retry with exponential backoff + jitter** — retrying immediately and repeatedly against a struggling service makes the problem worse (a "retry storm"); backoff with jitter spreads retries out in time so many clients don't all hammer the recovering service at the exact same moment.
 - **Bulkhead pattern** — isolate different workloads into separate resource pools (e.g., separate thread pools per downstream dependency) so one slow/failing dependency can't exhaust resources needed by unrelated work.
@@ -349,8 +349,7 @@ For each system below, practice working through: functional requirements, a roug
 ### What to Learn
 - **Arrange-Act-Assert** — structure every test the same way: set up state, perform the action, assert the outcome — consistent structure makes tests fast to read and review.
 - **Test doubles** — **dummy** (a placeholder never actually used, just satisfies a parameter list), **stub** (returns a hardcoded response for a specific call), **fake** (a real, working implementation not suitable for production — e.g., an in-memory repository), **mock** (verifies that specific interactions/calls actually happened), **spy** (wraps a real implementation while also recording calls made to it) — these are genuinely different tools solving different verification needs, not interchangeable jargon for "test double."
-- **Jest** (near-term, Track A) — `jest.fn()`/`jest.spyOn()` for setup, `mockReturnValue`/`mockRejectedValue` for stubbing behavior, `expect(...).toHaveBeenCalledWith(...)` for inspecting exactly what arguments a mocked dependency was actually called with, `describe`/`it`/`beforeEach` for organizing and isolating tests.
-- **Mockito + JUnit 5** (later, Track B) — `@Mock`/`@InjectMocks` for setup, `when(...).thenReturn(...)`/`thenThrow(...)` for stubbing behavior, `ArgumentCaptor` for inspecting exactly what arguments a mocked dependency was actually called with (the same role `toHaveBeenCalledWith` plays in Jest), `verify(...)` for confirming an interaction happened; `@Test`, `@ParameterizedTest`, `@Nested` for organizing tests. The underlying testing concepts (AAA, test doubles, TDD) are identical across both — only the API surface differs.
+- **Mockito + JUnit 5** (your active stack) — `@Mock`/`@InjectMocks` for setup, `when(...).thenReturn(...)`/`thenThrow(...)` for stubbing behavior, `ArgumentCaptor` for inspecting exactly what arguments a mocked dependency was actually called with, `verify(...)` for confirming an interaction happened; `@Test`, `@ParameterizedTest`, `@Nested` for organizing tests. The underlying testing concepts (AAA, test doubles, TDD) are identical across ecosystems — only the API surface differs.
 - **Naming convention** — `should_returnUser_when_validIdProvided` (or an equivalent descriptive style) makes a test failure immediately informative from the test name alone, before even reading the assertion.
 
 ### Anti-patterns
@@ -360,7 +359,7 @@ For each system below, practice working through: functional requirements, a roug
 
 ### Practice
 1. Write the same unit test scenario twice: once testing behavior (observable output for a given input) and once testing implementation (asserting a specific private method was called) — then refactor the implementation without changing its behavior, and confirm the behavior-based test still passes while the implementation-based test breaks, even though nothing actually went wrong.
-2. Use `expect(...).toHaveBeenCalledWith(...)` (Jest, now) or `ArgumentCaptor` (Mockito, later) to assert not just that a mocked email service was called, but that it was called with the exact expected recipient and subject.
+2. Use `ArgumentCaptor` (Mockito) to assert not just that a mocked email service was called, but that it was called with the exact expected recipient and subject.
 3. Deliberately create two tests that share mutable state and only pass in a specific run order; then fix the fragility by properly isolating state per test.
 
 ### Answer This
@@ -376,14 +375,14 @@ For each system below, practice working through: functional requirements, a roug
 
 ### What to Learn
 - **Integration tests** verify that real components work together correctly — the database layer actually talking to a real database, not a mock of one.
-- **Testcontainers** (Phase 5A.8 now, 5B.7 later) — spin up real PostgreSQL/Redis in Docker specifically for the test run, then tear down — avoiding both the "mocked away entirely" gap and the "shared, stateful test database" maintenance burden.
+- **Testcontainers** (Phase 5B.7) — spin up real PostgreSQL/Redis in Docker specifically for the test run, then tear down — avoiding both the "mocked away entirely" gap and the "shared, stateful test database" maintenance burden.
 - **E2E tests** simulate a real user driving the entire real system end to end. **Playwright** — `page.goto`, `page.click`, `page.fill`, `expect(locator).toBeVisible()` — browser automation with built-in auto-waiting that reduces (but doesn't eliminate) flakiness compared to older tools.
 - **Page Object Model** — encapsulate a page's selectors and interactions behind a class, so a UI change requires updating one place instead of every test that touches that page.
 - **Scope discipline** — E2E tests should cover critical user journeys only (registration, login, checkout) — trying to E2E-test everything reproduces the inverted-pyramid problem from 11.1.
 - **Flaky tests are the #1 enemy of E2E suites** — caused by timing assumptions, shared state between tests, or genuine environment instability; fixed with explicit waits for actual conditions (not arbitrary sleeps) and full test isolation (each test creates and cleans up its own data).
 
 ### Practice
-1. Write one integration test against a real PostgreSQL instance via Testcontainers, deliberately using a Postgres-specific feature that an in-memory substitute would behave differently on (reusing the exercise from Phase 5A.8/8.5 now, 5B.7/8.5 later, in a testing-focused context).
+1. Write one integration test against a real PostgreSQL instance via Testcontainers, deliberately using a Postgres-specific feature that an in-memory substitute would behave differently on (reusing the exercise from Phase 5B.7/8.5, in a testing-focused context).
 2. Write one E2E test for a genuinely critical path (e.g., login) using Playwright and the Page Object Model, then deliberately introduce a flaky-timing bug (assert immediately after an action without waiting for a real condition) and observe intermittent failures; fix it with a proper explicit wait.
 
 ### Answer This
@@ -500,7 +499,7 @@ Never optimize without data. Never guess.
 
 ### What to Learn
 - `EXPLAIN ANALYZE` (Phase 8.2) — read every node's `cost`, `actual rows`, and `actual time`, and make this a reflex on every non-trivial query, not a last resort.
-- **N+1 detection** — enable query logging in development (Prisma's query log now, Hibernate SQL logging later) and literally count queries fired per request; don't rely on assumption alone (Phase 5A.4/5B.3, 8.4).
+- **N+1 detection** — enable query logging in development (Hibernate SQL logging) and literally count queries fired per request; don't rely on assumption alone (Phase 5B.3, 8.4).
 - **Connection pool sizing** — the rough heuristic `(cores × 2) + effective spindle count`, and **HikariCP** tuning (`maximumPoolSize`, `connectionTimeout`, `leakDetectionThreshold`) — a pool sized too large can *hurt* throughput by causing excessive context switching and lock contention on the database side, which is counterintuitive if you assume "more connections = more parallelism" without limit.
 - **Slow query logging** (`log_min_duration_statement` in Postgres) — surface genuinely slow queries automatically instead of relying on someone noticing a page feels sluggish.
 - **Prepared statements** — prevent SQL injection (Phase 14) *and* enable query plan caching, a genuine two-for-one benefit.
@@ -516,19 +515,11 @@ Never optimize without data. Never guess.
 
 ---
 
-## 12.2 — Backend Performance (Track A: Node.js/NestJS now, Track B: Java/Spring Boot later)
+## 12.2 — Backend Performance (Java/Spring Boot)
 
-**Tier: 👀 Know Only**
+**Tier: 🎯 Master**
 
-### Track A — Node.js / NestJS Performance (near-term)
-- **Node's single-threaded event loop** — a CPU-bound synchronous block stalls the *entire process*, not just one request (Phase 5A.1); offload genuinely CPU-heavy work to a `worker_threads` Worker Thread instead of blocking the event loop.
-- **Avoiding blocking the event loop** — synchronous `fs`/crypto calls, large `JSON.parse`/`stringify` operations, or a tight synchronous loop in a hot path all stall every concurrent request, not just the one that triggered them.
-- **Clustering / PM2** — a single Node process can only use one CPU core; scale across cores with the built-in `cluster` module or a process manager like PM2.
-- **HTTP response compression** (gzip/Brotli) for large JSON payloads specifically — same mechanism, same benefit, framework-independent.
-- **Avoiding unnecessary serialization** — return Prisma `select`-scoped projections (Phase 5A.4/8.4) instead of full records with unneeded relations attached.
-- **Profiling** — Node's built-in `--prof` flag plus `clinic.js` (`clinic doctor`, `clinic flame`) for flame graphs, or Chrome DevTools attached via `--inspect`.
-
-### Track B — Java / Spring Boot Performance (deferred)
+### Java / Spring Boot Performance
 - **JVM tuning** — `-Xmx`/`-Xms` heap sizing, and choosing **G1GC vs ZGC** (Phase 1.3) as a genuine throughput-vs-latency tradeoff, not a "pick the newest one" decision.
 - **Avoiding object allocation in hot paths** — every allocation is eventually GC work; a tight, frequently-executed loop that allocates unnecessarily creates real, measurable GC pressure.
 - **`CompletableFuture`** for genuinely parallel I/O operations, and **virtual threads (Java 21)** specifically for I/O-bound endpoints, letting you write simple blocking-style code while still achieving high concurrency (Phase 5B.1) — the same underlying goal as Node's single-threaded-but-non-blocking model, achieved by a completely different mechanism (many cheap JVM-managed threads vs one event loop).
@@ -537,8 +528,7 @@ Never optimize without data. Never guess.
 - **Avoiding unnecessary serialization** — return DTO projections (Phase 5B.3/8.4) instead of full entities with lazy associations that might trigger further loading.
 
 ### Practice
-1. **(Track A, now)** Deliberately block the event loop with a synchronous CPU-heavy operation inside a NestJS handler, fire several concurrent requests, and confirm every other request stalls until it finishes — then move the work to a Worker Thread and confirm requests interleave properly again.
-2. **(Track B, later)** Profile a real endpoint with a JVM profiler (async-profiler or Java Flight Recorder), identify one specific hot-path allocation, eliminate or reduce it, and measure the GC-pressure difference before and after; then convert one I/O-bound endpoint to use virtual threads and compare its behavior under high concurrent load against a traditional bounded thread pool.
+1. Profile a real endpoint with a JVM profiler (async-profiler or Java Flight Recorder), identify one specific hot-path allocation, eliminate or reduce it, and measure the GC-pressure difference before and after; then convert one I/O-bound endpoint to use virtual threads and compare its behavior under high concurrent load against a traditional bounded thread pool.
 
 ### Answer This
 - Why does a single synchronous CPU-heavy operation in a Node handler stall *every* concurrent request, not just the one that triggered it?
@@ -595,7 +585,7 @@ Never optimize without data. Never guess.
 
 ## Phase 12 Capstone
 
-> **PROJECT:** Take your Master Project (Phase 5/10) and run a complete, honest performance audit: load test it with k6 to find its actual breaking point and the specific resource that's the bottleneck at that point. Profile the slowest endpoint with a real profiler — Node's `--prof`/`clinic.js` now, a JVM profiler (async-profiler/Java Flight Recorder) when this capstone is repeated against the Track B rebuild — and fix the top allocation/query issue you find. Measure Core Web Vitals before and after at least 3 individually-measured frontend optimizations. Document every single change with its measured before/after impact — no unmeasured claims of "this should be faster."
+> **PROJECT:** Take your Master Project (Phase 5/10) and run a complete, honest performance audit: load test it with k6 to find its actual breaking point and the specific resource that's the bottleneck at that point. Profile the slowest endpoint with a real JVM profiler (async-profiler/Java Flight Recorder) and fix the top allocation/query issue you find. Measure Core Web Vitals before and after at least 3 individually-measured frontend optimizations. Document every single change with its measured before/after impact — no unmeasured claims of "this should be faster."
 
 ---
 
@@ -651,7 +641,7 @@ Never optimize without data. Never guess.
 ### What to Learn
 - **Images vs containers** — an image is an immutable blueprint; a container is a running instance of one — the same distinction as a class and an object.
 - **Dockerfile instructions** — `FROM`, `WORKDIR`, `COPY`, `RUN`, `EXPOSE`, `ENV`, `ENTRYPOINT`, `CMD` — and **layer caching**: Docker caches each instruction's result as a layer, so ordering instructions from least-frequently-changing (dependencies) to most-frequently-changing (your actual application code) means most builds only need to re-run the last few layers, dramatically speeding up iterative builds.
-- **Multi-stage builds** — build your application in one stage (with the full build toolchain — `npm ci` + `tsc`/`nest build` for NestJS now, or the full JDK/Maven for Spring Boot later), then copy only the compiled artifact into a minimal runtime-only final image (a slim `node:alpine` base now, a JRE-only base later) — the build tools never ship in the final image at all.
+- **Multi-stage builds** — build your application in one stage (with the full build toolchain — the full JDK + Maven/Gradle for Spring Boot), then copy only the compiled artifact into a minimal runtime-only final image (a JRE-only base for Spring Boot) — the build tools never ship in the final image at all.
 - **`.dockerignore`** — exclude irrelevant files from the build context so they can't accidentally get copied in or bloat build time.
 - **Docker networking** — bridge (default, isolated per-host network), host (container shares the host's network namespace directly), none.
 - **Docker Compose** — define a multi-service local environment (app + database + cache + queue) declaratively, so `docker compose up` reproduces the same environment for every developer.
@@ -659,8 +649,8 @@ Never optimize without data. Never guess.
 - **Named volumes** (for persistent data like a database's files, managed by Docker) vs **bind mounts** (map a host directory directly into the container, typically used for local dev hot-reload).
 
 ### Practice
-1. Write a genuine multi-stage Dockerfile for a NestJS application: `npm ci` + build in one stage, copy only the compiled `dist/` output and production `node_modules` into a minimal `node:alpine` final stage, and compare the final image size against a naive single-stage build that includes the full dev toolchain. Repeat this exercise later for the Spring Boot rebuild (Maven build stage → minimal JRE-only final stage) and compare the two Dockerfiles' shape.
-2. Write a `docker-compose.yml` bringing up NestJS + PostgreSQL + Redis together (Redis doubling as your BullMQ backend), and confirm a fresh developer machine can run the entire stack with one command. Add a RabbitMQ service when the Track B/Spring Boot version arrives later.
+1. Write a genuine multi-stage Dockerfile for your Spring Boot application: Maven build stage (full JDK) → minimal JRE-only final stage with just the built jar, and compare the final image size against a naive single-stage build that includes the full JDK and build toolchain.
+2. Write a `docker-compose.yml` bringing up your Spring Boot app + PostgreSQL + Redis + RabbitMQ together, and confirm a fresh developer machine can run the entire stack with one command.
 3. Deliberately bake a secret into an early Dockerfile layer, then delete it in a later layer, and confirm — by inspecting the image's layer history — that the "deleted" secret is still recoverable, demonstrating why secrets must never enter any layer at all, not even temporarily.
 
 ### Answer This
@@ -685,7 +675,7 @@ Never optimize without data. Never guess.
 - **Reusable workflows** — DRY (Phase 3.1) applied to pipeline configuration itself, avoiding copy-pasted YAML across many repos.
 
 ### Practice
-1. Build a real pipeline: on every push/PR, lint → unit test → integration test (with Testcontainers, Phase 5A.8/11.4 now, 5B.7/11.4 later) → coverage gate → build a Docker image → push to a registry on merge to `main` → deploy to staging automatically → require an explicit human approval before deploying to production.
+1. Build a real pipeline: on every push/PR, lint → unit test → integration test (with Testcontainers, Phase 5B.7/11.4) → coverage gate → build a Docker image → push to a registry on merge to `main` → deploy to staging automatically → require an explicit human approval before deploying to production.
 2. Add Maven/npm dependency caching to the pipeline and measure the real time saved on a second run versus a cold one.
 
 ### Answer This
@@ -696,7 +686,7 @@ Never optimize without data. Never guess.
 
 ## 13.5 — Container Orchestration: Kubernetes
 
-**Tier: ⏸️ Skip For Now**
+**Tier: 👀 Know Only**
 
 ### What to Learn (working awareness level, not deep operator/CRD mastery)
 - **Pod, Deployment, Service, Ingress** — the core objects: a Pod is the smallest deployable unit (one or more tightly-coupled containers); a Deployment manages a desired number of Pod replicas and handles rolling updates; a Service gives a stable network identity/address to a dynamic set of Pods; Ingress handles external HTTP routing into the cluster.
@@ -718,7 +708,7 @@ Never optimize without data. Never guess.
 
 ## 13.6 — Infrastructure as Code: Terraform
 
-**Tier: ⏸️ Skip For Now**
+**Tier: 👀 Know Only**
 
 ### What to Learn
 - **Declarative infrastructure** — describe the desired end state; Terraform figures out the sequence of API calls needed to get there, rather than you scripting each step imperatively.
@@ -791,13 +781,13 @@ Never optimize without data. Never guess.
 **Tier: 👀 Know Only**
 
 ### What to Learn
-- **The three pillars** — logs (structured JSON, correlation IDs, Phase 5A.6 now / 5B.5 later), metrics (the **RED method** — Rate, Errors, Duration — a solid default framework for what to measure on any service), distributed tracing (following one request's full path across multiple services).
-- **Prometheus** — scrapes metrics (e.g., from a `@nestjs/terminus`-exposed endpoint now, a Spring Boot Actuator endpoint later, Phase 5A.6/5B.5) and stores them as time series; **Grafana** — builds dashboards and alerts on top of that data; **Sentry** — captures real-time application errors with full stack traces and context.
+- **The three pillars** — logs (structured JSON, correlation IDs, Phase 5B.5), metrics (the **RED method** — Rate, Errors, Duration — a solid default framework for what to measure on any service), distributed tracing (following one request's full path across multiple services).
+- **Prometheus** — scrapes metrics (e.g., from a Spring Boot Actuator endpoint, Phase 5B.5) and stores them as time series; **Grafana** — builds dashboards and alerts on top of that data; **Sentry** — captures real-time application errors with full stack traces and context.
 - **SLIs, SLOs, SLAs** — an SLI is the actual measured metric (e.g., request success rate); an SLO is your internal target for that metric (e.g., 99.9%); an SLA is the external, often contractual, commitment to a customer — these three are related but distinct, and conflating them causes real miscommunication about what's actually being promised to whom.
 - **Error budget** — the acceptable amount of "badness" (downtime, error rate) implied by your SLO, treated as a real, spendable budget — once it's exhausted for a period, the team should prioritize reliability work over new features, as a genuine, pre-agreed policy rather than an ad-hoc argument each time.
 
 ### Practice
-1. Set up Prometheus scraping a `@nestjs/terminus`/metrics endpoint (a Spring Boot Actuator endpoint later, with Track B) and build a Grafana dashboard showing request rate, error rate, and p95/p99 latency (the RED method, made concrete).
+1. Set up Prometheus scraping your Spring Boot Actuator/Micrometer metrics endpoint and build a Grafana dashboard showing request rate, error rate, and p95/p99 latency (the RED method, made concrete).
 2. Define a specific SLO for a real endpoint (e.g., "99.9% of requests complete under 500ms") and set up a Grafana alert that fires when the error budget for a rolling window is close to exhausted.
 
 ### Answer This
@@ -1059,7 +1049,7 @@ Permissions-Policy
 
 ## Ecosystem Awareness (All of Phase 14, Beyond the Core)
 
-**Tier: ⏸️ Skip For Now**
+**Tier: 👀 Know Only**
 
 > Awareness level — recognize these when they come up, know roughly what they solve, don't expect production mastery yet.
 

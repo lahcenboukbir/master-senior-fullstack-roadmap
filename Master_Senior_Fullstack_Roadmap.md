@@ -1,8 +1,8 @@
 # The Complete Senior Fullstack Engineer Roadmap
 ### From Coder to Expert — Every Fundamental, Every Tool, Every Layer of the Stack
-#### Core Stack: React · TypeScript · Node.js/NestJS (near-term backend) · Java/Spring Boot (deferred, professional-market backend) · React Native · PostgreSQL · AWS — plus the full ecosystem around it
+#### Core Stack: Java/Spring Boot (the single backend language) · React · TypeScript (frontend) · PostgreSQL · AWS — plus the full ecosystem around it
 
-> **Sequencing note:** the plan is full-stack JavaScript first (React + Node/NestJS) for fast, one-language freelance delivery, then Java + Spring Boot once JS is solid, specifically to target the professional/enterprise job market. Both backends serve the same React frontend. See Phase 5 for the full reasoning and the Track A/Track B split.
+> **Stack decision:** Java + Spring Boot is the **only** backend language — depth in one ecosystem beats breadth across three. TypeScript is used on the frontend (React/Next.js) only. The earlier Node/NestJS track was deleted on 2026-11-22. Algorithms and data structures are practiced in Java. See Phase 5 for the reasoning.
 
 > **No deadlines. No shortcuts. No ceiling.**
 > The goal is not to "finish" this document. The goal is to become an engineer who understands *why* everything works the way it does — from the CPU instruction cycle to the distributed system your API lives in — and who can pick up any tool in this document and use it competently within days because the fundamentals underneath it are already solid.
@@ -20,7 +20,7 @@
 ### Companion Files
 This document is the spine; these go deeper on specific concerns and are meant to be read alongside it, not instead of it:
 - `Priority_Map.md` — the honest 🎯/👀/⏸️ tiering reasoning behind every tag in this document.
-- `Part_0_Foundation_Reset_Detailed.md`, `Part_I` through `Part_VI_*_Detailed.md` — full-depth expansion of each Part above, including the "Under the Hood" mechanism-level deep-dives (V8 internals, React Fiber, Nest's DI container, Spring's proxy-based `@Transactional`, etc.).
+- `Part_0_Foundation_Reset_Detailed.md`, `Part_I` through `Part_VI_*_Detailed.md` — full-depth expansion of each Part above, including the "Under the Hood" mechanism-level deep-dives (V8 internals, React Fiber, Spring's proxy-based `@Transactional`, etc.).
 - `How_To_Learn_This_Roadmap.md` — the actual study method (active recall, spaced repetition, interleaving) to apply to Master-tier sections.
 - `Projects_And_Practice.md` — a Quick Wins + Milestone Project for every phase above, so you're building while you learn, not just reading.
 - `Project_Lifecycle_And_Planning.md` — **🎯 Master.** The layer above individual phases: how to take a raw idea through a 1-page brief, user stories, architecture/ERD/sequence diagrams (Mermaid, plus an honest verdict on what's left of UML), and a real solo backlog/sprint workflow, all the way to deployed. Read this once after Phase 3, then apply it at the start of the Master Project and every real project after.
@@ -41,7 +41,7 @@ This document is the spine; these go deeper on specific concerns and are meant t
 
 **Part II — Building Software**
 4. 🎯 [Frontend Engineering](#phase-4--frontend-engineering)
-5. 🎯⏸️ [Backend Engineering — Track A: Node.js/NestJS now, Track B: Java/Spring Boot later](#phase-5--backend-engineering-track-a-nodejsnestjs-now-track-b-javaspring-boot-later)
+5. 🎯 [Backend Engineering — Java + Spring Boot](#phase-5--backend-engineering-java--spring-boot--the-single-backend-language)
 6. ⏸️ [Mobile Engineering — React Native](#phase-6--mobile-engineering-react-native)
 7. 🎯 [API Design — REST, GraphQL, gRPC, Realtime](#phase-7--api-design)
 
@@ -149,7 +149,7 @@ Registers → L1 → L2 → L3 → RAM → SSD/HDD, with real latency numbers (r
 **Practice:** Write a Java program spawning threads that modify a shared variable — observe the race condition. Use VisualVM/JMC to watch GC behavior under pressure.
 
 ### 1.4 — Networking Deep Dive
-**Tier: 🎯 Master**
+**Tier: 👀 Know Only**
 OSI layers 3–7; IPv4/IPv6, subnets, CIDR; **TCP** — three-way handshake (why not two?), reliability/ordering, congestion control (slow start, AIMD), Nagle's algorithm vs `TCP_NODELAY`, teardown (FIN/FIN-ACK/ACK), `TIME_WAIT`; **UDP** — connectionless, when it beats TCP (DNS, gaming, VoIP), datagram boundaries; **DNS** — recursive vs authoritative resolution, TTL, propagation delay; **TLS 1.3** handshake, certificate chain validation, mTLS; **CORS** — same-origin policy, preflight OPTIONS, allowed origins; **HTTP/2 vs HTTP/3** — multiplexing, QUIC (built on UDP), 0-RTT, head-of-line blocking; **non-blocking I/O** — `select` vs `poll` vs `epoll` vs `io_uring`, how servers handle thousands of connections; **zero-copy** (`sendfile`) — why copying between kernel/user space is expensive; CDN edge caching mechanics.
 **Practice:** Wireshark on a real TLS handshake and DNS query. Use `dig`/`nslookup` to trace resolution step by step.
 
@@ -464,66 +464,22 @@ Core Web Vitals — LCP (<2.5s), INP (<200ms), CLS (<0.1); lazy loading (`loadin
 
 ---
 
-## Phase 5 — Backend Engineering (Track A: Node.js/NestJS Now, Track B: Java/Spring Boot Later)
+## Phase 5 — Backend Engineering (Java + Spring Boot — the single backend language)
 
-**Phase tier: 🎯 Track A — Master now, in full. ⏸️ Track B — deferred until Track A's capstone ships, not neglected.**
+**Phase tier: 🎯 Master — Java + Spring Boot is the one and only backend track.**
 
-> The plan is full-stack JavaScript first (React + Node/NestJS) for fast, one-language freelance delivery, then Java + Spring Boot second, specifically for the professional/enterprise job market, once JS is genuinely solid. NestJS was picked as the Track A framework precisely because its architecture — DI, modules, decorators, guards/pipes/interceptors — is the same mental model Spring Boot uses under different syntax, so this track pre-trains the hardest part of Track B rather than delaying it. Full topic-by-topic depth and the explicit Spring Boot analogue for every Nest concept live in `Part_II_Building_Software_Detailed.md`, Phase 5 — this section is the condensed reference.
+> **Decision (2026-11-22): one backend language — Java.** Depth beats breadth: a senior is judged on how deeply they know one ecosystem (the JVM, concurrency, Spring internals, JPA, testing, production debugging), not on how many frameworks they've touched. Java + Spring Boot is the professional/enterprise standard, strongly typed, and everything learned in it (OOP, DI, transactions, concurrency) transfers to any other language later. TypeScript stays — but as the **frontend** language only (React/Next.js). The earlier Node.js/NestJS track was deleted on 2026-11-22.
+>
+> **Section IDs are kept stable on purpose:** the sections are still numbered `5B.x` (there is no 5A any more). Every cross-reference in the other files still resolves. Algorithms are done **in Java** — Phase 2 is the vehicle for learning the Java collections framework, generics and streams. Full topic-by-topic depth lives in `Part_II_Building_Software_Detailed.md`, Phase 5.
 
-### Track A — Node.js + NestJS
+### Track B — Java + Spring Boot (the primary backend track)
 
-#### 5A.1 — Node.js Fundamentals (Deep)
-**Tier: 🎯 Master**
+**Phase tier: 🎯 Master — 5B.1–5B.7 drilled in full; 5B.3 (production concerns) is 👀 Know Only until a real project needs one**
 
-The runtime, not the language — V8 (JS engine) + libuv (event loop, thread pool, async I/O); CommonJS vs ESM and their interop pitfalls; Node's event loop phases specifically (timers → pending callbacks → poll → check → close — **not** the same diagram as the browser's from Phase 4.2); streams and **backpressure** (`pipe()` handles it, manual `data`/`write` wiring doesn't); core modules (`fs`, `path`, `process`, `Buffer`) — always prefer async `fs` in a server, since a sync call blocks the *entire* event loop for every concurrent request; npm/package.json mechanics (semver ranges, `package-lock.json`, `npm ci` — always in CI, never `npm install`).
-
-#### 5A.2 — NestJS: Core Concepts, Data, Auth & Production
-**Tier: 🎯 Master**
-
-**Express fundamentals (brief, deliberately):** the middleware pattern (`req, res, next`), routing, error-handling middleware — just enough to see exactly what Nest abstracts, not a framework to build on directly.
-
-**NestJS core (the direct Spring Boot analogue):** modules (`@Module()`), dependency injection via constructor injection always — never field injection, same reasoning as Spring; providers/services (`@Injectable()`); controllers (`@Controller()`, `@Get()`/`@Post()`/etc.); DTOs + `class-validator` + a global `ValidationPipe` (the `@Valid`/Bean Validation analogue) — never return a DB entity directly from a controller here either; guards (`CanActivate`, the Spring Security filter/`@PreAuthorize` analogue); pipes; interceptors (the Spring AOP/Proxy-pattern analogue); exception filters (`@Catch()`, the `@ControllerAdvice` analogue).
-
-**Prisma (the Spring Data JPA analogue):** `schema.prisma` + versioned migrations, the generated fully-typed client (data-mapper, not Active Record), `include`/`select` for relations, the N+1 problem and its `include`-based fix (the `JOIN FETCH`/`@EntityGraph` analogue), `$transaction` for atomic read-then-write logic — never hand-edit an already-applied migration, same hard rule as Flyway.
-
-**Auth & security (the Spring Security analogue):** Passport.js JWT strategy + `AuthGuard('jwt')`, role/ownership guards, Argon2/bcrypt password hashing (never a fast hash), refresh token rotation (detects reuse of a stolen token), CORS via `enableCors()` (never wildcard origin + credentials), Helmet for security headers.
-
-**Production features (the Spring Boot Production Features analogue):** `@nestjs/config` with schema-validated env vars (fail fast on startup, not at first use), structured logging with correlation IDs (`nestjs-pino`, the MDC analogue), `@nestjs/terminus` health checks (the Actuator analogue), graceful shutdown on `SIGTERM`, `@nestjs/swagger` for OpenAPI docs generated from decorators (the Springdoc analogue).
-
-**Async & background jobs (the RabbitMQ + Spring AMQP analogue):** BullMQ (`Queue`/`Worker`, Redis-backed), retries/backoff, a "failed" job state standing in for a native DLQ, genuinely idempotent handlers (non-negotiable — at-least-once delivery is the norm), `@Cron()` for scheduled jobs.
-
-**Testing NestJS (the Spring testing-pyramid analogue):** Jest; `Test.createTestingModule()` (the `@SpringBootTest`/`@MockBean` analogue — heavier, use sparingly); pure unit tests via plain constructor calls with no framework involved (the fast end of the pyramid, direct consequence of constructor injection); Supertest for HTTP-level tests (the `MockMvc`/`TestRestTemplate` analogue); Testcontainers for real Postgres/Redis in integration tests (identical tool, identical motivation as the Java track).
-
-#### 5A.3 — Backend Production Concerns
-**Tier: 👀 Know Only**
-- **Webhooks** — signature verification (HMAC-SHA256) against the *raw*, unparsed request body — bypass Nest's default JSON body parser for that one route; respond `200` fast, process async, design every handler idempotently.
-- **Payments** — Stripe's Node SDK, idempotency keys on payment-creation calls, never trust a client-side success callback alone.
-- **Full-text search** — PostgreSQL `tsvector`/`tsquery` + GIN index first, queried through Prisma's `$queryRaw` escape hatch since Prisma's query builder doesn't model full-text search natively.
-- **Multi-tenancy** — same RLS-vs-schema-vs-database tradeoffs as the Java track; Prisma middleware (`$use()`) as an app-layer `tenant_id` safety net, with database-level RLS remaining the stronger guarantee for the identical reason it does regardless of backend.
-- **Rate limiting** — `@nestjs/throttler` for basic in-process limiting, or a Redis-backed token bucket via `ioredis` for distributed per-user/per-IP enforcement.
-
-### Track A Tools & Practice
-| Tool | What to Do |
-|------|-----------|
-| VS Code | The standard Node/Nest editor — learn its TypeScript tooling and debugger deeply |
-| Nest CLI | `nest generate` for consistently scaffolding modules/controllers/services |
-| Postman / Swagger UI | Test and document APIs |
-| Testcontainers | Real PostgreSQL/Redis in Docker during tests |
-| Prisma Studio | Browse/edit real database data during development |
-| Docker Compose | Local Postgres + Redis for development and tests |
-
-> **PROJECT (Track A Capstone):** Complete REST API with NestJS — JWT + refresh token rotation, Argon2/bcrypt password hashing, full CRUD via Prisma + PostgreSQL with a documented N+1 fix (before/after query counts), Prisma migrations (including one added after the fact, never editing a previously-applied one), a BullMQ background job with a genuinely idempotent handler, health checks via `@nestjs/terminus`, structured logging with correlation IDs, layered test coverage (pure unit / `Test.createTestingModule()` / Testcontainers), and Swagger/OpenAPI docs. **This is your near-term Master Project backend** — full spec in `Part_II_Building_Software_Detailed.md`. When Track B begins, rebuild this exact same domain in Spring Boot as your re-entry point, and compare the two directly.
-
----
-
-### Track B — Java + Spring Boot (deferred until Track A's capstone ships)
-
-**Phase tier: ⏸️ Skip For Now — the content below is unchanged and complete, just resequenced**
-
-> Java forces you to understand OOP, types, and memory more deeply than most languages. Spring Boot is the enterprise/fintech industry standard — this is the professional-job-market half of the plan, not a downgrade of what comes first. Everything mastered in Track A — DI, guards-as-filters, DTOs, migrations, N+1 fixes, idempotent jobs, layered testing — already has a named equivalent here; expect this track to move noticeably faster than it would have cold.
+> Java forces you to understand OOP, types, and memory more deeply than most languages. Spring Boot is the enterprise/fintech industry standard. Study Java fundamentals **together with** Phase 2 (DSA) and Phase 1 (CPU/memory/OS/JVM) — they explain each other. Then Spring Boot alongside Phase 8 (databases), so JPA/transactions make sense because you already know what PostgreSQL is doing underneath.
 
 #### 5B.1 — Java Fundamentals (Deep)
-**Tier: ⏸️ Skip For Now**
+**Tier: 🎯 Master**
 
 **OOP in Java:** encapsulation; inheritance (`extends`, overriding, `super`, why deep hierarchies are dangerous); polymorphism (`Animal` reference holding a `Dog`); abstraction (abstract classes vs interfaces); `final` (class/method/variable meaning); `static`.
 
@@ -538,7 +494,7 @@ The runtime, not the language — V8 (JS engine) + libuv (event loop, thread poo
 **Error Handling:** checked vs unchecked exceptions (the Java debate); custom exception hierarchies; try-with-resources.
 
 #### 5B.2 — Spring Boot 3: Core Concepts
-**Tier: ⏸️ Skip For Now**
+**Tier: 🎯 Master**
 
 **DI & IoC:** Inversion of Control — the container creates/wires objects; bean scopes (singleton, prototype, request, session); **constructor injection always** (explicit dependencies, immutability, testability) — avoid field injection; auto-configuration (classpath scanning wires DataSource, Redis, etc. automatically); stereotypes — `@Component`, `@Service`, `@Repository`, `@Controller`.
 
@@ -555,7 +511,7 @@ The runtime, not the language — V8 (JS engine) + libuv (event loop, thread poo
 **Testing Spring Boot:** `@SpringBootTest` (full context, expensive); `@WebMvcTest` (web layer only, `MockMvc`); `@DataJpaTest` (JPA layer, use Testcontainers for a real DB); `@MockBean`; `TestRestTemplate`; **Testcontainers** — real PostgreSQL/Redis/RabbitMQ in Docker during tests; JUnit 5 (`@Test`, `@ParameterizedTest`, `@BeforeEach`, `@Nested`); Mockito (`@Mock`, `@InjectMocks`, `when/thenReturn`, `ArgumentCaptor`, `verify`).
 
 #### 5B.3 — Backend Production Concerns
-**Tier: ⏸️ Skip For Now**
+**Tier: 👀 Know Only**
 - **Webhooks** — signature verification (HMAC-SHA256), retry with exponential backoff, idempotency, respond 200 fast + process async, dead-letter handling. Real examples: Stripe, GitHub, Twilio.
 - **Payments** — PCI-DSS basics (never store raw card data, tokenize); Stripe PaymentIntents, idempotency keys, webhook handling; subscription billing (trials, proration, cancellation); chargebacks and refunds.
 - **Full-text search** — PostgreSQL `tsvector`/`tsquery` + GIN index + `ts_rank` first; Elasticsearch when you outgrow it.
@@ -567,8 +523,8 @@ The runtime, not the language — V8 (JS engine) + libuv (event loop, thread poo
 
 ### Ecosystem Awareness — Backend Landscape
 **Tier: 👀 Know Only**
-- **Other backend languages worth knowing about:** Python (Django/FastAPI, data/AI-friendly), Go (goroutines/channels, simple deployment, great for infra tooling), Rust (memory safety without GC, performance-critical services). *(Node.js/NestJS is no longer "just awareness" — it's Track A above.)*
-- **Job schedulers/queues in other ecosystems:** Sidekiq, Celery, Hangfire. *(BullMQ is no longer just an awareness item either — it's used directly in Track A above.)*
+- **Other backend languages worth knowing about:** Python (Django/FastAPI, data/AI-friendly), Go (goroutines/channels, simple deployment, great for infra tooling), Rust (memory safety without GC, performance-critical services).
+- **Job schedulers/queues in other ecosystems:** Sidekiq, Celery, Hangfire.
 - **Search platforms:** Elasticsearch/OpenSearch (inverted index, analyzers, mappings, aggregations), Algolia (managed, typo tolerance), Meilisearch (easy self-hosted alternative).
 
 ### Track B Tools & Practice
@@ -581,7 +537,7 @@ The runtime, not the language — V8 (JS engine) + libuv (event loop, thread poo
 | Spring Initializr | start.spring.io — bootstrap correctly |
 | resilience4j | Circuit breaker, retry, rate limiter |
 
-> **PROJECT (Track B Capstone):** Complete REST API with Spring Boot — user management, JWT + refresh tokens, CRUD with Spring Data JPA + PostgreSQL, Flyway migrations, async jobs with RabbitMQ, Stripe integration with webhooks, full-text search, multi-tenant RLS, full Testcontainers coverage, Swagger/OpenAPI docs. **Rebuild the exact same domain as the Track A Capstone** so the two implementations are directly comparable, not remembered separately.
+> **PROJECT (Track B Capstone):** Complete REST API with Spring Boot — user management, JWT + refresh tokens, CRUD with Spring Data JPA + PostgreSQL, Flyway migrations, async jobs with RabbitMQ, Stripe integration with webhooks, full-text search, multi-tenant RLS, full Testcontainers coverage, Swagger/OpenAPI docs. **This is your Master Project backend** — see Part VI for the full platform spec.
 
 ---
 
@@ -826,7 +782,7 @@ Vertical (bigger machine, ceiling) vs horizontal (more machines, needs stateless
 Strong consistency (every read reflects the latest write) vs eventual consistency (stale-but-converging reads); choose per use case — financial data needs strong, a social feed tolerates eventual.
 
 ### 10.4 — Load Balancing
-**Tier: 👀 Know Only**
+**Tier: 🎯 Master**
 Round robin, least connections, IP hash, **consistent hashing** (adding/removing a node remaps only 1/N of keys — critical for distributed caches/DBs); Layer 4 vs Layer 7; Nginx/HAProxy as reverse proxy and load balancer.
 
 ### 10.5 — Caching Architecture
@@ -979,7 +935,7 @@ Profiling (finds *where* time is spent) vs benchmarking (measures *how fast*); f
 `EXPLAIN ANALYZE` — read every node (`cost`, `actual rows`, `actual time`); N+1 detection (enable Hibernate SQL logging in dev, count queries per request); connection pool sizing (`(cores × 2) + effective spindle count`); **HikariCP** tuning (`maximumPoolSize`, `connectionTimeout`, `leakDetectionThreshold`); slow query log (`log_min_duration_statement`); prepared statements (SQL-injection-safe + plan caching); cursor-based pagination over OFFSET; materialized views for expensive aggregations.
 
 ### 12.2 — Java / Spring Boot Performance
-**Tier: 👀 Know Only**
+**Tier: 🎯 Master**
 JVM tuning (`-Xmx`, `-Xms`); **G1GC vs ZGC** (throughput vs latency tradeoff); avoid object allocation in hot paths; `CompletableFuture` for parallel I/O; **virtual threads (Java 21)** for I/O-bound endpoints; Spring Boot startup time (lazy init, GraalVM native image awareness); HTTP response compression (gzip/Brotli); avoid unnecessary serialization — use projections not full entities.
 
 ### 12.3 — Frontend Performance
@@ -1033,12 +989,12 @@ Workflows/jobs/steps hierarchy; secrets (`${{ secrets.X }}` — never hardcode);
 **Build a pipeline that:** runs on every push/PR → lints → unit tests → integration tests (Testcontainers) → coverage gate → builds Docker image → pushes to registry on merge to main → deploys to staging → requires approval for production.
 
 ### 13.5 — Container Orchestration — Kubernetes
-**Tier: ⏸️ Skip For Now**
+**Tier: 👀 Know Only**
 Pod, Deployment, Service, Ingress (core objects); ConfigMap & Secret (externalized config); Horizontal Pod Autoscaler; rolling deployments (zero downtime); liveness vs readiness probes; resource limits (CPU/memory).
 > Awareness-to-working level is enough for most fullstack roles; go deeper (operators, CRDs, Helm charts) only if you move toward platform engineering.
 
 ### 13.6 — Infrastructure as Code — Terraform
-**Tier: ⏸️ Skip For Now**
+**Tier: 👀 Know Only**
 Declarative infra; workflow — `init` → `plan` → `apply` → `destroy`; providers, resources, variables, outputs; **remote state** (S3 backend + DynamoDB lock table for teams — never local state in production); modules (reusable components); data sources.
 **Practice:** Provision a full AWS stack — VPC, EC2, RDS, S3, CloudFront, IAM roles.
 
@@ -1167,7 +1123,7 @@ Never commit secrets to Git; env vars for local dev; **AWS Secrets Manager**/Par
 Auth on every endpoint, no exceptions; rate limiting (brute force + abuse prevention); input validation (whitelist not blacklist); output filtering; API keys (rotation, scope restriction); email security — SPF/DKIM/DMARC.
 
 ### Ecosystem Awareness — Security Beyond the App
-**Tier: ⏸️ Skip For Now**
+**Tier: 👀 Know Only**
 - **Zero Trust Architecture** — no implicit trust even inside your own network; verify identity at every hop; micro-segmentation; identity-aware proxies.
 - **WAF** — filter/monitor HTTP traffic at the edge; OWASP Core Rule Set; bot detection; DDoS mitigation. Tools: AWS WAF, Cloudflare WAF, ModSecurity.
 - **SIEM** — aggregate logs across systems, correlation rules, real-time threat detection, incident-response integration. Tools: Splunk, Elastic SIEM, AWS Security Hub.
@@ -1393,8 +1349,8 @@ Track debt explicitly (a backlog item, not a memory); quantify the cost; Boy Sco
 ## The Complete Tech Stack Reference
 
 ### Languages
-- **TypeScript** — near-term backend (Node/NestJS), all frontend and mobile code, algorithms
-- **Java 21** — deferred backend, for the professional-market Track B
+- **Java 21** — the single backend language, and the language for all DSA practice
+- **TypeScript** — frontend only (React/Next.js)
 - **JavaScript** — browser fundamentals, event loop understanding
 - **SQL** — PostgreSQL, queries, schema design, performance
 - **Bash** — terminal, scripting, Linux daily use
@@ -1407,11 +1363,9 @@ HTML5 (semantic) → plain CSS → Tailwind CSS → JavaScript (ES6+, deeply) �
 ### Mobile
 React Native, Expo, Expo Router, NativeWind, React Navigation, EAS Build + Submit, Fastlane
 
-### Backend — Track A (now)
-Node.js 20+, Express (fundamentals only), NestJS, Prisma, Passport.js/JWT, BullMQ, Jest, Supertest, Testcontainers, npm, Helmet
-
-### Backend — Track B (later)
+### Backend (Java)
 Java 21, Spring Boot 3, Spring Security, Spring Data JPA, Hibernate, MapStruct, Flyway, JUnit 5, Mockito, Testcontainers, Maven, resilience4j
+
 
 ### Databases
 PostgreSQL (primary), pgvector (AI), Redis (cache/pub-sub/queues), PgBouncer, Flyway
@@ -1453,29 +1407,29 @@ A **Developer Tools SaaS Platform** — a real product developers would pay for.
 | Multi-tenancy | Row-level security in PostgreSQL |
 | Mobile App | React Native companion app with offline support |
 
-### Technology Stack (Track A build — near-term)
+### Technology Stack
 | Layer | Technology |
 |-------|-----------|
 | Frontend | React 18 + TypeScript + TanStack Query + Zustand + Tailwind CSS |
 | Mobile | React Native + Expo + NativeWind + Expo Router |
-| Backend | Node.js 20+ + NestJS + Prisma |
+| Backend | Java 21 + Spring Boot 3 + Spring Security + Spring Data JPA |
 | Database | PostgreSQL + pgvector + Redis |
-| Messaging | BullMQ (Redis-backed) |
+| Messaging | RabbitMQ + Spring AMQP |
 | Infrastructure | Docker + AWS (EC2, RDS, ElastiCache, S3, CloudFront) |
 | IaC | Terraform |
 | CI/CD | GitHub Actions — lint, test, build, deploy on every push |
 | Monitoring | Prometheus + Grafana + Sentry |
-| Testing | Jest + Supertest + Testcontainers + Playwright + k6 |
+| Testing | JUnit 5 + Mockito + Testcontainers (backend) · Vitest + Playwright (frontend) · k6 |
 | AI | Claude API + pgvector RAG |
 
-> **Track B rebuild (later):** once Track B (Java/Spring Boot) begins, rebuild this same platform's backend with Java 21 + Spring Boot 3 + Spring Security + Spring Data JPA + RabbitMQ + JUnit 5 + Mockito, reusing the same React frontend, database schema, and feature set — the point is a direct, concrete comparison between the two backends on identical requirements, not a from-scratch new project.
+> **Single build:** there is no second backend rebuild any more — the Master Project is built once, in Java + Spring Boot, with the React frontend consuming it. (Mobile and Terraform stay out of the required path, per `Priority_Map.md`.)
 
 ### Build It in This Order
 1. Core API — user auth, JWT, basic CRUD with PostgreSQL
 2. Frontend — React + TypeScript, connect to your API
 3. Testing from the start — unit, integration, E2E
 4. Infrastructure — Docker Compose, then CI/CD pipeline
-5. Advanced backend — BullMQ jobs, WebSockets, Redis caching
+5. Advanced backend — RabbitMQ jobs, WebSockets, Redis caching
 6. Deploy to AWS with Terraform
 7. Monitoring — Prometheus, Grafana, Sentry
 8. AI feature — RAG search with pgvector
@@ -1490,18 +1444,17 @@ There is no clock on this. The table below is a *sequencing* guide, not a schedu
 
 | Stage | Focus |
 |-------|-------|
-| 1 | Foundation Reset + CS Fundamentals — Linux daily driver, build an HTTP server on raw TCP sockets, event loop mastery |
-| 2 | Data Structures & Algorithms — implement every structure from scratch (Java, per Phase 2's build exercises — DSA stays in Java independent of which backend track is active), one pattern problem a day |
-| 3 | Software Design + NestJS basics (Track A) — patterns in mini-projects, first real REST API + Postgres via Prisma |
-| 4 | Frontend deep dive + Docker + CI/CD — React/TypeScript mastery, GitHub Actions pipeline, Docker Compose full stack |
-| 5 | Databases internals + System Design + AWS — the 1M-row index challenge, 2 system designs a week, Terraform deploy |
-| 6 | Testing + Performance + Security — TDD discipline, load testing, PortSwigger labs, full auth system (NestJS) |
-| 7 | API Design breadth — WebSockets, GraphQL/gRPC exploration |
-| 8 | Track A Master Project — ship the full NestJS-backed platform end to end, with monitoring and billing |
-| 9 | Track B — Java + Spring Boot, from fundamentals through the full framework; the job-market track begins here, once JS is genuinely solid |
-| 10 | Track B rebuild — redo the Master Project's backend in Spring Boot for a direct, concrete comparison against Track A |
-| 11 | Mobile (React Native) — companion app for whichever backend is current at the time |
-| 12 | Data Engineering awareness — understand the data pipeline landscape |
+| 1 | Foundation Reset (Part 0) — Linux daily driver, terminal, Git, HTTP, DevTools |
+| 2 | **Java fundamentals (5B.1) + Data Structures & Algorithms (Phase 2), together** — split each session, e.g. 1h Java / 1h DSA; implement every structure from scratch in Java, one pattern problem a day |
+| 3 | CS Fundamentals (Phase 1), interleaved with stage 2 — CPU, memory, OS, networking, the JVM; these explain why Java behaves the way it does |
+| 4 | Software Design & Clean Code in Java (Phase 3) + `Project_Lifecycle_And_Planning.md` |
+| 5 | Spring Boot (5B.2) **with** Databases (Phase 8) — PostgreSQL, indexing, transactions and JPA together, so JPA is understood against what the database is really doing; then API Design (Phase 7) and Security (Phase 14) applied to your Spring app |
+| 6 | Frontend deep dive (Phase 4) — React/TypeScript/Next.js, mostly consolidation of what you already know; it now consumes the Java API you built |
+| 7 | Testing + Performance (Phases 11–12) — TDD discipline, JUnit/Testcontainers, load testing; Docker + CI/CD (GitHub Actions) |
+| 8 | System Design & AWS (Phase 10, Phase 13 lightened) — 2 system designs a week; a simple deploy |
+| 9 | **Master Project** — ship the full Java/Spring Boot + React platform end to end, with monitoring and billing |
+| 10 | Mobile (React Native) — skipped by default; only if your goal changes |
+| 11 | Data Engineering awareness — understand the data pipeline landscape |
 | Ongoing | Senior mindset, communication, engineering practices — these compound for the rest of your career, they never "finish" |
 
 ---
