@@ -147,6 +147,8 @@
 - 🔁 **Back-of-envelope reps.** 5 estimates: QPS, storage/year, bandwidth, cache size, number of servers. *Check:* each done in under 5 minutes with units written out.
 - 🔁 **Design-a-X, weekly.** One system per week (URL shortener → rate limiter → chat → news feed → notification system). Format: requirements → estimates → API → data model → diagram → bottlenecks → trade-offs. *Check:* timed 45 minutes, then you critique your own design the next day.
 - 💥 **Failure-mode table.** For your Practice App list every component, what happens when it dies, and what the user sees. *Check:* at least one failure you didn't know the answer to — then test it by killing the process.
+- 💥 **Retry-storm lab** *(10.8)*. Hit a flaky fake dependency with naive immediate retries, then with exponential backoff + jitter. *Check:* compare the two request timelines and explain why jitter matters.
+- 💥 **Lock-expiry lab** *(10.8)*. Hold a Redis `SET NX EX` lock past its TTL and watch a second process acquire it. *Check:* you can explain why a distributed lock isn't a perfect mutex.
 - 🔨 **Rate Limiter Service** — the Phase 10 milestone. Add a tiny load balancer or KV store as optional toy builds.
 
 ---
@@ -158,6 +160,7 @@
 - 💥 **Flaky test lab.** Write a flaky E2E (missing wait); fix with an explicit wait on a condition, never a `sleep`. *Check:* 50 consecutive green runs.
 - 💥 **Mutation check.** Break a line of production code on purpose. *Check:* at least one test fails; if none do, write the missing test.
 - 🔁 **Coverage honesty.** Find a line that is 100% covered but not actually asserted on.
+- 🔁 **PIT run** *(11.6, optional)*. Run PIT against one existing suite. *Check:* kill at least one surviving mutant with a new test.
 
 ---
 
@@ -175,6 +178,7 @@
 - 🔨 **Multi-stage Dockerfile.** *Check:* image size reduced and a written explanation of what each stage drops.
 - 🔁 **One-command stack.** `docker compose up` brings up app + Postgres + Redis, healthchecks included.
 - 💥 **Kill-a-container lab.** Stop Postgres under load; observe app behaviour; add a restart policy and retry logic.
+- 💥 **Cron overlap lab** *(13.11)*. Schedule a job that takes longer than its interval and watch two runs collide; fix with `flock` and add failure logging. *Check:* a deliberately failing run shows up in the log. (Backup/restore is the Phase 8 drill above.)
 - 🔁 **Secrets hygiene.** Scan your repo history with `gitleaks`; move every secret to environment config.
 
 ---

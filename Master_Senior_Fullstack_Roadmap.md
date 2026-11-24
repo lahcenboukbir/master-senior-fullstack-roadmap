@@ -165,9 +165,9 @@ Lexing/tokenization; parsing and AST; compilation vs interpretation vs JIT; **JV
 **Why this matters:** helps you write faster code and understand cryptic error messages.
 
 ### Ecosystem Awareness — CS Fundamentals Extras
-**Tier: ⏸️ Skip For Now**
-- **Escape analysis** — how compilers decide stack vs heap allocation.
-- **Boolean logic & discrete math basics** — truth tables, De Morgan's laws — underpin query planners and conditionals.
+**Tier: split (2026-11-24 review)**
+- 👀 **Know Only — Boolean logic & discrete math basics** — truth tables, De Morgan's laws — underpin query planners, conditionals and SQL `WHERE` clauses (~30 min; you use it every time you simplify `!(a && b)`).
+- ⏸️ **Skip For Now — Escape analysis** — how compilers decide stack vs heap allocation. The JVM does it for you; revisit when studying JVM internals (1.6 / 5B.1).
 
 ### Tools & Practice
 | Tool | What to Do |
@@ -807,7 +807,7 @@ Message queues vs direct HTTP — decoupling, consumer can be down while message
 Service discovery; **API Gateway** (single entry — auth, routing, rate limiting); service mesh awareness (Istio, Linkerd); data ownership — each microservice owns its own data, no shared databases.
 
 ### 10.8 — Distributed Systems Fundamentals
-**Tier: ⏸️ Skip For Now**
+**Tier: 👀 Know Only**
 The Fallacies of Distributed Computing (the network is not reliable/instant/infinite); **CAP theorem** — pick two during a partition; **PACELC** extension; consensus algorithms at awareness level (Raft, Paxos, ZAB — how etcd/Consul/ZooKeeper agree); **2PC** (coordinator failure can leave participants locked) vs **Saga** (compensating transactions) vs **TCC** — know when each is viable; idempotency and idempotency keys; distributed locking with Redis (`SET key value NX EX 30`); circuit breaker; retry with exponential backoff + jitter; **bulkhead pattern** (isolate workloads into separate thread pools).
 
 ### 10.9 — Common Systems to Design
@@ -877,7 +877,7 @@ Integration — verify components work together; **Testcontainers** — real Pos
 Load (expected traffic), stress (beyond capacity — where does it break?), spike (sudden surge), soak (hours at moderate load — catches memory leaks); **k6** — JS-based virtual users and scenarios; metrics — throughput, p50/p95/p99 latency (never just average), error rate; fix, then measure again.
 
 ### 11.6 — Beyond the Basics
-**Tier: ⏸️ Skip For Now**
+**Tier: 👀 Know Only**
 - **Contract testing (Pact)** — consumer-driven contracts between services, catch breaking changes before deploy.
 - **Property-based testing** — define properties that must always hold ("sort then reverse == reverse then sort"); the framework generates hundreds of random inputs to find edge cases you'd never think of. Tools: **fast-check** (JS), **Hypothesis** (Python), **jqwik** (Java).
 - **Mutation testing** — mutate your code automatically, verify your tests actually catch the mutation (not just hit the line). Tools: **Stryker** (JS/TS), **PIT** (Java).
@@ -1038,7 +1038,7 @@ Declarative infra; workflow — `init` → `plan` → `apply` → `destroy`; pro
 | Feature Flags | Decouple deploy from release |
 
 ### 13.11 — Backups & Cron
-**Tier: ⏸️ Skip For Now**
+**Tier: 🎯 Master**
 3-2-1 backup rule; automated restore testing; point-in-time recovery; cron job syntax, logging, `flock` to avoid overlapping runs.
 
 ### Ecosystem Awareness — Infra Landscape

@@ -262,7 +262,7 @@ Take your Master-Project-track app's three slowest real interactions (an API end
 
 ## Phase 13 — DevOps & Infrastructure
 
-*Trimmed by design for a fullstack-not-DevOps focus (see `Priority_Map.md`) — Docker and a basic CI/CD pipeline are the load-bearing pieces; Kubernetes/Terraform/deep AWS wait until a real need pulls you there.*
+*Trimmed by design for a fullstack-not-DevOps focus (see `Priority_Map.md`) — Docker, a basic CI/CD pipeline, and backups & cron discipline (13.11) are the load-bearing pieces; Kubernetes/Terraform/deep AWS wait until a real need pulls you there.*
 
 ### Quick Wins
 - Write a multi-stage Dockerfile for your backend (build stage → slim runtime stage) and compare image size against a naive single-stage build.

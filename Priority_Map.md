@@ -155,7 +155,7 @@
 | 10.5 Caching Architecture | 🎯 MASTER | Extremely practical, directly usable |
 | 10.6 Asynchronous Communication | 👀 KNOW ONLY | Practical RabbitMQ side already Mastered in 5.6 — this is the deeper theory layer |
 | 10.7 Microservices vs Monolith | 🎯 MASTER | You'll be part of this decision even as an IC |
-| 10.8 Distributed Systems Fundamentals | ⏸️ SKIP FOR NOW | 2PC/Saga/consensus/TCC — genuine distributed-systems specialty |
+| 10.8 Distributed Systems Fundamentals | 👀 KNOW ONLY | Promoted from Skip (2026-11-24): idempotency, retry+backoff+jitter, circuit breaker and Redis-lock caveats are everyday production code; consensus/2PC/TCC stay awareness-only |
 | 10.9 Common Systems to Design | 👀 KNOW ONLY | Valuable for interview prep specifically — bump up if interviewing at system-design-heavy companies |
 
 ### Phase 11 — Testing & Quality Engineering
@@ -167,7 +167,7 @@
 | 11.3 Unit Testing (Deep) | 🎯 MASTER | Daily craft |
 | 11.4 Integration & E2E Testing | 🎯 MASTER | Daily craft |
 | 11.5 Performance/Load Testing | 👀 KNOW ONLY | Useful conceptually; deep k6 mastery only if a job specifically needs it |
-| 11.6 Beyond the Basics | ⏸️ SKIP FOR NOW | Mutation testing, chaos engineering, property-based testing — rare in typical fullstack jobs |
+| 11.6 Beyond the Basics | 👀 KNOW ONLY | Promoted from Skip (2026-11-24): read once; optionally do Practice 3 (PIT mutation testing — cheapest, most instructive). Pact and chaos engineering stay awareness-only |
 | 11.7 CI/CD Testing Pipeline | 🎯 MASTER | Expected professional practice |
 
 ### Phase 12 — Performance Engineering
@@ -195,7 +195,7 @@
 | 13.8 Web Servers & Proxies | 👀 KNOW ONLY | Recognize what Nginx is doing, rarely configure it yourself |
 | 13.9 Monitoring & Observability | 👀 KNOW ONLY | Actuator itself is already Mastered in 5.5 — building the Prometheus/Grafana stack from scratch is not |
 | 13.10 Deployment Strategies | 👀 KNOW ONLY | Conceptual fluency for architecture conversations |
-| 13.11 Backups & Cron | ⏸️ SKIP FOR NOW | Ops-team territory |
+| 13.11 Backups & Cron | 🎯 MASTER | Promoted from Skip (2026-11-24): tiny section, real payoff — an untested backup isn't a backup, and every backend ends up with cron jobs |
 
 ### Phase 14 — Security Fundamentals
 
@@ -256,7 +256,7 @@ This isn't a time-cutting exercise — you have no deadline, so total hours isn'
 What's genuinely deprioritized to 👀 Know Only or ⏸️ Skip is specialist/adjacent-career territory, not basics:
 - **Phase 6** — the entire React Native mobile track (a different specialization: mobile engineering, not web)
 - **Phase 13** — Kubernetes, Terraform, and deep AWS service design (platform/DevOps-engineer territory, not fullstack-dev-who-understands-deployment territory)
-- **10.8** — 2PC/Saga/consensus algorithms (genuine distributed-systems specialty)
+- ~~**10.8**~~ — promoted to 👀 Know Only on 2026-11-24 (see table)
 - **17.3 / 17.6** — full DDD strategic design and FinOps (architect/cost-engineering specialties)
 
 This is an honest "senior fullstack web developer who understands the fundamentals deeply" curriculum — not five careers stapled together, and not a speed-run either.

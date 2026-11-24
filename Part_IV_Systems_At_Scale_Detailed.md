@@ -19,7 +19,7 @@
 - 🎯 [10.5 — Caching Architecture](#105--caching-architecture)
 - 👀 [10.6 — Asynchronous Communication](#106--asynchronous-communication)
 - 🎯 [10.7 — Microservices vs Monolith](#107--microservices-vs-monolith)
-- ⏸️ [10.8 — Distributed Systems Fundamentals](#108--distributed-systems-fundamentals)
+- 👀 [10.8 — Distributed Systems Fundamentals](#108--distributed-systems-fundamentals)
 - 👀 [10.9 — Common Systems to Design](#109--common-systems-to-design)
 - [Phase 10 Capstone](#phase-10-capstone)
 
@@ -29,7 +29,7 @@
 - 🎯 [11.3 — Unit Testing (Deep)](#113--unit-testing-deep)
 - 🎯 [11.4 — Integration & E2E Testing](#114--integration--e2e-testing)
 - 👀 [11.5 — Performance/Load Testing](#115--performanceload-testing)
-- ⏸️ [11.6 — Beyond the Basics](#116--beyond-the-basics)
+- 👀 [11.6 — Beyond the Basics](#116--beyond-the-basics)
 - 🎯 [11.7 — CI/CD Testing Pipeline](#117--cicd-testing-pipeline)
 - [Phase 11 Capstone](#phase-11-capstone)
 
@@ -53,7 +53,7 @@
 - 👀 [13.8 — Web Servers & Proxies](#138--web-servers--proxies)
 - 👀 [13.9 — Monitoring & Observability](#139--monitoring--observability)
 - 👀 [13.10 — Deployment Strategies](#1310--deployment-strategies)
-- ⏸️ [13.11 — Backups & Cron](#1311--backups--cron)
+- 🎯 [13.11 — Backups & Cron](#1311--backups--cron)
 - [Phase 13 Capstone](#phase-13-capstone)
 
 **Phase 14 — Security Fundamentals**
@@ -72,7 +72,7 @@
 
 # Phase 10 — System Design & Architecture
 
-**Phase tier: 🎯👀 Mixed — foundational concepts Master; distributed-systems depth (10.8) Skip**
+**Phase tier: 🎯👀 Mixed — foundational concepts Master; distributed-systems depth (10.8) Know Only**
 
 > Real systems don't fail because of bad code. They fail because of bad design decisions made under pressure, without understanding the tradeoffs.
 
@@ -229,7 +229,7 @@
 
 ## 10.8 — Distributed Systems Fundamentals
 
-**Tier: ⏸️ Skip For Now**
+**Tier: 👀 Know Only** *(promoted from Skip on 2026-11-24 — focus on idempotency, backoff + jitter, circuit breaker, Redis-lock caveats; consensus/2PC/TCC are awareness only)*
 
 ### What to Learn
 - **The Fallacies of Distributed Computing** — the network is not reliable, not zero-latency, and not infinite-bandwidth; every distributed design that implicitly assumes otherwise will eventually break in production.
@@ -416,7 +416,7 @@ For each system below, practice working through: functional requirements, a roug
 
 ## 11.6 — Beyond the Basics
 
-**Tier: ⏸️ Skip For Now**
+**Tier: 👀 Know Only** *(promoted from Skip on 2026-11-24 — optionally do Practice 3, mutation testing; Pact and chaos engineering are awareness only)*
 
 ### What to Learn
 - **Contract testing (Pact)** — consumer-driven contracts let a frontend/consumer team define exactly what they expect from an API; that contract is verified automatically against the real backend in CI, catching a breaking API change before it ever reaches a shared environment (directly connects to Phase 7.6).
@@ -824,7 +824,7 @@ Never optimize without data. Never guess.
 
 ## 13.11 — Backups & Cron
 
-**Tier: ⏸️ Skip For Now**
+**Tier: 🎯 Master** *(promoted from Skip on 2026-11-24)*
 
 ### What to Learn
 - **The 3-2-1 backup rule** — 3 copies of data, on 2 different media types, with 1 copy offsite — a simple, durable heuristic against many different failure modes at once (hardware failure, site-level disaster, accidental deletion).

@@ -97,12 +97,12 @@ Next week:
 - [ ] One data contract
 
 ### Phase 10 — System Design
-- [ ] Back-of-envelope ×5 · Design-a-X (weeks done: ____ / 8) · failure-mode table
+- [ ] Back-of-envelope ×5 · Design-a-X (weeks done: ____ / 8) · failure-mode table · retry-storm lab · lock-expiry lab
 - [ ] L16 KV store with WAL · L17 Load balancer
 - [ ] **Milestone: Rate Limiter Service**
 
 ### Phase 11 — Testing (Card E)
-- [ ] TDD rep · test doubles · flaky lab · mutation check
+- [ ] TDD rep · test doubles · flaky lab · mutation check · PIT run (optional)
 - [ ] L18 Property tests
 - [ ] **Milestone: Card E**
 
@@ -111,7 +111,7 @@ Next week:
 - [ ] **Milestone: Card H**
 
 ### Phase 13 — DevOps (Card F)
-- [ ] Multi-stage Dockerfile · compose · kill-a-container · secrets scan
+- [ ] Multi-stage Dockerfile · compose · kill-a-container · cron overlap lab · secrets scan
 - [ ] **Milestone: Card F**
 
 ### Phase 14 — Security (Card G)
