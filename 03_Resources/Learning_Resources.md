@@ -5,14 +5,14 @@
 > 1. **Free only.** Everything here costs nothing (some need a free account).
 > 2. **Easy first.** Visual, example-driven, short. The hard stuff is in a separate "🔓 Later" line so it can't discourage you.
 > 3. **Every numbered roadmap topic has its own entry, with max 2–3 picks.** More choices means more procrastination. Pick the first one, start, and only switch if it truly doesn't click.
-> 4. **Tier-aware.** 🎯 Master sections get full coverage, 👀 Know-only sections get one quick overview, ⏸️ Skip sections get nothing yet (see the shelf at the bottom). Tiers come from [Priority_Map.md](Priority_Map.md).
+> 4. **Tier-aware.** 🎯 Master sections get full coverage, 👀 Know-only sections get one quick overview, ⏸️ Skip sections get nothing yet (see the shelf at the bottom). Tiers come from [Priority_Map.md](../00_Start_Here/Priority_Map.md).
 > 5. **Official docs and tutorials beat random blog posts** when they're written for beginners. Where they're not, a video channel is listed instead.
 >
 > **Legend:** 🎬 watch · 📖 read · 🛠️ do (interactive / hands-on) · 🔓 later, when you're ready · ⏱️ rough time
 >
 > **Honesty note on links:** the ones marked ✅ were confirmed to exist by a web search on 2026-11-24. The rest are long-established resources written from knowledge, and I could not re-check each one. Links point to a site or channel home, not deep pages, so they rarely break. If one is dead, search the resource's name. YouTube channel names are given as plain names for the same reason: search them on YouTube.
 >
-> **Companion files:** [How_To_Learn_This_Roadmap.md](How_To_Learn_This_Roadmap.md) (the study method), [Exercises_And_Drills.md](Exercises_And_Drills.md) (practice), [Projects_And_Practice.md](Projects_And_Practice.md) (projects), [Progress_Tracker.md](Progress_Tracker.md).
+> **Companion files:** [How_To_Learn_This_Roadmap.md](../00_Start_Here/How_To_Learn_This_Roadmap.md) (the study method), [Exercises_And_Drills.md](../02_Practice/Exercises_And_Drills.md) (practice), [Projects_And_Practice.md](../02_Practice/Projects_And_Practice.md) (projects), [Progress_Tracker.md](../00_Start_Here/Progress_Tracker.md).
 
 ---
 
@@ -89,7 +89,7 @@ If you only open five things this month, open these, in this order:
 - 🛠️ Watch real requests in the DevTools Network tab.
 
 ### 0.9 Environment & Habits Checklist (🎯)
-- No resource needed — the habits are in [How_To_Learn_This_Roadmap.md](How_To_Learn_This_Roadmap.md).
+- No resource needed — the habits are in [How_To_Learn_This_Roadmap.md](../00_Start_Here/How_To_Learn_This_Roadmap.md).
 
 ---
 
@@ -510,7 +510,7 @@ If you only open five things this month, open these, in this order:
 - 📖 [Atlassian Agile Coach](https://www.atlassian.com/agile) — "Estimation" articles. Remember: estimate ranges, not points.
 
 ### 15.6 Core Daily Habits
-- 🎬📖 **[Learning How to Learn](https://www.coursera.org/learn/learning-how-to-learn)** (Coursera, free to audit) + [How_To_Learn_This_Roadmap.md](How_To_Learn_This_Roadmap.md).
+- 🎬📖 **[Learning How to Learn](https://www.coursera.org/learn/learning-how-to-learn)** (Coursera, free to audit) + [How_To_Learn_This_Roadmap.md](../00_Start_Here/How_To_Learn_This_Roadmap.md).
 - 🔓 *[Software Engineering at Google](https://abseil.io/resources/swe-book)* (free online).
 
 ## Phase 16 — Communication & Collaboration (all 🎯)

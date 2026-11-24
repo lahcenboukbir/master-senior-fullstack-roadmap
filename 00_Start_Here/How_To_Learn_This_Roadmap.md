@@ -157,7 +157,7 @@ Every few weeks, spend five minutes writing down why you're actually doing this 
 
 ## 6 — Resource Library
 
-> **Beginner? Start with [Learning_Resources.md](Learning_Resources.md)** — a free, easy-first, phase-by-phase list (YouTube, interactive sites, short articles). The list below is the deeper, more advanced shelf to graduate to.
+> **Beginner? Start with [Learning_Resources.md](../03_Resources/Learning_Resources.md)** — a free, easy-first, phase-by-phase list (YouTube, interactive sites, short articles). The list below is the deeper, more advanced shelf to graduate to.
 
 > A consolidated, phase-mapped resource list — beyond what's already cited inline in each Part file — organized by type, so you can reach for the right *kind* of resource for the right moment (a reference vs a deep-dive vs a community).
 

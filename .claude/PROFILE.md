@@ -25,7 +25,7 @@ Explicitly **not** just "a coder" — wants full understanding from scratch: com
 - Wants to be walked through *why* something works, not just told the steps.
 
 ## Roadmap System (this project)
-Lives in this repo root:
+Lives in this repo, organised in folders (`00_Start_Here/`, `01_Roadmap/`, `02_Practice/`, `03_Resources/`); files are referenced by bare filename:
 - `Master_Senior_Fullstack_Roadmap.md` — the main roadmap document.
 - `Priority_Map.md` — tiers every topic as 🎯 Master / 👀 Know Only / ⏸️ Skip For Now, reframed (2026-08-03) around deep understanding rather than fastest-employable.
 - `Part_0` through `Part_VI_*_Detailed.md` — full depth-expansion files per phase.
