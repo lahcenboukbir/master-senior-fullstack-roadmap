@@ -69,7 +69,24 @@ Within a 90-minute block:
 ### Weekly Rhythm
 A sustainable pace for a working adult is roughly **4–6 focus blocks per week**, not 7. Building in deliberate rest days isn't slacking — it's when consolidation actually happens (sleep and downtime are when your brain does a meaningful amount of the real work of moving things into long-term memory). A roadmap this size rewards consistency over intensity: 5 sessions a week for two years dramatically outperforms a burnout-inducing 7-sessions-a-week sprint that collapses after six weeks.
 
+### The Learn-by-Doing Mix (target: 10–20 hours/week)
+The roadmap's practice material comes in six layers — Drills, Builds, Break-it labs (`Exercises_And_Drills.md`), Mini-Projects, Milestones, and the Master Project (`Projects_And_Practice.md`). A healthy week splits roughly:
+
+| Share | Activity | Example |
+|---|---|---|
+| ~20% | **Read / watch** | One subsection of the current phase |
+| ~55% | **Build** | The current Build, Mini-Project or Milestone card |
+| ~10% | **Break it** | One Break-it lab from the phase |
+| ~10% | **Drill** | SQL reps, 3 DSA problems, complexity flashcards |
+| ~5% | **Reflect** | The weekly log in `Progress_Tracker.md` |
+
+If reading exceeds ~30% of your time for two weeks running, you have drifted into tutorial mode — stop and build the next item.
+
+**DSA cadence:** three problems a week (Exercises_And_Drills.md, Phase 2), re-solved cold after three days. Short and steady beats a weekend cram.
+
 ### Tracking Progress Without It Becoming a Chore
+Use `Progress_Tracker.md` for the per-item checklist and the weekly log; the guidance below on keeping it light still applies.
+
 Use the checklists implicitly built into each phase (the "Answer This" questions, the capstone projects) as your actual progress markers — not a separate elaborate tracking system that becomes its own project. A single running document (or the learning journal from Section 7) with one line per session is enough. The goal of tracking is honest self-assessment over time, not a dashboard to admire.
 
 ---

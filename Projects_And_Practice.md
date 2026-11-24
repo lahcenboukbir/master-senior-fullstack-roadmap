@@ -31,6 +31,10 @@
 - [Phase 14 — Security Fundamentals](#phase-14--security-fundamentals)
 - [Phase 15-17 — Becoming Senior (non-code practice)](#phase-15-17--becoming-senior-non-code-practice)
 - [The Master Project — Full Build Order](#the-master-project--full-build-order)
+- [Mini-Project Ladder](#mini-project-ladder)
+- [Practice App Spec Cards (HabitHub)](#practice-app-spec-cards-habithub)
+
+> **Also see:** `Exercises_And_Drills.md` (the small reps: Drills, Builds, Break-it labs) and `Progress_Tracker.md` (where you log them). The ladder and spec cards at the bottom of this file fill the gap between a Quick Win (hours) and a Milestone (a week-plus).
 
 ---
 
@@ -327,3 +331,91 @@ The Master Project (full spec in `Master_Senior_Fullstack_Roadmap.md` and `Part_
 | 10 | Security pass | Phase 14 milestone, applied to the real app instead of a throwaway copy |
 
 **Done when (the real finish line):** a stranger could clone the repo, follow a README, get it running locally in under 15 minutes, and understand from the code alone — not from you explaining it — why the significant decisions were made the way they were.
+
+---
+
+## Mini-Project Ladder
+
+> Between a Quick Win (hours) and a Milestone (a week or more) sits a gap. These are **2–3 day projects**, each one small enough to finish and different enough in shape to keep things fresh (Strategy 3 in `How_To_Learn_This_Roadmap.md`). Do 1–2 per phase, in order. Each has a one-line **Done when**. They are *not* required for the next milestone — they are the practice that makes the milestone feel easy.
+
+| # | Phase | Mini-project | Done when |
+|---|---|---|---|
+| L1 | 0 | **`tail`/`grep` clone in Java** — reads a file, filters lines, follows appended output | Matches `grep -n` and `tail -f` behaviour on a growing log |
+| L2 | 1 | **Tiny shell** — runs commands, supports pipes and `cd` | `ls \| grep foo \| wc -l` works through your own shell |
+| L3 | 2 | **LRU cache** (hash map + doubly linked list) with O(1) get/put | Hits the O(1) bound; a test with eviction order passes |
+| L4 | 2 | **Autocomplete** using a trie, with top-5 by frequency | Handles 100k words; lookup time is independent of dictionary size |
+| L5 | 2 | **Route finder** on a small city graph (Dijkstra) | Returns the shortest path and rejects unreachable nodes cleanly |
+| L6 | 3 | **Plugin-style text transformer** (Strategy + Factory + Decorator) | Adding a new transformer needs zero edits to existing classes |
+| L7 | 4 | **Vanilla-JS kanban board** (no framework, drag and drop, localStorage) | Survives refresh; no memory leak after 100 moves (DevTools heap check) |
+| L8 | 4 | **Weather/GitHub dashboard** with `fetch`, loading/error states, cancellation | Typing fast never shows a stale result (race-condition safe) |
+| L9 | 5B | **URL shortener API** (Spring Boot, Postgres, base62 IDs) | Redirects with 301/302, rejects bad URLs, has click counts |
+| L10 | 5B | **Pastebin with expiry** (scheduled cleanup, soft delete) | Expired pastes return 410 and are physically removed by a job |
+| L11 | 5B | **Webhook receiver** with signature check and replay protection | The same payload delivered twice has exactly one effect |
+| L12 | 7 | **Live poll** (SSE for results, REST for votes) | 50 browser tabs all see the same count within a second |
+| L13 | 7 | **Tiny chat room** (WebSocket, rooms, reconnect with backoff) | Kill the server; clients reconnect on their own and resume |
+| L14 | 8 | **Search box over a 1M-row dataset** (GIN + trigram) | `EXPLAIN` shows an index scan; p95 under 50 ms |
+| L15 | 8 | **Leaderboard on Redis sorted sets** | Top-100 and "my rank" are O(log n) and correct under concurrent updates |
+| L16 | 10 | **Tiny key-value store with a write-ahead log** | Kill -9 mid-write; on restart the data is consistent |
+| L17 | 10 | **Tiny load balancer** (round-robin + health checks) | A dead backend is removed within one health interval, then restored |
+| L18 | 11 | **Property-based tests** for your LRU cache and a date parser | The tool finds at least one bug you hadn't thought of |
+| L19 | 14 | **CTF-style practice**: 3 PortSwigger labs documented as write-ups | Each write-up states the root cause and the exact fix |
+
+**Fun-track (one per ~2 weeks, no rules, Strategy 2):** pick any idea from `How_To_Learn_This_Roadmap.md` §5. Not graded, not tracked.
+
+---
+
+## Practice App Spec Cards (HabitHub)
+
+> **Why a Practice App?** The Master Project (`Part_VI_Putting_It_Together_Detailed.md` §2) is a Developer Tools SaaS. That is a large target, and starting there with no prior reps means learning auth, CRUD, tests, CI and WebSockets *and* the product domain at once. **HabitHub** is deliberately a simpler domain, so every hour goes into the engineering, not into understanding the product.
+>
+> **How it relates to the Master Project:** HabitHub carries Phases 4, 5B, 7, 8, 10, 11, 12, 13 and 14. When you start the Master Project you **lift the reusable parts** — the auth module, CI pipeline, WebSocket gateway, rate limiter, Docker Compose, test setup — and replace the domain. That is a *good* second pass: you rebuild them faster and better, and the differences are what you learned. You are not starting from zero. (This supersedes the "feeds the Master Project" wording in the milestones above: the *code* is lifted and adapted, not used as-is.)
+>
+> **Core domain (keep it small):** `User` → `Habit` (name, schedule, target) → `Completion` (date, note). Later: `Team`, `Membership`, shared habits, streaks, leaderboards.
+
+Each card is a spec, not a tutorial: you decide how.
+
+### Card A — Frontend (Phase 4 milestone)
+- **Required:** habit list/create/edit/archive; a daily check-in view; a calendar heat-map of completions; streak count; protected routes (stubbed auth first).
+- **Rules:** strict TypeScript, TanStack Query for server state, Tailwind, React Router.
+- **Backend for now:** a mock API (MSW or json-server) — the real one comes in Card B.
+- **Stretch:** keyboard-only check-in; dark mode; offline-tolerant optimistic updates.
+- **Rubric (pass = all):** Lighthouse performance and accessibility ≥ 90 · one re-render fix documented with Profiler evidence · deployed at a URL · no `any`.
+
+### Card B — Backend (Phase 5B milestone)
+- **Required:** register/login; JWT + refresh rotation + Argon2; CRUD for habits and completions scoped to the owner; streak calculation endpoint; pagination; consistent error envelope.
+- **Rules:** Spring Boot 3, Java 21, Spring Data JPA, PostgreSQL, Flyway, Testcontainers.
+- **Deliberate lesson:** an N+1 on "habits with their last 30 completions", documented before/after.
+- **Stretch:** soft delete; per-user timezone for "what day is it"; CSV export.
+- **Rubric:** IDOR test proves user A cannot read user B's habit · N+1 fixed with numbers · a Flyway migration added *after* the initial one · OpenAPI usable · test slices used correctly.
+- **Then:** wire Card A to this backend and delete the mock.
+
+### Card C — Real-time (Phase 7 milestone)
+- **Required:** when a teammate completes a shared habit, other members see a live toast; presence indicator ("3 teammates online").
+- **Rules:** token sent after connect (not in the URL), heartbeat, client reconnect with exponential backoff and jitter.
+- **Rubric:** server kill/restart → clients reconnect unaided · unauthenticated socket rejected before any message is processed · no duplicate events after a reconnect.
+
+### Card D — Search & limits (Phase 8 milestone)
+- **Required:** full-text search over habit notes; a Redis token-bucket rate limiter on search and on the check-in endpoint; Redis cache for the streak computation with a stampede guard.
+- **Rubric:** `EXPLAIN ANALYZE` shows `Bitmap Index Scan` on the GIN index · 429 with `Retry-After` · cache hit ratio measured before/after.
+- **Stretch:** pgvector "find habits similar to this one" — a gentle first step toward the Master Project's RAG feature.
+
+### Card E — Quality gate (Phase 11 milestone)
+- **Required:** GitHub Actions: lint → unit → integration (Testcontainers) → coverage gate → Playwright E2E on login + check-in.
+- **Rubric:** one deliberately broken PR is *blocked* · pipeline under 10 minutes (or you have measured and documented why not) · the test pyramid is pyramid-shaped.
+
+### Card F — Ship it (Phase 13 milestone)
+- **Required:** multi-stage Docker image; `docker compose up` full stack locally; deployed to a PaaS or one VM; auto-deploy on merge to `main`; a health-check endpoint and one dashboard.
+- **Rubric:** reachable at a real URL · a rollback you have actually performed · zero secrets in Git history.
+
+### Card G — Break it (Phase 14 milestone)
+- **Required:** on a throwaway copy, add an IDOR and a SQL injection; exploit with ZAP/Burp; fix; re-scan.
+- **Rubric:** before/after evidence for each · each mapped to its OWASP Top 10 category · a regression test added to the real app.
+
+### Card H — Performance (Phase 12 milestone)
+- **Required:** a k6 load test on check-in and on the streak endpoint; find the breaking point and the bottleneck; fix the worst one; re-test.
+- **Rubric:** p50/p95/p99 before and after · the bottleneck is *named* (CPU / DB connections / lock / GC) with evidence.
+
+> **Order of the cards:** A and B in either order (B first is easier); then C → D → E → F → G → H. After H you are ready for the Master Project.
+
+### Rubric rule
+A card is **done** only when every rubric item can be demonstrated, not claimed. Record the proof (a screenshot, a query plan, a log line) in `Progress_Tracker.md`.
